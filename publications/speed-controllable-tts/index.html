@@ -20,9 +20,351 @@
         This paper proposes a controllable end-to-end text-to-speech (TTS) system to control the speaking speed (speed-controllable TTS; SCTTS) of synthesized speech with sentence-level speaking-rate value as an additional input. The speaking-rate value, the ratio of the number of input phonemes to the length of input speech, is adopted in the proposed system to control the speaking speed. Furthermore, the proposed SCTTS system can control the speaking speed while retaining other speech attributes, such as the pitch, by adopting the global style token-based style encoder. The proposed SCTTS does not require any additional well-trained model or an external speech database to extract phoneme-level duration information and can be trained in an end-to-end manner. In addition, our listening tests on fast-, normal-, and slow-speed speech showed that the SCTTS can generate more natural speech than other phoneme duration control approaches which increase or decrease duration at the same rate for the entire sentence, especially in the case of slow-speed speech.
     </div>
 
+    &nbsp;
     <div>
-        <h3>Audio Samples</h3>
-        To be announced.
+      <div id="toc_container">
+      <table border bgcolor="lightgray">
+        <tr><td>
+        <h3>&ensp;Contents</h3>
+        <ol>
+        <li><a href="#kss">Speaking Rate Control (Neutral Speaker)</a></li>
+        <li><a href="#bb">Speaking Rate Control (Expressive Speaker)</a></li>
+        <!--
+          <ol type="a">
+            <li><a href="#volume">Neutral Speaker</a></li>
+            <li><a href="#duration">Expressive Speaker</a></li>
+          </ol>
+        -->
+        <li><a href="#gst">Disentanglement of Speaking Speed and Other Speech Attributes&ensp;</a></li>
+        </ol>
+        </td>
+        </tr>
+      </table>
+      </div>
+      <p>&nbsp;</p>
+
+      <a name="kss"><h3>1. Speaking Speed Control (Neutral Speaker)</h3></a>
+      <hr color="gray" size="1px"></hr>
+      <p>&nbsp;</p>
+      <table></table>
+      <a name="bb"><h3>2. Speaking Speed Control (Expressive Speaker)</h3></a>
+      <hr color="gray" size="1px"></hr>
+      <table>
+        <tr>
+          <td colspan="4">Sentence: 음... 그로 인해서 일루에 조금 오래 머물 수밖에 없었던 최훈재였거든요.</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td style="text-align: center;">SCTTS (ours)</td>
+            <td style="text-align: center;">FastSpeech</td>
+            <td style="text-align: center;">PDC-TTS</td>
+            <td style="text-align: center;">DCTTS (normal-speed only)</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Fast&ensp;</td>
+            <td><audio controls><source src="samples/gdc_f_1.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_f_1.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_f_1.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Normal&ensp;</td>
+            <td><audio controls><source src="samples/gdc_n_1.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_n_1.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_n_1.wav"></audio></td>
+            <td><audio controls><source src="samples/dctts_n_1.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Slow&ensp;</td>
+            <td><audio controls><source src="samples/gdc_s_1.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_s_1.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_s_1.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+      <table>
+        <tr>
+          <td colspan="4">Sentence: 그, 자, 지금 이루수 김지수 선수가 잘 쫓아가봤지만 옆으로 빠져나갔습니다.</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td style="text-align: center;">SCTTS (ours)</td>
+            <td style="text-align: center;">FastSpeech</td>
+            <td style="text-align: center;">PDC-TTS</td>
+            <td style="text-align: center;">DCTTS (normal-speed only)</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Fast&ensp;</td>
+            <td><audio controls><source src="samples/gdc_f_2.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_f_2.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_f_2.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Normal&ensp;</td>
+            <td><audio controls><source src="samples/gdc_n_2.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_n_2.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_n_2.wav"></audio></td>
+            <td><audio controls><source src="samples/dctts_n_2.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Slow&ensp;</td>
+            <td><audio controls><source src="samples/gdc_s_2.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_s_2.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_s_2.wav"></audio></td>
+        </tr>
+      </table>
+      &nbsp;
+      <table>
+        <tr>
+          <td colspan="4">Sentence: 잡아당긴 타구는 왼쪽에 파울! </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td style="text-align: center;">SCTTS (ours)</td>
+            <td style="text-align: center;">FastSpeech</td>
+            <td style="text-align: center;">PDC-TTS</td>
+            <td style="text-align: center;">DCTTS (normal-speed only)</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Fast&ensp;</td>
+            <td><audio controls><source src="samples/gdc_f_3.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_f_3.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_f_3.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Normal&ensp;</td>
+            <td><audio controls><source src="samples/gdc_n_3.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_n_3.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_n_3.wav"></audio></td>
+            <td><audio controls><source src="samples/dctts_n_3.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Slow&ensp;</td>
+            <td><audio controls><source src="samples/gdc_s_3.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_s_3.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_s_3.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp;
+      <table>
+        <tr>
+          <td colspan="4">Sentence: 삼루 주자가 홈인! 그리고 강영식이 삼루까지! 점수차를 두 점 차로 벌립니다!</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td style="text-align: center;">SCTTS (ours)</td>
+            <td style="text-align: center;">FastSpeech</td>
+            <td style="text-align: center;">PDC-TTS</td>
+            <td style="text-align: center;">DCTTS (normal-speed only)</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Fast&ensp;</td>
+            <td><audio controls><source src="samples/gdc_f_4.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_f_4.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_f_4.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Normal&ensp;</td>
+            <td><audio controls><source src="samples/gdc_n_4.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_n_4.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_n_4.wav"></audio></td>
+            <td><audio controls><source src="samples/dctts_n_4.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Slow&ensp;</td>
+            <td><audio controls><source src="samples/gdc_s_4.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_s_4.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_s_4.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp;
+      <table>
+        <tr>
+          <td colspan="4">Sentence: 와우! 육구! 바깥쪽 툭 갖다 댔습니다! 그리고 김대유!</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td style="text-align: center;">SCTTS (ours)</td>
+            <td style="text-align: center;">FastSpeech</td>
+            <td style="text-align: center;">PDC-TTS</td>
+            <td style="text-align: center;">DCTTS (normal-speed only)</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Fast&ensp;</td>
+            <td><audio controls><source src="samples/gdc_f_5.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_f_5.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_f_5.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Normal&ensp;</td>
+            <td><audio controls><source src="samples/gdc_n_5.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_n_5.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_n_5.wav"></audio></td>
+            <td><audio controls><source src="samples/dctts_n_5.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Slow&ensp;</td>
+            <td><audio controls><source src="samples/gdc_s_5.wav"></audio></td>
+            <td><audio controls><source src="samples/fastspeech_s_5.wav"></audio></td>
+            <td><audio controls><source src="samples/phd_s_5.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp;
+
+
+
+    <p>&nbsp;</p>
+    <a name="gst"><h3>3. Disentanglement of Speaking Speed and Other Speech Attributes</h3></a>
+      <hr color="gray" size="1px"></hr>
+      <table>
+        <tr>
+          <td colspan="4">Sentence: 음... 그로 인해서 일루에 조금 오래 머물 수밖에 없었던 최훈재였거든요.</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td style="text-align: center;">SCTTS</td>
+            <td style="text-align: center;">SCTTS-GST (N)</td>
+            <td style="text-align: center;">SCTTS-GST (H)</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Fast&ensp;</td>
+            <td><audio controls><source src="samples/gdc_f_1.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_f_1.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_f_1.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Normal&ensp;</td>
+            <td><audio controls><source src="samples/gdc_n_1.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_n_1.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_n_1.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Slow&ensp;</td>
+            <td><audio controls><source src="samples/gdc_s_1.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_s_1.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_s_1.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp;
+      <table>
+        <tr>
+          <td colspan="4">Sentence: 그, 자, 지금 이루수 김지수 선수가 잘 쫓아가봤지만 옆으로 빠져나갔습니다.</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td style="text-align: center;">SCTTS</td>
+            <td style="text-align: center;">SCTTS-GST (N)</td>
+            <td style="text-align: center;">SCTTS-GST (H)</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Fast&ensp;</td>
+            <td><audio controls><source src="samples/gdc_f_2.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_f_2.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_f_2.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Normal&ensp;</td>
+            <td><audio controls><source src="samples/gdc_n_2.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_n_2.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_n_2.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Slow&ensp;</td>
+            <td><audio controls><source src="samples/gdc_s_3.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_s_3.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_s_3.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp;
+      <table>
+        <tr>
+          <td colspan="4">Sentence: 잡아당긴 타구는 왼쪽에 파울! </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td style="text-align: center;">SCTTS</td>
+            <td style="text-align: center;">SCTTS-GST (N)</td>
+            <td style="text-align: center;">SCTTS-GST (H)</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Fast&ensp;</td>
+            <td><audio controls><source src="samples/gdc_f_3.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_f_3.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_f_3.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Normal&ensp;</td>
+            <td><audio controls><source src="samples/gdc_n_3.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_n_3.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_n_3.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Slow&ensp;</td>
+            <td><audio controls><source src="samples/gdc_s_3.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_s_3.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_s_3.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+      <table>
+        <tr>
+          <td colspan="4">Sentence: 삼루 주자가 홈인! 그리고 강영식이 삼루까지! 점수차를 두 점 차로 벌립니다!</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td style="text-align: center;">SCTTS</td>
+            <td style="text-align: center;">SCTTS-GST (N)</td>
+            <td style="text-align: center;">SCTTS-GST (H)</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Fast&ensp;</td>
+            <td><audio controls><source src="samples/gdc_f_4.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_f_4.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_f_4.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Normal&ensp;</td>
+            <td><audio controls><source src="samples/gdc_n_4.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_n_4.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_n_4.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Slow&ensp;</td>
+            <td><audio controls><source src="samples/gdc_s_4.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_s_4.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_s_4.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+      <table>
+        <tr>
+          <td colspan="4">Sentence: 와우! 육구! 바깥쪽 툭 갖다 댔습니다! 그리고 김대유!</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td style="text-align: center;">SCTTS</td>
+            <td style="text-align: center;">SCTTS-GST (N)</td>
+            <td style="text-align: center;">SCTTS-GST (H)</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Fast&ensp;</td>
+            <td><audio controls><source src="samples/gdc_f_5.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_f_5.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_f_5.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Normal&ensp;</td>
+            <td><audio controls><source src="samples/gdc_n_5.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_n_5.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_n_5.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Slow&ensp;</td>
+            <td><audio controls><source src="samples/gdc_s_5.wav"></audio></td>
+            <td><audio controls><source src="samples/gste0_s_5.wav"></audio></td>
+            <td><audio controls><source src="samples/gstp2_s_5.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp;
     </div>
   </body>
 </html>
