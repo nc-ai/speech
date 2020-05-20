@@ -23,7 +23,7 @@
     &nbsp;
     <div>
       <div id="toc_container">
-      <table border bgcolor="lightgray">
+      <table border bgcolor="#D3D3Dr">
         <tr><td>
         <h3>&ensp;Contents</h3>
         <ol>
@@ -35,7 +35,7 @@
             <li><a href="#duration">Expressive Speaker</a></li>
           </ol>
         -->
-        <li><a href="#gst">Disentanglement of Speaking Speed and Other Speech Attributes&ensp;</a></li>
+        <li><a href="#gst">Disentanglement of Speaking Speed and Other Speech Attributes</a>&ensp;</li>
         </ol>
         </td>
         </tr>
@@ -45,8 +45,71 @@
 
       <a name="kss"><h3>1. Speaking Speed Control (Neutral Speaker)</h3></a>
       <hr color="gray" size="1px"></hr>
+      <table>
+        <tr>
+          <td colspan="4">Sentence: 시간 순서대로 내용을 정리합시다.</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td style="text-align: center;">SCTTS (ours)</td>
+            <td style="text-align: center;">FastSpeech</td>
+            <td style="text-align: center;">PDC-TTS</td>
+            <td style="text-align: center;">DCTTS (normal-speed only)</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Fast&ensp;</td>
+            <td><audio controls><source src="samples/kss/gdc_kss_f_2_0001.wav"></audio></td>
+            <td><audio controls><source src="samples/kss/fs_kss_f_2_0001.wav"></audio></td>
+            <td><audio controls><source src="samples/kss/phd_kss_f_2_0001.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Normal&ensp;</td>
+            <td><audio controls><source src="samples/kss/gdc_kss_n_2_0001.wav"></audio></td>
+            <td><audio controls><source src="samples/kss/fs_kss_n_2_0001.wav"></audio></td>
+            <td><audio controls><source src="samples/kss/phd_kss_n_2_0001.wav"></audio></td>
+            <td><audio controls><source src="samples/kss/dctts_kss_n_2_0001.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Slow&ensp;</td>
+            <td><audio controls><source src="samples/kss/gdc_kss_s_2_0001.wav"></audio></td>
+            <td><audio controls><source src="samples/kss/fs_kss_s_2_0001.wav"></audio></td>
+            <td><audio controls><source src="samples/kss/phd_kss_s_2_0001.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+      <table>
+        <tr>
+          <td colspan="4">Sentence: 설날에 아이들은 어른에게 절을 합니다.</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td style="text-align: center;">SCTTS (ours)</td>
+            <td style="text-align: center;">FastSpeech</td>
+            <td style="text-align: center;">PDC-TTS</td>
+            <td style="text-align: center;">DCTTS (normal-speed only)</td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Fast&ensp;</td>
+            <td><audio controls><source src="samples/kss/gdc_kss_f_1_0001.wav"></audio></td>
+            <td><audio controls><source src="samples/kss/fs_kss_f_1_0001.wav"></audio></td>
+            <td><audio controls><source src="samples/kss/phd_kss_f_1_0001.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Normal&ensp;</td>
+            <td><audio controls><source src="samples/kss/gdc_kss_n_1_0001.wav"></audio></td>
+            <td><audio controls><source src="samples/kss/fs_kss_n_1_0001.wav"></audio></td>
+            <td><audio controls><source src="samples/kss/phd_kss_n_1_0001.wav"></audio></td>
+            <td><audio controls><source src="samples/kss/dctts_kss_n_1_0001.wav"></audio></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;">Slow&ensp;</td>
+            <td><audio controls><source src="samples/kss/gdc_kss_s_1_0001.wav"></audio></td>
+            <td><audio controls><source src="samples/kss/fs_kss_s_1_0001.wav"></audio></td>
+            <td><audio controls><source src="samples/kss/phd_kss_s_1_0001.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
       <p>&nbsp;</p>
-      <table></table>
       <a name="bb"><h3>2. Speaking Speed Control (Expressive Speaker)</h3></a>
       <hr color="gray" size="1px"></hr>
       <table>
