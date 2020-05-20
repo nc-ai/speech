@@ -33,7 +33,7 @@
           <li><a href="#src.kspon">KSponSpeech Dataset</a></li>
           <li><a href="#src.kspon">Comparing music-mixed speech and filtered speech</a></li>
         </ol>
-        <li><a href="#gst-tts">Proposed Systems (models w/ WER lower than 50%)</a></li>
+        <li><a href="#gst-tts">Proposed Systems (models w/ WER lower than 60%)</a></li>
       </ul>
     </div>
 
@@ -220,7 +220,7 @@
 
     <div><br><br><br>
       <a name="gst-tts">
-        <h2>B. Proposed Systems (models w/ WER lower than 50%)</h2>
+        <h2>B. Proposed Systems (models w/ WER lower than 60%)</h2>
       </a>
       <div>
       </div>
@@ -246,6 +246,7 @@
           <tr>
             <td align="center">Model</td>
             <td align="center">TTS</td>
+            <td align="center">GST_Failed</td>
             <td align="center">GST+MF</td>
             <td align="center">GST+MF+Aux.</td>
             <td align="center">GST+MF+Aux.</td>
@@ -254,6 +255,7 @@
           <tr>
             <td align="center">(Clean/Noisy)</td>
             <td align="center">(5h/0h)</td>
+            <td align="center">(2.5h/2.5h)</td>
             <td align="center">(2.5h/2.5h)</td>
             <td align="center">(0.5h/4.5h)</td>
             <td align="center">(1.5h/3.5h)</td>
@@ -266,6 +268,10 @@
                 <source src="demo/T2M_2.wav" type="audio/wav">
             </audio>
             </td>
+            <td>
+            <audio controls>
+                <source src="demo/GST_mixed_c5m5_2.wav" type="audio/wav">
+            </audio></td>
             <td>
               <audio controls>
                 <source src="demo/GST_dist_c5d5_2.wav" type="audio/wav">
@@ -298,6 +304,10 @@
             </audio>
             </td>
             <td>
+            <audio controls>
+                <source src="demo/GST_mixed_c5m5_4.wav" type="audio/wav">
+            </audio></td>
+            <td>
               <audio controls>
                 <source src="demo/GST_dist_c5d5_4.wav" type="audio/wav">
               </audio>
@@ -328,6 +338,10 @@
                 <source src="demo/T2M_6.wav" type="audio/wav">
             </audio>
             </td>
+            <td>
+            <audio controls>
+                <source src="demo/GST_mixed_c5m5_6.wav" type="audio/wav">
+            </audio></td>
             <td>
               <audio controls>
                 <source src="demo/GST_dist_c5d5_6.wav" type="audio/wav">
