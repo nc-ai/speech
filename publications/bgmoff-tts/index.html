@@ -2,7 +2,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Audio samples from "UTILIZATION OF MUSIC-MIXED BROADCASTING DATA FOR SPEECH SYNTHESIS USING A LIMITED PERSONAL SPEECH DATABASE"</title>
+  <title>Audio samples from "BGMoff-TTS: UTILIZATION OF MUSIC-MIXED BROADCASTING DATA FOR SPEECH SYNTHESIS USING A LIMITED PERSONAL SPEECH DATABASE"</title>
 </head>
 
 <body>
@@ -13,13 +13,13 @@
   </article>
 
   <div><b>Paper:</b> The paper will be uploaded.</div>
-  <div><b>Authors:</b> Hanbin Bae, Jae-Sung Bae, Young-Ik Kim, Hoon-Young Cho</div>
+  <div><b>Authors:</b> Hanbin Bae, Jae-Sung Bae, Young-Sun Joo, Young-Ik Kim, Hoon-Young Cho</div>
 
   <p><b>Abstract:</b></div>
-    A personalized text-to-speech (TTS) system requires several hours of high-quality personal speech data from a speaker. In real scenarios, collecting hours of voice recordings of a specific speaker is very expensive, and only a few minutes of data are often available. Recently, it has become easier to obtain speech data from personal social broadcasting. However, it remains difficult to utilize them as training data for TTS systems, as they include various noise such as background music. A global style token (GST) based TTS model can generate high quality speech from speech data mixed with music and noise, but it requires a sufficient amount of data to attain reliable performance. Therefore, in this paper, we propose a method to train the GST-based TTS system with an insufficient amount of specific speaker data containing different music noise. We apply two tasks: first, we separate music from noisy speech data by using a pre-trained music filter; second, we use an auxiliary classifier to make the audio quality clean. We demonstrate that the proposed method can synthesize high-quality speech with less mispronunciation through speech recognition and listening tests.
-
+    A personalized text-to-speech (TTS) system requires several hours of high-quality personal speech data from a speaker. In real scenarios, only a few minutes of speech data are often available. Recently, it has become easier to obtain speech data from personal social broadcasting. However, it remains difficult to utilize them directly to train TTS systems, as the portion of clean speech is insufficient and the remainder includes noise such as background music. A global style token (GST) based TTS model can generate clean synthesized-speech from speech data mixed with music and noise, but it requires a sufficient amount of data to attain reliable performance. Therefore, in this paper, we propose a method to train the GST-based TTS system with a limited broadcasting data has music-mixed speech and an insufficient amount of clean speech.We apply two tasks: first, we separate speech from music-mixed speech data by using a music filter; second, we use an auxiliary classifier to allow the embedding vector of GST layer to distinguish whether the given speech is clean. We demonstrated that the proposed method synthesizes much more high-quality speech than conventional methods.
+  
   <p><b>Proposed System Architecture:</b></div><br>
-    <img src="images/2020_ICASSP_fig_v5.png" alt="My Image" width="1200" height="276">
+    <img src="images/2020_ICASSP_fig3_v3.png" alt="My Image" width="1200" height="276">
 
     &nbsp;
 
@@ -33,7 +33,7 @@
           <li><a href="#src.kspon">KSponSpeech Dataset</a></li>
           <li><a href="#src.kspon">Comparing music-mixed speech and filtered speech</a></li>
         </ol>
-        <li><a href="#gst-tts">Proposed Systems (models w/ WER lower than 60%)</a></li>
+        <li><a href="#gst-tts">Proposed Systems (models w/ SER lower than 50%)</a></li>
       </ul>
     </div>
 
@@ -220,7 +220,7 @@
 
     <div><br><br><br>
       <a name="gst-tts">
-        <h2>B. Proposed Systems (models w/ WER lower than 60%)</h2>
+        <h2>B. Proposed Systems (models w/ SER lower than 50%)</h2>
       </a>
       <div>
       </div>
@@ -260,6 +260,15 @@
             <td align="center">(0.5h/4.5h)</td>
             <td align="center">(1.5h/3.5h)</td>
             <td align="center">(2.5h/2.5h)</td>
+          </tr>
+          <tr>
+            <td align="center">SER(%)</td>
+            <td align="center">13.45</td>
+            <td align="center">Training Failed</td>
+            <td align="center">49.12</td>
+            <td align="center">29.80</td>
+            <td align="center">15.89</td>
+            <td align="center">16.52</td>
           </tr>
           <tr>
             <td nowrap>Sample 1</td>
