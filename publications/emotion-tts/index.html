@@ -1,0 +1,203 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Audio samples from "Effective Emotion Transplantation in an End-to-End Text-to-Speech System"</title>
+  </head>
+  <body>
+    <article>
+      <header>
+        <h1>Audio samples from "Effective Emotion Transplantation in an End-to-End Text-to-Speech System"</h1>
+      </header>
+    </article>
+
+    <div><b>Paper:</b> The paper will be uploaded.</div>
+    <div><b>Authors:</b> Young-Sun Joo, Hanbin Bae, Young-Ik Kim, Hoon-Young Cho, Hong-Goo Kang</div>
+
+    <p><b>Abstract:</b></div>
+      In this paper, we propose an effective technique to transplant a source
+      speaker's emotional expression to a new target speaker's voice within an
+      end-to-end text-to-speech (TTS) framework. We modify an expressive TTS
+      model pre-trained using a source speaker's emotional speech database
+      to reflect the voice characteristics of a target speaker for which only
+      a neutral speech database is available. We set two adaptation criteria
+      to achieve this. One criterion is to minimize the reconstruction loss
+      between the target speaker's recorded and synthesized speech, such that
+      the synthesized speech has the target speaker's voice characteristics.
+      The other criterion is to minimize the emotion loss between the emotion
+      embedding vectors extracted from the reference expressive speech and the
+      target speaker's synthesized expressive speech, which is essential to
+      preserve expressiveness. Since the two criteria are applied alternately
+      in the adaptation process, we are able to avoid the kind of bias issues
+      frequently encountered in similar tasks. The proposed adaptation technique
+      demonstrates more effective performance compared to conventional approaches
+      in both quantitative and qualitative evaluations.
+
+    &nbsp;
+    <p class="toc_title"><br><h2>Contents</h2></p>
+    <div id="toc_container">
+    <ul>
+      <li><a href="#src">Source speaker's expressive speech</a></li>
+      <li><a href="#tgt_emo_trans">Target speaker's expressive speech</a></li>
+        <ol>
+          <li><a href="#tgt_emo_trans.wo_emo_loss">Conventional method</a></li>
+          <li><a href="#tgt_emo_trans.w_emo_loss">Proposed method</a></li>
+            <ol>
+              <li><a href="#tgt_emo_trans.w_emo_loss-f1">Spk A (female)</a></li>
+              <li><a href="#tgt_emo_trans.w_emo_loss-f2">Spk B (female)</a></li>
+              <li><a href="#tgt_emo_trans.w_emo_loss-m1">Spk C (male)</a></li>
+            </ol>
+        </ol>
+    </ul>
+    </div>
+
+    <div><br/>We selected speech samples from the test set, which are not used for expressive TTS model training.
+    Please listen speech samples focusing on emotion.
+    </div>
+
+
+    &nbsp;
+
+    <div>
+      <a name="src"><h2>Source Speaker's Expressive Speech</h2></a>
+      <hr color="gray" size="1px"></hr>
+      <div>
+        * We used an internal expressive speech database for the source speaker consists of four emotion classes, namely neutral, joyful, angry, and sad. The total amount of speech waveforms is about 11 hours. It is recorded by a single professional voice actress.
+      </div>
+
+      <a name="src.rec"><h3>Expressive speech samples (recorded speech)</h3></a>
+      <table>
+        <tbody>
+        <tr>
+          <td align="center">NEU</td>
+          <td align="center">JOY</td>
+          <td align="center">SAD</td>
+          <td align="center">ANG</td>
+        </tr>
+        <tr>
+          <td colspan="4">Sentence: 내가 대명동 방을 뺄 때 가지고 있던 전셋돈도 그와의 생활비로 이미 반 이상 없어진 뒤였으니까요.</td>
+        </tr>
+        <tr>
+          <td><audio controls=""><source src="demo/record-src-emo/46-FY_NOR_NCF_00093.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/record-src-emo/58-FY_JOY_NCF_00035.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/record-src-emo/7-FY_SAD_NCF_00093.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/record-src-emo/28-FY_ANG_NCF_00010.wav" type="audio/wav"></audio></td>
+        </tr>
+        </tbody>
+      </table>
+
+
+      <a name="src.synth"><h3>Synthesized Speech</h3></a>
+      <table>
+        <tbody>
+        <tr>
+          <td align="center"></td>
+          <td align="center">NEU</td>
+          <td align="center">JOY</td>
+          <td align="center">SAD</td>
+          <td align="center">ANG</td>
+        </tr>
+        <tr>
+          <td nowrap>sample 1</td>
+          <td><audio controls=""><source src="demo/syn-emo-src-same-text/src_emo-ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-src-same-text/src_emo-ref_FY_JOY_NCF_00002.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-src-same-text/src_emo-ref_FY_SAD_NCF_00067.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-src-same-text/src_emo-ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap>sample 2</td>
+          <td><audio controls=""><source src="demo/synthesized-emo-src-griffin/src_emo-ref_FY_NOR_NCF_00051.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/synthesized-emo-src-griffin/src_emo-ref_FY_JOY_NCF_00002.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/synthesized-emo-src-griffin/src_emo-ref_FY_SAD_NCF_00063.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/synthesized-emo-src-griffin/src_emo-ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <div><br><br><br>
+      <a name="src"><h2>Target Speaker's Expressive Speech based on Emotion Transplantation</h2></a>
+      <div>
+        We adapt the pre-trained TTS model using a part of the neutral speech database; an hour of speech waveforms.
+      </div>
+
+      <br><a name="tgt_emo_trans.rec"><h3>Recorded Neutral Speech</h3></a>
+      <table>
+        <tbody>
+        <tr>
+          <td align="center"></td>
+          <td align="center">NEU</td>
+        </tr>
+        <tr>
+          <td nowrap>Sentence 1</td>
+          <td><audio controls=""><source src="demo/record-tgt-neu/FEMALE00927.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap>Sentence 2</td>
+          <td><audio controls=""><source src="demo/record-tgt-neu/FEMALE00057.wav" type="audio/wav"></audio></td>
+        </tr>
+        </tbody>
+      </table>
+
+
+      <br><a name="tgt_emo_trans.wo_emo_loss"><h3>Synthesized Expressive Speech (w/o emo_loss) - Conventional approach</h3></a>
+      <table>
+        <tbody>
+        <tr>
+          <td align="center"></td>
+          <td align="center">NEU</td>
+          <td align="center">JOY</td>
+          <td align="center">SAD</td>
+          <td align="center">ANG</td>
+        </tr>
+        <tr>
+          <td nowrap>Sentence 1</td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent1-ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent1-ref_FY_JOY_NCF_00003.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent1-ref_FY_SAD_NCF_00063.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent1-ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap>Sentence 2</td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent2-ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent2-ref_FY_JOY_NCF_00002.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent2-ref_FY_SAD_NCF_00063.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent2-ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+        </tr>
+        </tbody>
+      </table>
+
+
+      <br><a name="tgt_emo_trans.w_emo_loss"><h3>Synthesized Expressive Speech (w/ emo_loss) - Proposed approach</h3></a>
+      <table>
+        <tbody>
+        <tr>
+          <td align="center"></td>
+          <td align="center">NEU</td>
+          <td align="center">JOY</td>
+          <td align="center">SAD</td>
+          <td align="center">ANG</td>
+        </tr>
+        <tr>
+          <td nowrap>Sentence 1</td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent1-ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent1-ref_FY_JOY_NCF_00003.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent1-30-ref_FY_SAD_NCF_00067.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent1-ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap>Sentence 2</td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent2-ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent2-ref_FY_JOY_NCF_00003.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent2-ref_FY_SAD_NCF_00067.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent2-ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+
+  </body>
+</html>
