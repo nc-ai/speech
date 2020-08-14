@@ -1,0 +1,253 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Audio samples from "Effective Emotion Transplantation in an End-to-End Text-to-Speech System"</title>
+  </head>
+  <body>
+    <article>
+      <header>
+        <h1>Audio samples from "Effective Emotion Transplantation in an End-to-End Text-to-Speech System"</h1>
+      </header>
+    </article>
+
+    <div><b>Paper:</b> The paper will be uploaded.</div>
+    <div><b>Authors:</b> Young-Sun Joo, Hanbin Bae, Young-Ik Kim, Hoon-Young Cho, Hong-Goo Kang</div>
+
+    <p><h2>Abstract</h2></div>
+      In this paper, we propose an effective technique to transplant a source
+      speaker's emotional expression to a new target speaker's voice within an
+      end-to-end text-to-speech (TTS) framework. We modify an expressive TTS
+      model pre-trained using a source speaker's emotional speech database
+      to reflect the voice characteristics of a target speaker for which only
+      a neutral speech database is available. We set two adaptation criteria
+      to achieve this. One criterion is to minimize the reconstruction loss
+      between the target speaker's recorded and synthesized speech, such that
+      the synthesized speech has the target speaker's voice characteristics.
+      The other criterion is to minimize the emotion loss between the emotion
+      embedding vectors extracted from the reference expressive speech and the
+      target speaker's synthesized expressive speech, which is essential to
+      preserve expressiveness. Since the two criteria are applied alternately
+      in the adaptation process, we are able to avoid the kind of bias issues
+      frequently encountered in similar tasks. The proposed adaptation technique
+      demonstrates more effective performance compared to conventional approaches
+      in both quantitative and qualitative evaluations.
+
+    &nbsp;
+    <p class="toc_title"><br><h2>Contents</h2></p>
+    <div id="toc_container">
+    <ul>
+      <li><a href="#src">Source speaker's expressive speech</a></li>
+      <li><a href="#tgt_emo_trans">Target speaker's expressive speech</a></li>
+        <ul>
+          <li>Spk A (female)</li>
+          <li>Spk B (male)</li>
+        </ul>
+    </ul>
+    </div>
+
+    &nbsp;
+
+    <div>
+      <hr color="gray" size="1px"></hr>
+      <br><a name="src"><h2>Source Speaker's Expressive Speech</h2></a>
+      <div>
+        We used an internal expressive speech database for the source speaker consists of four emotion classes, namely neutral, joyful, angry, and sad. <br>The total amount of speech waveforms is about 11 hours. It is recorded by a single professional voice actress.
+      </div>
+
+      <br><br><a name="src.rec"><h3>Example of Expressive Speech (recorded)</h3></a>
+      Unfortunately, there are no recorded expressive speech samples for the same sentence. Please listen the speech samples focusing on emotion.
+      <table>
+        <tbody>
+        <tr>
+          <td align="center"></td>
+          <td align="center"><b>NEU</b></td>
+          <td align="center"><b>ANG</b></td>
+          <td align="center"><b>SAD</b></td>
+          <td align="center"><b>JOY</b></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Record</b></td>
+          <td><audio controls=""><source src="demo/record-src-emo/46-FY_NOR_NCF_00093.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/record-src-emo/28-FY_ANG_NCF_00010.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/record-src-emo/7-FY_SAD_NCF_00093.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/record-src-emo/58-FY_JOY_NCF_00035.wav" type="audio/wav"></audio></td>
+        </tr>
+        </tbody>
+      </table>
+
+
+      <br><br><a name="src.synth"><h3>Synthesized Expressive Speech</h3></a>
+      <table>
+        <tbody>
+          <tr>
+            <td colspan="4">Sentence: "내가 대명동 방을 뺄 때 가지고 있던 전셋돈도 그와의 생활비로 이미 반 이상 없어진 뒤였으니까요."</td>
+          </tr>
+        <tr>
+          <td align="center"></td>
+          <td align="center"><b>NEU</b></td>
+          <td align="center"><b>ANG</b></td>
+          <td align="center"><b>SAD</b></td>
+          <td align="center"><b>JOY</b></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Record</b></td>
+          <td><audio controls=""><source src="demo/record-src-emo/46-FY_NOR_NCF_00093.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Synth.</b></td>
+          <td><audio controls=""><source src="demo/syn-emo-src-same-text/src_emo-ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-src-same-text/src_emo-ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-src-same-text/src_emo-ref_FY_SAD_NCF_00067.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-src-same-text/src_emo-ref_FY_JOY_NCF_00002.wav" type="audio/wav"></audio></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <div><br><br><br><br>
+      <a name="tgt_emo_trans"><h2>Target Speaker's Expressive Speech based on Emotion Transplantation</h2></a>
+          * We adapt the pre-trained TTS model using a part of the neutral speech database; an hour of speech waveforms.
+
+      <br><br><br><h3>Target speaker A (female)</h3>
+      <hr color="gray" size="1px"></hr>
+      Sentence : "즉 태양 에너지가 증가하면 지구의 바다가 데워집니다."
+      <table>
+        <tbody>
+        <tr>
+          <td align="center"></td>
+          <td align="center"><b>NEU</b></td>
+          <td align="center"><b>ANG</b></td>
+          <td align="center"><b>SAD</b></td>
+          <td align="center"><b>JOY</b></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Record</b></td>
+          <td><audio controls=""><source src="demo/record-tgt-neu/FEMALE00927.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Conv. approach (w/o emo_loss)</b></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent1-ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent1-ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent1-ref_FY_SAD_NCF_00063.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent1-ref_FY_JOY_NCF_00003.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Prop. approach (w/ emo_loss)</b></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent1-ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent1-ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent1-30-ref_FY_SAD_NCF_00067.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent1-ref_FY_JOY_NCF_00003.wav" type="audio/wav"></audio></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <br>
+      Sentence : "욕하는건 기본이고 뺨까지 때려요."
+      <table>
+        <tbody>
+        <tr>
+          <td align="center"></td>
+          <td align="center"><b>NEU</b></td>
+          <td align="center"><b>ANG</b></td>
+          <td align="center"><b>SAD</b></td>
+          <td align="center"><b>JOY</b></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Record</b></td>
+          <td><audio controls=""><source src="demo/record-tgt-neu/FEMALE00057.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Conv. approach (w/o emo_loss)</b></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent2-ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent2-ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent2-ref_FY_SAD_NCF_00063.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-f-sent2-ref_FY_JOY_NCF_00002.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Prop. approach (w/ emo_loss)</b></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent2-ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent2-ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent2-ref_FY_SAD_NCF_00067.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-f-sent2-ref_FY_JOY_NCF_00003.wav" type="audio/wav"></audio></td>
+        </tr>
+        </tbody>
+      </table>
+
+
+      <br><br><h3>Target speaker B (male)</h3>
+      <hr color="gray" size="1px"></hr>
+      Sentence : "그러자 관노인 권송이가 분연히 일어나 부싯돌을 쳐서 횃불에 불을 붙였습니다."
+      <table>
+        <tbody>
+        <tr>
+          <td align="center"></td>
+          <td align="center"><b><span style="color:red;">NEU</span></b></td>
+          <td align="center"><b>ANG</b></td>
+          <td align="center"><b><span style="color:red;">SAD</span></b></td>
+          <td align="center"><b>JOY</b></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Record</b></td>
+          <td><audio controls=""><source src="demo/record-tgt-neu/m0099.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Conv. approach (w/o emo_loss)</b></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-m-1_ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-m-1_ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-m-1_ref_FY_SAD_NCF_00067.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-m-1_ref_FY_JOY_NCF_00002.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Prop. approach (w/ emo_loss)</b></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-m-1_ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-m-1_ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-m-1_ref_FY_SAD_NCF_00067.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-m-1_ref_FY_JOY_NCF_00002.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Prop. approach (w/ emo_loss) 20</b></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/prop-sitecm-ref-020-newtext/1_ref_FY_JOY_NCF_00002.wav" type="audio/wav"></audio></td>
+        </tr>
+        <td colspan="4" align ="left">Sentence : "이렇게 뛰어가세요."</td>
+        <tr>
+          <td nowrap><b>Conv. approach (w/o emo_loss)</b></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-m-4_ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-m-4_ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-m-4_ref_FY_SAD_NCF_00067.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-m-4_ref_FY_JOY_NCF_00002.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Prop. approach (w/ emo_loss)</b></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-m-4_ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-m-4_ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-m-4_ref_FY_SAD_NCF_00067.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-m-4_ref_FY_JOY_NCF_00003.wav" type="audio/wav"></audio></td>
+        </tr>
+        <td colspan="4" align ="left">Sentence : "점심 시간에 밖에 나가서 돼지고기를 맛있게 먹었습니다."</td>
+        <tr>
+          <td nowrap><b>Conv. approach (w/o emo_loss)</b></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-m-2_ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-m-2_ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-m-2_ref_FY_SAD_NCF_00067.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/wo_emoloss-m-2_ref_FY_JOY_NCF_00002.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap><b>Prop. approach (w/ emo_loss)</b></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-m-2_ref_FY_NOR_NCF_00047.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-m-2_ref_FY_ANG_NCF_00006.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-m-2_ref_FY_SAD_NCF_00067.wav" type="audio/wav"></audio></td>
+          <td><audio controls=""><source src="demo/syn-emo-tgt-same-text/w_emoloss-m-2_ref_FY_JOY_NCF_00003.wav" type="audio/wav"></audio></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+
+  </body>
+</html>
