@@ -1,5 +1,6 @@
 <html>
 
+
 <head>
   <meta charset="UTF-8">
   <title>ICASSP2021 청취 평가 페이지 - 배한빈</title>
@@ -12,420 +13,46 @@
     </header>
   </article>
 
-  <!-- 청취평가 설명   -->
-    <p class="toc_title"><br>
-      <h2>평가 1 : Pitch shift 알고리즘의 화자 유사성 평가</h2>
-    </p>
-
-    <div><br /> <b>원본</b>과 비교하여, 같은 화자로 느껴지는 지 0~5점 사이로 대답해 주세요.
-    </div>
-
-    <!-- 평가 1 샘플 시작  -->
-
-    <table>
-      <script language="JavaScript">
-        // var alphas = ["-6", "-5", "-4", "-3", "-2", "-1", "0", "1", "2", "3", "4", "5", "6"];
-
-        var alphas = ["-4", "-3", "-2", "-1", "0", "1", "2", "3", "4"];
-        document.write("<tr>"); 
-        
-        document.write("<td align=\"center\">번호</td>");
-        for(i=0;i<9;i++){
-          if(i==4)
-            document.write("<td align=\"center\"><b>원본</b></td>");
-          else
-            document.write("<td align=\"center\">&alpha;="+alphas[i]+"</td>");
-        }
-          
-        document.write("</tr>");
-     
-      
-        String.prototype.fillZero = function(width){
-            return this.length >= width ? this:new Array(width-this.length+1).join('0')+this;//남는 길이만큼 0으로 채움
-        }
-        Number.prototype.fillZero = function(width){
-            let n = String(this);//문자열 변환
-            return n.length >= width ? n:new Array(width-n.length+1).join('0')+n;//남는 길이만큼 0으로 채움
-        }
-        
-        // sox
-        c=0;
-        for(i=0;i<60;i++)
-        {
-          
-
-          if(i<30){
-            tag = 'neutral'
-            if(i>=5) continue
-          }
-          else {
-            tag = 'dialog'
-            if(i>=35) continue
-          }
-          
-          // Reference
-          document.write("<tr>");
-          document.write("<td>A-"+ (c+1) +"</td>");
-
-          for(j=0;j<9;j++){
-            alpha = alphas[j]
-            document.write("<td><audio style=\"width:100px;height:32px\" controls=\"\">");
-            document.write("<source src=\"" + "./samples/exp1_sox_fcps/"+ tag +"/sox/"+alpha+ "/" + i.fillZero(3) + ".wav" + "\" type=\"audio/wav\"></audio></td>");
-          }
-          // Reference
-
-          document.write("</tr>")
-
-          document.write("<tr>");
-          document.write("<td>B-"+ (c+++1) +"</td>");
-
-          for(j=0;j<9;j++){
-            alpha = alphas[j]
-            document.write("<td><audio style=\"width:100px;height:32px\" controls=\"\">");
-            document.write("<source src=\"" + "./samples/exp1_sox_fcps/"+ tag +"/fcps/"+alpha+ "/" + i.fillZero(3) + ".wav" + "\" type=\"audio/wav\"></audio></td>");
-          }
-          // Reference
-
-          document.write("</tr>")
-
-        }
-
-        document.write("");
-      </script>
-    </table>
-    &nbsp;
-
-    <div>
-      <a name="src">
-        <h2>A. Pre-trained Music Filter</h2>
-      </a>
-      <div>
-      </div>
-
-
-      <a name="src.kspon">
-        <h3>A.1. KSponSpeech Dataset</h3>
-      </a>
-
-      To train a speaker-independent music filter, we use the KsponSpeech dataset.
-      dataset, which comprises approximatly 1,000 h of spontaneous speech samples recorded by 2,000 people talking about various topics, sampled at 16 kHz.
-      <br>
-      1. Male
-      <br>
-      <audio controls>
-        <source src="Kspon_sample/kspon_male.wav" type="audio/wav">
-      </audio>
-      <br>
-      2. Female
-      <br>
-
-      <audio controls>
-        <source src="Kspon_sample/kspon_female.wav" type="audio/wav">
-      </audio>
-      <br>
-
-
-      <a name="src.filter">
-        <h3>A.2. Comparing music-mixed speech and filtered speech</h3>
-
-      </a>
-
-      <br>
-
-      1. 가고시마에서는 연습경기를 통해 실전 감각을 끌어올린다는 계획이다.
-
-      <table>
-        <tbody>
-          <tr>
-            <td nowrap></td>
-            <td align="center">0dB</td>
-            <td align="center">5dB</td>
-            <td align="center">10dB</td>
-            <td align="center">15dB</td>
-            <td align="center">20dB</td>
-          </tr>
-          <tr>
-            <td nowrap>Mixed</td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-          <tr>
-            <td nowrap>Filtered</td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <br>
-      2. 리니지 쿠우 서버 어떻게 하나요?
-
-      <table>
-        <tbody>
-          <tr>
-            <td nowrap></td>
-            <td align="center">0dB</td>
-            <td align="center">5dB</td>
-            <td align="center">10dB</td>
-            <td align="center">15dB</td>
-            <td align="center">20dB</td>
-          </tr>
-          <tr>
-            <td nowrap>Mixed</td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-          <tr>
-            <td nowrap>Filtered</td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <br>
-      3. 직장인 소액대출 알아봅니다.
-
-      <table>
-        <tbody>
-          <tr>
-            <td nowrap></td>
-            <td align="center">0dB</td>
-            <td align="center">5dB</td>
-            <td align="center">10dB</td>
-            <td align="center">15dB</td>
-            <td align="center">20dB</td>
-          </tr>
-          <tr>
-            <td nowrap>Mixed</td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-          <tr>
-            <td nowrap>Filtered</td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-        </tbody>
-      </table>
-
-<!--
-      <a name="src.found">
-        <h3>A.3. Found Data Application</h3>
-      </a>
-      <video id="myVideo" src="images/kma_jtbc_news_20190814_demo.mp4" controls width="640" height="360"></video> <br> -->
-    </div>
-
-
-
-    <div><br><br><br>
-      <a name="gst-tts">
-        <h2>B. Proposed Systems (models w/ SER lower than 50%)</h2>
-      </a>
-      <div>
-      </div>
-      <div><br>
-        <b>1. TTS:</b> the DC-TTS [2] model usedconducted in the pre-liminary experiments.
-      <br>
-        <b>2.  GST:</b>  the GST-TTS model where the quality embeddingfrom the GST layers was concatenated into the encoderstate of DC-TTS.
-      <br>
-        <b>3.  GST+MF:</b>   the  GST-TTS  model  trained  with  filteredspeech obtained from the pre-trained music filter.
-      <br>
-        <b>4.  GST+MF+Aux.:</b>  the GST+MF model with an auxiliaryclassifier.
-      </div>
-      <div><br>
-        Sample1: 눈은 내일 새벽까지 이어지다가 점차 그치겠고요.<br>
-        Sample2: 도심형 생활주택 구매 어떤가요?<br>
-        Sample3: 또 동해안을 중심으로는 건조 주의보가 발효 중입니다.<br>
-
-
-      </div>
-
-      <table>
-        <tbody>
-          <tr>
-            <td align="center">Model</td>
-            <td align="center">TTS</td>
-            <td align="center">GST</td>
-            <td align="center">GST+MF</td>
-            <td align="center">GST+MF+Aux.</td>
-            <td align="center">GST+MF+Aux.</td>
-            <td align="center">GST+MF+Aux.</td>
-          </tr>
-          <tr>
-            <td align="center">(Clean/Noisy)</td>
-            <td align="center">(5h/0h)</td>
-            <td align="center">(2.5h/2.5h)</td>
-            <td align="center">(2.5h/2.5h)</td>
-            <td align="center">(0.5h/4.5h)</td>
-            <td align="center">(1.5h/3.5h)</td>
-            <td align="center">(2.5h/2.5h)</td>
-          </tr>
-          <tr>
-            <td align="center">SER(%)</td>
-            <td align="center">13.45</td>
-            <td align="center">Training Failed</td>
-            <td align="center">49.12</td>
-            <td align="center">29.80</td>
-            <td align="center">15.89</td>
-            <td align="center">16.52</td>
-          </tr>
-          <tr>
-            <td nowrap>Sample 1</td>
-            <td>
-            <audio controls>
-                <source src="demo/T2M_2.wav" type="audio/wav">
-            </audio>
-            </td>
-            <td>
-            <audio controls>
-                <source src="demo/GST_mixed_c5m5_2.wav" type="audio/wav">
-            </audio></td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_dist_c5d5_2.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c1d9_2.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/gst_aux_c3d7_2.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c5d5_2.wav" type="audio/wav">
-              </audio>
-            </td>
-          </tr>
-
-
-
-          <tr>
-            <td nowrap>Sample 2</td>
-            <td>
-            <audio controls>
-                <source src="demo/T2M_4.wav" type="audio/wav">
-            </audio>
-            </td>
-            <td>
-            <audio controls>
-                <source src="demo/GST_mixed_c5m5_4.wav" type="audio/wav">
-            </audio></td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_dist_c5d5_4.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c1d9_4.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c3d7_4.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c5d5_4.wav" type="audio/wav">
-              </audio>
-            </td>
-          </tr>
-
-
-
-          <tr>
-            <td nowrap>Sample 3</td>
-            <td>
-            <audio controls>
-                <source src="demo/T2M_6.wav" type="audio/wav">
-            </audio>
-            </td>
-            <td>
-            <audio controls>
-                <source src="demo/GST_mixed_c5m5_6.wav" type="audio/wav">
-            </audio></td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_dist_c5d5_6.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c1d9_6.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c3d7_6.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c5d5_6.wav" type="audio/wav">
-              </audio>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-    </div>
-
-
+  <article>
+    <header>
+      <span class="paper_date"><b>평가 1 : Pitch shift 알고리즘의 화자 유사도 (Speaker Similarity) 평가</b>
+      <ul>
+        <!-- <li><a href="paper_link">paper</a></li> -->
+        <li><a href="mos_exp1.html">샘플 페이지</a></li>
+        <li><a href="mos_exp1.html">설문지</a></li>
+      </ul>
+    </header>
+  </article>
+  <article>
+    <header>
+      <span class="paper_date"><b>평가 2 : FastPitch 모델 발화 명료도 (Speech intelligibility) 평가</b>
+      <ul>
+        <!-- <li><a href="paper_link">paper</a></li> -->
+        <li><a href="mos_exp2.html">샘플 페이지</a></li>
+        <li><a href="mos_exp2.html">설문지</a></li>
+      </ul>
+    </header>
+  </article>
+  <article>
+    <header>
+      <span class="paper_date"><b>평가 3 : FastPitch 모델 발화 음질 (Speech Quality) 평가</b>
+      <ul>
+        <!-- <li><a href="paper_link">paper</a></li> -->
+        <li><a href="mos_exp3.html">샘플 페이지</a></li>
+        <li><a href="mos_exp3.html">설문지</a></li>
+      </ul>
+    </header>
+  </article>
+  <article>
+    <header>
+      <span class="paper_date"><b>평가 4 : FastPitch 모델 자연성(Naturalness) 평가</b>
+      <ul>
+        <!-- <li><a href="paper_link">paper</a></li> -->
+        <li><a href="mos_exp4.html">샘플 페이지</a></li>
+        <li><a href="mos_exp4.html">설문지</a></li>
+      </ul>
+    </header>
+  </article>
 </body>
 
 </html>

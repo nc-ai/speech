@@ -1,0 +1,223 @@
+<html>
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>ICASSP2021 청취 평가 페이지 - 배한빈</title>
+</head>
+
+<body>
+  <article>
+    <header>
+      <h1>ICASSP2021 청취 평가 - "Formant-Conserved Pitch Shift를 이용한 Data Augmentation 및 FastPitch 모델 개선"</h1>
+    </header>
+  </article>
+
+
+    <p class="toc_title"><br>
+      <h2>평가 4 : FastPitch 모델 자연성(Naturalness) 평가</h2>
+    </p>
+
+    <div>
+      <br /> 샘플을 듣고 해당 샘플이 발화 스타일이 자연스러운지 평가 해주시면 됩니다.
+      <br /> 스타일은 <b> 낭독체 </b> 및 <b> 대화체 </b> 가 있습니다.
+      <br /> 각 스타일에 대한 샘플 예시입니다.
+      <table>
+        <tbody>
+          <tr>
+            <td 스타일></td>
+            <td align="center">1</td>
+            <td align="center">2</td>
+            <td align="center">3</td>
+            <td align="center">4</td>
+            <td align="center">5</td>
+          </tr>
+          <tr>
+            <td nowrap><b>낭독체</b></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/neutral/sox/0/010.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/neutral/sox/0/011.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/neutral/sox/0/012.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/neutral/sox/0/013.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/neutral/sox/0/014.wav" type="audio/wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap><b>대화체</b></td>
+            <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/sox/0/040.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/sox/0/041.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/sox/0/042.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/sox/0/043.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/sox/0/044.wav" type="audio/wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br /> 부자연스러움(0점) / 자연스러움(5점) 에 대한 예시 입니다.
+
+      <table>
+        <tbody>
+          <tr>
+            <td 스타일></td>
+            <td align="center">자연1</td>
+            <td align="center">부자연1</td>
+            <td align="center">자연2</td>
+            <td align="center">부자연2</td>
+            <td align="center">자연3</td>
+            <td align="center">부자연3</td>
+          </tr>
+          <tr>
+            <td nowrap><b>낭독체</b></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/example/natural_000.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/example/unnatural_000.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/example/natural_001.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/example/unnatural_001.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/example/natural_002.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/example/unnatural_002.wav" type="audio/wav"></audio></td>
+          </tr>
+          <tr>
+            <td nowrap><b>대화체</b></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/example/natural_030.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/example/unnatural_030.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/example/natural_031.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/example/unnatural_031.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/example/natural_032.wav" type="audio/wav"></audio></td>
+            <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/example/unnatural_032.wav" type="audio/wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <br /> <b>평가 시작 - (중요) 점수 기준은 부자연(0) ---- 자연(5) 입니다!! </b>
+      
+      <table>
+        <script language="JavaScript">
+          // var alphas = ["-6", "-5", "-4", "-3", "-2", "-1", "0", "1", "2", "3", "4", "5", "6"];
+  
+          // 0 : baseline   1 : augment
+          var samples = [0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0] 
+          n=5
+          exp_name = 'samples/exp2_fastpitch/'
+       
+        
+          String.prototype.fillZero = function(width){
+              return this.length >= width ? this:new Array(width-this.length+1).join('0')+this;//남는 길이만큼 0으로 채움
+          }
+          Number.prototype.fillZero = function(width){
+              let n = String(this);//문자열 변환
+              return n.length >= width ? n:new Array(width-n.length+1).join('0')+n;//남는 길이만큼 0으로 채움
+          }
+          
+          document.write("<tr>  <td> <b> 감사합니다 </b> </td> </tr>");
+          // 10~19 번, 40~49번 샘플로 구성.
+          cbase=0;
+          caug=0;
+          for(i=0;i<20;i+=n)
+          {
+            
+  
+            document.write("<tr>"); 
+          
+            document.write("<td><b> 낭독체 </b></td>");
+            for(j=0;j<n;j++){
+              document.write("<td align=\"center\">E4-"+(i+j+1)+"</td>");
+            }
+              
+            document.write("</tr>");
+            
+            // all_pred
+            document.write("<tr>");
+            document.write("<td></td>");
+  
+            for(j=0;j<n;j++){
+              if(samples[i+j] == 0){
+                tag = 'baseline';
+                fname = (10+cbase).fillZero(3)+ ".wav"
+                cbase++;
+              }
+              else {
+                tag = 'augment';
+                fname = (10+caug).fillZero(3)+ ".wav"
+                caug++;
+              }
+              alpha = 0
+              document.write("<td><audio style=\"width:100px;height:32px\" controls=\"\">");
+              document.write("<source src=\"" + exp_name + tag +"/neutral/all_pred/" + alpha+ "/" + fname + "\" type=\"audio/wav\"></audio></td>");
+            }
+  
+          }
+
+          document.write("<tr>  <td> <b> 감사합니다 </b> </td> </tr>");
+          cbase=0;
+          caug=0;
+          for(i=0;i<20;i+=n)
+          {
+            
+
+            document.write("<tr>"); 
+              
+          
+            document.write("<td><b> 대화체 </b></td>");
+            for(j=0;j<n;j++){
+              document.write("<td align=\"center\">E4-"+(i+j+21)+"</td>");
+            }
+              
+            document.write("</tr>");
+            
+            // all_pred
+            document.write("<tr>");
+            document.write("<td></td>");
+  
+            for(j=0;j<n;j++){
+              if(samples[i+j] == 0){
+                tag = 'baseline';
+                fname = (40+cbase).fillZero(3)+ ".wav"
+                cbase++;
+              }
+              else {
+                tag = 'augment';
+                fname = (40+caug).fillZero(3)+ ".wav"
+                caug++;
+              }
+              alpha = 0
+              document.write("<td><audio style=\"width:100px;height:32px\" controls=\"\">");
+              document.write("<source src=\"" + exp_name + tag +"/dialog/all_pred/" + alpha+ "/" + fname + "\" type=\"audio/wav\"></audio></td>");
+            }
+  
+          }
+  
+          document.write("");
+        </script>
+      </table>
+
+    </div>
+
+
+
+
+
+
+
+</body>
+
+</html>

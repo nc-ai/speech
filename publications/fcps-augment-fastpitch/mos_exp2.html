@@ -1,0 +1,179 @@
+<html>
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>ICASSP2021 청취 평가 페이지 - 배한빈</title>
+</head>
+
+<body>
+  <article>
+    <header>
+      <h1>ICASSP2021 청취 평가 - "Formant-Conserved Pitch Shift를 이용한 Data Augmentation 및 FastPitch 모델 개선"</h1>
+    </header>
+  </article>
+
+
+    <p class="toc_title"><br>
+      <h2>평가 2 : FastPitch 모델 발화 명료도 (Speech intelligibility) 평가</h2>
+    </p>
+
+    <div>
+      <br /> 샘플을 듣고 해당 샘플의 발화 내용이 잘 들리는지, 그리고 이해가 되는지 평가해주시면 됩니다.
+      
+      <br /> 발화 명료도 점수에 대한 예시 입니다.
+
+      <div><br>
+        Sample1: 포켓몬스터에 나오는 팔랑거리는 그런 마름모 모양 가오리들인데, 혼타 가오리라고 되게 귀엽고 큰 것들은 또 멋있고.<br>
+        Sample2: 내가 저번에 얘기했던 거. 내가 보는 그 유튜브 영상 중에 영화 하는 사람이 있어.<br>
+        Sample3: 그러나 증권업계는 다소 우려의 시각을 나타내고 있다.<br>
+
+      </div>
+      
+
+      <table>
+        <tbody>
+          <tr>
+            <td nowrap></td>
+            <td align="center">점수</td>
+            <td align="center">샘플</td>
+            <td align="center">특징</td>
+          </tr>
+          <tr>
+            <td nowrap>Sample1</td>
+            <td nowrap><b>0~1점</b></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/example/int1_334.wav" type="audio/wav"></audio></td>
+            <td><b> 문장 전체 중 상당 부분 말이 들리지 않거나, 문장을 이해할 수 없음. </b></td>
+          </tr>
+          <tr>
+            <td nowrap>Sample2</td>
+            <td nowrap><b>2~3점</b></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/example/int2_256.wav" type="audio/wav"></audio></td>
+            <td nowrap><b>2~3글자 정도 발음이 모호하나, 문장을 이해할 수 있음.</b></td>
+
+          </tr>
+          <tr>
+            <td nowrap>Sample3</td>
+            <td nowrap><b>4~5점</b></td>
+            <td><audio style="width:100px;height:32px" controls="">
+                <source src="samples/example/int3_141.wav" type="audio/wav"></audio></td>
+            <td nowrap><b>모든 말이 잘 들리고, 문장이 이해가 됨.</b></td>
+
+          </tr>
+        </tbody>
+      </table>
+
+
+      <br /> <b>평가 시작 - (중요) 점수 기준은 이해 안됨(0) ---- 이해 됨(5) 입니다!! </b>
+      
+      <table>
+        <script language="JavaScript">
+          // var alphas = ["-6", "-5", "-4", "-3", "-2", "-1", "0", "1", "2", "3", "4", "5", "6"];
+  
+          var alphas = ["-4", "-2",  "0",  "2", "4"];
+          n=5
+
+          // 0 : baseline   1 : augment
+          var samples = [0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0] 
+          exp_name = 'samples/exp2_fastpitch/'
+       
+        
+          String.prototype.fillZero = function(width){
+              return this.length >= width ? this:new Array(width-this.length+1).join('0')+this;//남는 길이만큼 0으로 채움
+          }
+          Number.prototype.fillZero = function(width){
+              let n = String(this);//문자열 변환
+              return n.length >= width ? n:new Array(width-n.length+1).join('0')+n;//남는 길이만큼 0으로 채움
+          }
+          
+          
+          // 0~9 번 샘플로 구성.
+          cbase=0;
+          caug=0;
+          for(i=0;i<20;i++)
+          {
+            if(i%5 ==0)
+              document.write("<tr>  <td> <b> 감사합니다 </b> </td> </tr>");
+            if(samples[i] == 0){
+              tag = 'baseline';
+              fname = cbase.fillZero(3)+ ".wav"
+              cbase++;
+            }
+            else {
+              tag = 'augment';
+              fname = caug.fillZero(3)+ ".wav"
+              caug++;
+            }
+  
+            document.write("<tr>"); 
+          
+            document.write("<td><b>  </b></td>");
+            for(j=0;j<n;j++){
+              document.write("<td align=\"center\">&alpha;="+alphas[j]+"</td>");
+            }
+              
+            document.write("</tr>");
+            
+            // all_pred
+            document.write("<tr>");
+            document.write("<td>E2-"+ (i+1) +"</td>");
+  
+            for(j=0;j<n;j++){
+              alpha = alphas[j]
+              document.write("<td><audio style=\"width:100px;height:32px\" controls=\"\">");
+              document.write("<source src=\"" + exp_name + tag +"/neutral/all_pred/" + alpha+ "/" + fname + "\" type=\"audio/wav\"></audio></td>");
+            }
+  
+          }
+
+          cbase=0;
+          caug=0;
+          for(i=0;i<20;i++)
+          {
+            if(i%5 ==0)
+              document.write("<tr>  <td> <b> 감사합니다 </b> </td> </tr>");
+            if(samples[i] == 0){
+              tag = 'baseline';
+              fname = (30+cbase).fillZero(3)+ ".wav"
+              cbase++;
+            }
+            else {
+              tag = 'augment';
+              fname = (30+caug).fillZero(3)+ ".wav"
+              caug++;
+            }
+  
+            document.write("<tr>"); 
+          
+            document.write("<td><b>  </b></td>");
+            for(j=0;j<n;j++){
+              document.write("<td align=\"center\">&alpha;="+alphas[j]+"</td>");
+            }
+              
+            document.write("</tr>");
+            
+            // all_pred
+            document.write("<tr>");
+            document.write("<td>E2-"+ (i+21) +"</td>");
+  
+            for(j=0;j<n;j++){
+              alpha = alphas[j]
+              document.write("<td><audio style=\"width:100px;height:32px\" controls=\"\">");
+              document.write("<source src=\"" + exp_name + tag +"/dialog/all_pred/" + alpha+ "/" + fname + "\" type=\"audio/wav\"></audio></td>");
+            }
+  
+          }
+  
+          document.write("");
+        </script>
+      </table>
+
+    </div>
+
+    
+
+</body>
+
+</html>
