@@ -9,7 +9,7 @@
 <body>
   <article>
     <header>
-      <h1>ICASSP2021 청취 평가 - "Formant-Conserved Pitch Shift를 이용한 Data Augmentation 및 FastPitch 모델 개선"</h1>
+      <h1>ICASSP2021 청취 평가 - "Formant-Preserving Pitch Shift를 이용한 Data Augmentation 및 FastPitch 모델 개선"</h1>
     </header>
   </article>
 
@@ -23,10 +23,21 @@
     <br/> <b>노란색 음영</b>은 반음(Semitone)단위의 &alpha; 값으로, 해당 값 만큼 Pitch shift를 합니다.
     <br/> Pitch Shift 값의 범위는 <b>(-4, -2, 0, +2, +4)</b>로, 샘플 페이지는 <b>가로</b>로, 설문지는 <b>세로</b>로 표현되어 있습니다.
     <br /> <b>샘플페이지의 순서와 설문지의 순서를 헷갈리지 않게 주의 부탁드립니다.</b>
+
+
+  </div>
+  <br /> <b>-------------------------------------------------------------------------------------------------</b>
+  <br /> <b>**중요!!</b>
+  <br /> <b>샘플페이지를 새로고침할 경우 음성이 다시 shuffle 되므로 가급적이면 새로고침 하지 말아주세요!</b>
+  <br /> <b>만약 새로고침 하였다면, 설문하던 번호부터 계속 진행하시면 됩니다.</b>
+  <br /> <b>-------------------------------------------------------------------------------------------------</b>
+  <div>
+
   </div>
 
+
     <p class="toc_title"><br>
-      <h2>평가 3 : FastPitch 모델 발화 음질 (Speech Quality) 평가</h2>
+      <h2>평가 2 : FastPitch 모델 발화 품질 (Speech Quality) 평가</h2>
     </p>
 
     <div>
@@ -44,17 +55,17 @@
           </tr>
           <tr>
             <td nowrap>Sample1</td>
-            <td nowrap><b>0~1점</b></td>
+            <td nowrap><b>1점</b></td>
             <td><audio style="width:100px;height:32px" controls="">
                 <source src="samples/example/sq1_334.wav" type="audio/wav"></audio></td>
-            <td><b> 소리에 잡음이나 왜곡이 심하여 듣기가 매우 힘듦. </b></td>
+            <td><b> 소리에 왜곡이 심하여 발화 내용을 이해할 수 없음. </b></td>
           </tr>
           <tr>
             <td nowrap>Sample2</td>
             <td nowrap><b>2~3점</b></td>
             <td><audio style="width:100px;height:32px" controls="">
                 <source src="samples/example/sq2_030.wav" type="audio/wav"></audio></td>
-            <td nowrap><b>잡음이나 왜곡이 있음.</b></td>
+            <td nowrap><b> 왜곡이 있으나, <b>노력하면</b> 발화 내용을 이해할 수는 있음. </b></td>
 
           </tr>
           <tr>
@@ -62,7 +73,7 @@
             <td nowrap><b>4~5점</b></td>
             <td><audio style="width:100px;height:32px" controls="">
                 <source src="samples/example/sq3_045.wav" type="audio/wav"></audio></td>
-            <td nowrap><b>소리가 매우 명료하고, 잡음, 왜곡이 없음.</b></td>
+            <td nowrap><b> 왜곡이 거의 없고, <b>무리없이</b> 발화 내용을 이해할 수 있음.</b></td>
 
           </tr>
         </tbody>
@@ -81,7 +92,7 @@
           n=5
 
           // 0 : baseline   1 : augment
-          var samples = [0, 2, 0, 2, 2, 1, 2, 0, 0, 1, 2, 1, 0, 1, 2, 2, 1, 1, 1, 2, 0, 0, 2, 1, 0, 2, 1, 1, 0, 0] 
+          var samples = [2, 0, 1, 1, 2, 0, 1, 1, 0, 0] 
           exp_name = 'samples/exp2_fastpitch/'
        
         
@@ -94,29 +105,18 @@
           }
           
           
-          // 0~9 번 샘플로 구성.
-          cbase=0;
-          caug=0;
-          corig=0;
-          for(i=0;i<30;i++)
+          for(i=0;i<10;i++)
           {
             if(i%5 ==0)
               document.write("<tr>  <td> <b> 감사합니다 </b> </td> </tr>");
-
             if(samples[i] == 0){
               tag = 'baseline';
-              fname = (20+cbase).fillZero(3)+ ".wav"
-              cbase++;
             }
             else if(samples[i] == 1) {
               tag = 'augment';
-              fname = (20+caug).fillZero(3)+ ".wav"
-              caug++;
             }
             else if(samples[i] == 2){
-              tag = 'origin'
-              fname = (20+corig).fillZero(3) + ".wav"
-              corig++;
+              tag = 'origin';
             }
   
             document.write("<tr>"); 
@@ -131,8 +131,10 @@
             // all_pred
             document.write("<tr>");
             document.write("<td>E3-"+ (i+1) +"</td>");
-  
+
             for(j=0;j<n;j++){
+              mm = Math.floor(Math.random() * 30) // 0~2 random
+              fname = mm.fillZero(3) + ".wav"
               alpha = alphas[j]
               document.write("<td><audio style=\"width:100px;height:32px\" controls=\"\">");
               
@@ -143,27 +145,20 @@
             }
           }
 
-          cbase=0;
-          caug=0;
-          corig=0;
-          for(i=0;i<30;i++)
+          for(i=0;i<10;i++)
           {
             if(i%5 ==0)
               document.write("<tr>  <td> <b> 감사합니다 </b> </td> </tr>");
+            document.write("<")
             if(samples[i] == 0){
               tag = 'baseline';
-              fname = (50+cbase).fillZero(3)+ ".wav"
-              cbase++;
             }
             else if(samples[i] == 1) {
               tag = 'augment';
-              fname = (50+caug).fillZero(3)+ ".wav"
-              caug++;
+
             }
             else if(samples[i] == 2){
               tag = 'origin'
-              fname = (50+corig).fillZero(3) + ".wav"
-              corig++;
             }
   
             document.write("<tr>"); 
@@ -177,9 +172,11 @@
             
             // all_pred
             document.write("<tr>");
-            document.write("<td>E3-"+ (i+31) +"</td>");
+            document.write("<td>E3-"+ (i+11) +"</td>");
   
             for(j=0;j<n;j++){
+              mm = Math.floor(Math.random() * 30) // 0~2 random
+              fname = (30+mm).fillZero(3) + ".wav"
               alpha = alphas[j]
               document.write("<td><audio style=\"width:100px;height:32px\" controls=\"\">");
               
