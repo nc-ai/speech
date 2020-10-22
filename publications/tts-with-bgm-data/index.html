@@ -2,13 +2,13 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Audio samples from "BGMoff-TTS : Utilization of Music-Mixed Broadcasting Data for A Personalized Text-To-Speech System"</title>
+  <title>Audio samples from "A NEURAL TEXT-TO-SPEECH MODEL UTILIZING BROADCAST DATA MIXED WITH BACKGROUND MUSIC"</title>
 </head>
 
 <body>
   <article>
     <header>
-      <h1>Audio samples from "BGMoff-TTS : Utilization of Music-Mixed Broadcasting Data for A Personalized Text-To-Speech System"</h1>
+      <h1>Audio samples from "A NEURAL TEXT-TO-SPEECH MODEL UTILIZING BROADCAST DATA MIXED WITH BACKGROUND MUSIC"</h1>
     </header>
   </article>
 
@@ -16,8 +16,8 @@
   <div><b>Authors:</b> Hanbin Bae, Jae-Sung Bae, Young-Sun Joo, Young-Ik Kim, Hoon-Young Cho</div>
 
   <p><b>Abstract:</b></div>
-    A personalized text-to-speech (TTS) system requires several hours of high-quality personal speech data from a speaker. In real scenarios, only a few minutes of speech data are often available. Recently, it has become easier to obtain speech data from personal social broadcasting. However, it remains difficult to utilize them directly to train TTS systems, as the portion of clean speech is insufficient and the remainder includes noise such as background music. A global style token (GST) based TTS model can generate clean synthesized-speech from speech data mixed with music and noise, but it requires a sufficient amount of data to attain reliable performance. Therefore, in this paper, we propose a method to train the GST-based TTS system with a limited broadcasting data has music-mixed speech and an insufficient amount of clean speech.We apply two tasks: first, we separate speech from music-mixed speech data by using a music filter; second, we use an auxiliary classifier to allow the embedding vector of GST layer to distinguish whether the given speech is clean. We demonstrated that the proposed method synthesizes much more high-quality speech than conventional methods.
-  
+    Recently, it has become easier to obtain speech data from various media such as the internet or YouTube, but directly utilizing them to train a neural text-to-speech (TTS) model is difficult. The proportion of clean speech is insufficient and the remainder includes background music. Even with the global style token (GST). Therefore, we propose the following method to successfully train an end-to-end TTS model with limited broadcast data. First, the background music is removed from the speech by introducing a music filter. Second, the GST-TTS model with an auxiliary quality classifier is trained with the filtered speech and a small amount of clean speech. In particular, the quality classifier makes the embedding vector of the GST layer focus on representing the speech quality (filtered or clean) of the input speech. The experimental results verified that the proposed method synthesized much more high-quality speech than conventional methods.
+
   <p><b>Proposed System Architecture:</b></div><br>
     <img src="images/2020_ICASSP_fig3_v3.png" alt="My Image" width="1200" height="276">
 
@@ -209,7 +209,7 @@
         </tbody>
       </table>
 
-<!-- 
+<!--
       <a name="src.found">
         <h3>A.3. Found Data Application</h3>
       </a>
