@@ -1,507 +1,305 @@
 <html>
 
-<head>
-  <meta charset="UTF-8">
-  <title>Audio samples from "FastPitch TTS with Extended Pitch Controllability Using Personlaity-Preserving Pitch Augmentation"</title>
-</head>
+<!-- Background theme -->
+<div id="background">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <img src="img/logo.svg" alt="ci_logo">/<img>
+    <div class="bg3"></div>
+    <div class="bg4"></div>
+</div>
 
-<body>
-  <article>
-    <header>
-      <h1>Audio samples from "FastPitch TTS with Extended Pitch Controllability Using Personlaity-Preserving Pitch Augmentation"</h1>
-    </header>
-  </article>
-
-  <div><b>Paper:</b> The paper will be uploaded.</div>
-  &nbsp;
-  <div><b>Authors:</b> Hanbin Bae, Young-Sun Joo, Hoon-Young Cho</div>
-  &nbsp;
-  <p><b>Abstract:</b></div>
-    Recently, neural text-to-speech models with additional input features have been proposed. For example, the FastPitch model uses pitch and duration as additional inputs. However, for pitch values that significantly deviate from the average pitch, the quality of the synthesized speech is reduced considerably. To address this issue, we propose two algorithms to ensure the robustness of FastPitch: a personality-preserving pitch augmentation using the neural formant-preserving pitch shift (neurFPS) algorithm, and a learning algorithm to use pitch-augmented datasets with different pitch ranges in the same sentence. Our results indicate that FastPitch when applied with our proposed algorithms ensure pitch controllability within at least four semitones from the predicted pitch. This clearly improved a pitch controllability of the baseline FastPitch that can generate natural speech within at most two semitones from the predicted pitch.
-  &nbsp;
-
-  <p class="toc_title"><br>
-    <h2>Contents</h2>
-  </p>
-  <div id="toc_container">
-    <ol type="A">
-      <li><a href="#neurfps">neurl Formant-Preserving Pitch Shift <b>(neurFPS)</b> </a></li>
-      <ol type="1">
-        <li><a href="#neurfps.kor">Internel Korean female speaker</a></li>
-        <li><a href="#neurfps.eng">English LJSpeech</a></li>
-      </ol>
-      <li><a href="#gst-tts">Proposed Systems (models w/ SER lower than 50%)</a></li>
-    </ul>
-  </div>
-
-  &nbsp;
-  &nbsp;
-
-  
-  <p>
-    <a name="neurfps">
-    <h3><b>A. Neural Formant-Preserving Pitch Shift (neurFPS):</b></h3>
-    </a>
-    &nbsp;
-    &nbsp;
-    <img src="images/fig_FPPS-diagram.png" alt="My Image" width="600"><br>
-  
-    
-    <!-- <img src="images/fig_mel-gate-output_v2.png" alt="My Image" width="600"><br> -->
-
-
-    <a name="neurfps.kor">
-      <h3>A.1. neurFPS algorithm for Korean female speaker</h3>
-    </a>
-
-    <table>
-      <tbody>
-        <tr>
-          <td> </td>
-          <td align="center">-3</td>
-          <td align="center">-2</td>
-          <td align="center">-1</td>
-          <td align="center">0<b><br>Formant Gate</b></td>
-
-
-          <td align="center">1</td>
-          <td align="center">2</td>
-          <td align="center">3</td>
-        </tr>
-        <tr>
-          <td nowrap>Pitch shift <br> <b>Excitation Gate</b> </td>
-          
-          <td><audio style="width:100px;height:32px" controls="">
-            <source src="samples/exp1_sox_fcps/dialog/sox/-3/030.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/dialog/sox/-2/030.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/dialog/sox/-1/030.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/dialog/sox/0/030.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/dialog/sox/1/030.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/dialog/sox/2/030.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/dialog/sox/3/030.wav" type="audio/wav"></audio></td>
-        </tr>
-        <tr>
-          <td nowrap>neurFPS<br> <b>Result</b> </td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/dialog/fcps/-3/030.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/dialog/fcps/-2/030.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/dialog/fcps/-1/030.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/dialog/fcps/0/030.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/dialog/fcps/1/030.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/dialog/fcps/2/030.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/dialog/fcps/3/030.wav" type="audio/wav"></audio></td>
-        </tr>
-      </tbody>
-    </table>
+<div id="gvc_header" class="container scrollspy">
+    <div>
+    <h4>FastPitch TTS with Extended Pitch Controllability <br>Using Personlaity-Preserving Pitch Augmentation </h4>
+    <h3>Hanbin Bae, Young-Sun Joo, Hoon-Young Cho</h3></div>
+    <br>
+    <div>
+    <h6><h5>Abstract</h5>
+        &nbsp;&nbsp;&nbsp;&nbsp;Recently, neural text-to-speech models with additional input features have been proposed.<br>
+        For example, the FastPitch model uses pitch and duration as additional inputs. However, for <br>
+        pitch values that significantly deviate from the average pitch, the quality of the synthesized <br>
+        speech is reduced considerably. To address this issue, we propose two algorithms to ensure <br>
+        the robustness of FastPitch: a personality-preserving pitch augmentation using the neural <br>
+        formant-preserving pitch shift (neurFPS) algorithm, and a learning algorithm to use pitch-<br>
+        augmented datasets with different pitch ranges in the same sentence. Our results indicate <br>
+        that FastPitch when applied with our proposed algorithms ensure pitch controllability within <br>
+        at least four semitones from the predicted pitch. This clearly improved a pitch controllability <br>
+        of the baseline FastPitch that can generate natural speech within at most two semitones from <br>
+        the predicted pitch.</h6></div>
 
     <br>
-    <a name="neurfps.eng">
-      <h3>A.2. neurFPS algorithm for English female speaker (LJSpeech)</h3>
-    </a>
-    <table>
-      <tbody>
-        <tr>
-          <td> </td>
-          <td align="center">-3</td>
-          <td align="center">-2</td>
-          <td align="center">-1</td>
-          <td align="center">0<b><br>Formant Gate</b></td>
-          <td align="center">1</td>
-          <td align="center">2</td>
-          <td align="center">3</td>
-        </tr>
-        <tr>
-          <td nowrap>Pitch shift <br> <b>Excitation Gate</b> </td>
-          
-          <td><audio style="width:100px;height:32px" controls="">
-            <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-3.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-            <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-2.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-            <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-1.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-            <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-            <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_1.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-            <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_2.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-            <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_3.wav" type="audio/wav"></audio></td>
-        </tr>
-        <tr>
-          <td nowrap>neurFPS<br> <b>Result</b> </td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-3.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-2.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-1.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_1.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_2.wav" type="audio/wav"></audio></td>
-          <td><audio style="width:100px;height:32px" controls="">
-              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_3.wav" type="audio/wav"></audio></td>
-        </tr>
-        
-      </tbody>
-    </table>
-
-
-    <div><br />We augmented 
-
-      <!-- The synthsized speech samples below are converted from mel-scale spectrogram to speech waveform by using the -->
-      <!-- Griffin-Lim algorithm. -->
+    <div id="toc_container" >
+    <h5>Contents</h5>
+    <ol type="A">
+        <li><a href="#neurfps"><b>[NCFemale]</b> Audio Samples for Korean Female Speaker in Paper</a></li>
+            <ol type="1">
+                <li><a href="#neurfps.kor">Neural Formant-Preserving Pitch Shift</a></li>
+                <li><a href="#fastpitch.kor">FastPitch with Pitch-Augmented Databases</a></li>
+            </ol>
+        <br>
+        <li><a href="#fastpitch"><b>[LJSpeech]</b> Additional Samples for English Listeners </a></li>
+            <ol type="1">
+                <li><a href="#neurfps.eng">Neural Formant-Preserving Pitch Shift</a></li>
+                <li><a href="#fastpitch.eng">FastSpeech2 with Pitch-Augmented Databases</a></li>
+            </ol>
+    </ol>
     </div>
+    <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed neurFPS </a>
+    <a href="#gvc_demo" class="waves-effect waves-light btn header-btn"><i></i> improved FastPitch </a> -->
+</div>
 
 
-    &nbsp;
+<head>
+  <title> Demo Page, "FastPitch TTS with Extended Pitch Controllability Using Personlaity-Preserving Pitch Augmentation" </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
 
-    <div>
-      <a name="src">
-        <h2>A. Pre-trained Music Filter</h2>
-      </a>
-      <div>
-      </div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">   
+$(document).ready( function() {
 
+$("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
 
-      <a name="src.kspon">
-        <h3>A.1. KSponSpeech Dataset</h3>
-      </a>
-
-      To train a speaker-independent music filter, we use the KsponSpeech dataset.
-      dataset, which comprises approximatly 1,000 h of spontaneous speech samples recorded by 2,000 people talking about various topics, sampled at 16 kHz.
-      <br>
-      1. Male
-      <br>
-      <audio controls>
-        <source src="Kspon_sample/kspon_male.wav" type="audio/wav">
-      </audio>
-      <br>
-      2. Female
-      <br>
-
-      <audio controls>
-        <source src="Kspon_sample/kspon_female.wav" type="audio/wav">
-      </audio>
-      <br>
+});
+</script>
 
 
-      <a name="src.filter">
-        <h3>A.2. Comparing music-mixed speech and filtered speech</h3>
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    <div id="neurfps" class="container scrollspy">
+        <a>
+        <h3><b>A. <b>[NCFemale]</b> Audio Samples for Korean Female Speaker in Paper</b></h3>
+        </a>
+        <br><br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/fig_FPPS-diagram.png" alt="My Image" width="600"><br>
+        <h6><b>Fig. 1.</b> Structure of mel-VGG and schematic diagram of the neurFPS algorithm.</h6>
 
-      </a>
+        <br><br><br>
+        <a name="neurfps.kor">
+            <h3><b>A.1. Neural Formant-Preserving Pitch Shift</b></h3>
+            <br><br>
+        </a>
+      
+          <table>
+            <tbody>
+              <!-- <tr>
+                <td> </td>
+                <td align="center"></td>
+                <td align="center"></td>
+                <td align="center"></td>
+                <td align="center"><b><br>Formant Gate</b></td>
+                <td align="center"></td>
+                <td align="center"></td>
+                <td align="center">3</td>
+              </tr> -->
+              <tr>
+                <td> &alpha; </td>
+                <td align="center">-4</td>
+                <td align="center">-2</td>
+                <td align="center">0</td>
+                <td align="center">2</td>
+                <td align="center">4</td>
+              </tr>
+              <tr>
+                <td nowrap>Pitch shift <br> <b>Excitation Gate</b> </td>
+                
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/dialog/sox/-3/030.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/dialog/sox/-2/030.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/dialog/sox/-1/030.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/dialog/sox/0/030.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/dialog/sox/1/030.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/dialog/sox/2/030.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/dialog/sox/3/030.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td nowrap>neurFPS<br> <b>Result</b> </td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/dialog/fcps/-3/030.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/dialog/fcps/-2/030.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/dialog/fcps/-1/030.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/dialog/fcps/0/030.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/dialog/fcps/1/030.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/dialog/fcps/2/030.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/dialog/fcps/3/030.wav" type="audio/wav"></audio></td>
+              </tr>
+            </tbody>
+          </table>
+      
+          <br>
 
-      <br>
+          <a name="fastpitch.kor">
+            <br><br>
+            <h3><b>A.2. FastPitch with Pitch-Augmented Databases</b></h3>
+            <br><br>
+          </a>
+          <table>
+            <tbody>
+              <tr>
+                <td> &alpha; </td>
+                <td align="center">-3</td>
+                <td align="center">-2</td>
+                <td align="center">-1</td>
+                <td style="color:mediumturquoise">Input Speech</td>
+                <td align="center">1</td>
+                <td align="center">2</td>
+                <td align="center">3</td>
+              </tr>
+              <tr>
+                <td nowrap>Pitch shift <br> <b>Excitation Gate</b> </td>
+                
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-3.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-2.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-1.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_1.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_2.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_3.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td nowrap>neurFPS<br> <b>Result</b> </td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-3.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-2.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-1.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_1.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_2.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_3.wav" type="audio/wav"></audio></td>
+              </tr>
+              
+            </tbody>
+          </table>
+      
 
-      1. 가고시마에서는 연습경기를 통해 실전 감각을 끌어올린다는 계획이다.
-
-      <table>
-        <tbody>
-          <tr>
-            <td nowrap></td>
-            <td align="center">0dB</td>
-            <td align="center">5dB</td>
-            <td align="center">10dB</td>
-            <td align="center">15dB</td>
-            <td align="center">20dB</td>
-          </tr>
-          <tr>
-            <td nowrap>Mixed</td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-          <tr>
-            <td nowrap>Filtered</td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <br>
-      2. 리니지 쿠우 서버 어떻게 하나요?
-
-      <table>
-        <tbody>
-          <tr>
-            <td nowrap></td>
-            <td align="center">0dB</td>
-            <td align="center">5dB</td>
-            <td align="center">10dB</td>
-            <td align="center">15dB</td>
-            <td align="center">20dB</td>
-          </tr>
-          <tr>
-            <td nowrap>Mixed</td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-          <tr>
-            <td nowrap>Filtered</td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <br>
-      3. 직장인 소액대출 알아봅니다.
-
-      <table>
-        <tbody>
-          <tr>
-            <td nowrap></td>
-            <td align="center">0dB</td>
-            <td align="center">5dB</td>
-            <td align="center">10dB</td>
-            <td align="center">15dB</td>
-            <td align="center">20dB</td>
-          </tr>
-          <tr>
-            <td nowrap>Mixed</td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-          <tr>
-            <td nowrap>Filtered</td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-        </tbody>
-      </table>
-
-<!-- 
-      <a name="src.found">
-        <h3>A.3. Found Data Application</h3>
-      </a>
-      <video id="myVideo" src="images/kma_jtbc_news_20190814_demo.mp4" controls width="640" height="360"></video> <br> -->
-    </div>
-
-
-
-    <div><br><br><br>
-      <a name="gst-tts">
-        <h2>B. Proposed Systems (models w/ SER lower than 50%)</h2>
-      </a>
-      <div>
-      </div>
-      <div><br>
-        <b>1. TTS:</b> the DC-TTS [2] model usedconducted in the pre-liminary experiments.
-      <br>
-        <b>2.  GST:</b>  the GST-TTS model where the quality embeddingfrom the GST layers was concatenated into the encoderstate of DC-TTS.
-      <br>
-        <b>3.  GST+MF:</b>   the  GST-TTS  model  trained  with  filteredspeech obtained from the pre-trained music filter.
-      <br>
-        <b>4.  GST+MF+Aux.:</b>  the GST+MF model with an auxiliaryclassifier.
-      </div>
-      <div><br>
-        Sample1: 눈은 내일 새벽까지 이어지다가 점차 그치겠고요.<br>
-        Sample2: 도심형 생활주택 구매 어떤가요?<br>
-        Sample3: 또 동해안을 중심으로는 건조 주의보가 발효 중입니다.<br>
-
-
-      </div>
-
-      <table>
-        <tbody>
-          <tr>
-            <td align="center">Model</td>
-            <td align="center">TTS</td>
-            <td align="center">GST</td>
-            <td align="center">GST+MF</td>
-            <td align="center">GST+MF+Aux.</td>
-            <td align="center">GST+MF+Aux.</td>
-            <td align="center">GST+MF+Aux.</td>
-          </tr>
-          <tr>
-            <td align="center">(Clean/Noisy)</td>
-            <td align="center">(5h/0h)</td>
-            <td align="center">(2.5h/2.5h)</td>
-            <td align="center">(2.5h/2.5h)</td>
-            <td align="center">(0.5h/4.5h)</td>
-            <td align="center">(1.5h/3.5h)</td>
-            <td align="center">(2.5h/2.5h)</td>
-          </tr>
-          <tr>
-            <td align="center">SER(%)</td>
-            <td align="center">13.45</td>
-            <td align="center">Training Failed</td>
-            <td align="center">49.12</td>
-            <td align="center">29.80</td>
-            <td align="center">15.89</td>
-            <td align="center">16.52</td>
-          </tr>
-          <tr>
-            <td nowrap>Sample 1</td>
-            <td>
-            <audio controls>
-                <source src="demo/T2M_2.wav" type="audio/wav">
-            </audio>
-            </td>
-            <td>
-            <audio controls>
-                <source src="demo/GST_mixed_c5m5_2.wav" type="audio/wav">
-            </audio></td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_dist_c5d5_2.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c1d9_2.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/gst_aux_c3d7_2.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c5d5_2.wav" type="audio/wav">
-              </audio>
-            </td>
-          </tr>
-
-
-
-          <tr>
-            <td nowrap>Sample 2</td>
-            <td>
-            <audio controls>
-                <source src="demo/T2M_4.wav" type="audio/wav">
-            </audio>
-            </td>
-            <td>
-            <audio controls>
-                <source src="demo/GST_mixed_c5m5_4.wav" type="audio/wav">
-            </audio></td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_dist_c5d5_4.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c1d9_4.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c3d7_4.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c5d5_4.wav" type="audio/wav">
-              </audio>
-            </td>
-          </tr>
-
-
-
-          <tr>
-            <td nowrap>Sample 3</td>
-            <td>
-            <audio controls>
-                <source src="demo/T2M_6.wav" type="audio/wav">
-            </audio>
-            </td>
-            <td>
-            <audio controls>
-                <source src="demo/GST_mixed_c5m5_6.wav" type="audio/wav">
-            </audio></td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_dist_c5d5_6.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c1d9_6.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c3d7_6.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c5d5_6.wav" type="audio/wav">
-              </audio>
-            </td>
-          </tr>
-        </tbody>
-      </table>
 
     </div>
 
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
+<br><br><br>
+
+
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    <div id="neurfps" class="container scrollspy">
+        <a>
+        <h3><b>B. <b>[LJSpeech]</b> Additional Samples for English Listeners</b></h3>
+        </a>
+        
+          <a name="neurfps.eng">
+            <br><br>
+            <h3><b>B.1. Neural Formant-Preserving Pitch Shift</b></h3>
+            <br><br>
+          </a>
+          <table>
+            <tbody>
+              <tr>
+                <td> &alpha; </td>
+                <td align="center">-3</td>
+                <td align="center">-2</td>
+                <td align="center">-1</td>
+                <td style="color:mediumturquoise">Input Speech</td>
+                <td align="center">1</td>
+                <td align="center">2</td>
+                <td align="center">3</td>
+              </tr>
+              <tr>
+                <td nowrap>Pitch shift <br> <b>Excitation Gate</b> </td>
+                
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-3.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-2.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-1.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_1.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_2.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_3.wav" type="audio/wav"></audio></td>
+              </tr>
+              <tr>
+                <td nowrap>neurFPS<br> <b>Result</b> </td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-3.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-2.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-1.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_1.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_2.wav" type="audio/wav"></audio></td>
+                <td><audio style="width:100px;height:32px" controls="">
+                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_3.wav" type="audio/wav"></audio></td>
+              </tr>
+              
+            </tbody>
+          </table>
+      
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+
+
+<!-- 
+<body class="text-center">
+  
+  
+<div id="index"></div>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="js/script.js"></script>
+</body> -->
 </html>
