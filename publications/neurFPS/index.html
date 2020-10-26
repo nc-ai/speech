@@ -2,43 +2,167 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Audio samples from "BGMoff-TTS : Utilization of Music-Mixed Broadcasting Data for A Personalized Text-To-Speech System"</title>
+  <title>Audio samples from "FastPitch TTS with Extended Pitch Controllability Using Personlaity-Preserving Pitch Augmentation"</title>
 </head>
 
 <body>
   <article>
     <header>
-      <h1>Audio samples from "BGMoff-TTS : Utilization of Music-Mixed Broadcasting Data for A Personalized Text-To-Speech System"</h1>
+      <h1>Audio samples from "FastPitch TTS with Extended Pitch Controllability Using Personlaity-Preserving Pitch Augmentation"</h1>
     </header>
   </article>
 
   <div><b>Paper:</b> The paper will be uploaded.</div>
-  <div><b>Authors:</b> Hanbin Bae, Jae-Sung Bae, Young-Sun Joo, Young-Ik Kim, Hoon-Young Cho</div>
-
+  &nbsp;
+  <div><b>Authors:</b> Hanbin Bae, Young-Sun Joo, Hoon-Young Cho</div>
+  &nbsp;
   <p><b>Abstract:</b></div>
-    A personalized text-to-speech (TTS) system requires several hours of high-quality personal speech data from a speaker. In real scenarios, only a few minutes of speech data are often available. Recently, it has become easier to obtain speech data from personal social broadcasting. However, it remains difficult to utilize them directly to train TTS systems, as the portion of clean speech is insufficient and the remainder includes noise such as background music. A global style token (GST) based TTS model can generate clean synthesized-speech from speech data mixed with music and noise, but it requires a sufficient amount of data to attain reliable performance. Therefore, in this paper, we propose a method to train the GST-based TTS system with a limited broadcasting data has music-mixed speech and an insufficient amount of clean speech.We apply two tasks: first, we separate speech from music-mixed speech data by using a music filter; second, we use an auxiliary classifier to allow the embedding vector of GST layer to distinguish whether the given speech is clean. We demonstrated that the proposed method synthesizes much more high-quality speech than conventional methods.
+    Recently, neural text-to-speech models with additional input features have been proposed. For example, the FastPitch model uses pitch and duration as additional inputs. However, for pitch values that significantly deviate from the average pitch, the quality of the synthesized speech is reduced considerably. To address this issue, we propose two algorithms to ensure the robustness of FastPitch: a personality-preserving pitch augmentation using the neural formant-preserving pitch shift (neurFPS) algorithm, and a learning algorithm to use pitch-augmented datasets with different pitch ranges in the same sentence. Our results indicate that FastPitch when applied with our proposed algorithms ensure pitch controllability within at least four semitones from the predicted pitch. This clearly improved a pitch controllability of the baseline FastPitch that can generate natural speech within at most two semitones from the predicted pitch.
+  &nbsp;
+
+  <p class="toc_title"><br>
+    <h2>Contents</h2>
+  </p>
+  <div id="toc_container">
+    <ol type="A">
+      <li><a href="#neurfps">neurl Formant-Preserving Pitch Shift <b>(neurFPS)</b> </a></li>
+      <ol type="1">
+        <li><a href="#neurfps.kor">Internel Korean female speaker</a></li>
+        <li><a href="#neurfps.eng">English LJSpeech</a></li>
+      </ol>
+      <li><a href="#gst-tts">Proposed Systems (models w/ SER lower than 50%)</a></li>
+    </ul>
+  </div>
+
+  &nbsp;
+  &nbsp;
+
   
-  <p><b>Proposed System Architecture:</b></div><br>
-    <img src="images/2020_ICASSP_fig3_v3.png" alt="My Image" width="1200" height="276">
-
+  <p>
+    <a name="neurfps">
+    <h3><b>A. Neural Formant-Preserving Pitch Shift (neurFPS):</b></h3>
+    </a>
     &nbsp;
-
-    <p class="toc_title"><br>
-      <h2>Contents</h2>
-    </p>
-    <div id="toc_container">
-      <ol type="A">
-        <li><a href="#src">Pre-trained Music Filter</a></li>
-        <ol type="1">
-          <li><a href="#src.kspon">KSponSpeech Dataset</a></li>
-          <li><a href="#src.kspon">Comparing music-mixed speech and filtered speech</a></li>
-        </ol>
-        <li><a href="#gst-tts">Proposed Systems (models w/ SER lower than 50%)</a></li>
-      </ul>
-    </div>
+    &nbsp;
+    <img src="images/fig_FPPS-diagram.png" alt="My Image" width="600"><br>
+  
+    
+    <!-- <img src="images/fig_mel-gate-output_v2.png" alt="My Image" width="600"><br> -->
 
 
-    <div><br />We selected speech samples from the test set, which are not used for expressive TTS model training.
+    <a name="neurfps.kor">
+      <h3>A.1. neurFPS algorithm for Korean female speaker</h3>
+    </a>
+
+    <table>
+      <tbody>
+        <tr>
+          <td> </td>
+          <td align="center">-3</td>
+          <td align="center">-2</td>
+          <td align="center">-1</td>
+          <td align="center">0<b><br>Formant Gate</b></td>
+
+
+          <td align="center">1</td>
+          <td align="center">2</td>
+          <td align="center">3</td>
+        </tr>
+        <tr>
+          <td nowrap>Pitch shift <br> <b>Excitation Gate</b> </td>
+          
+          <td><audio style="width:100px;height:32px" controls="">
+            <source src="samples/exp1_sox_fcps/dialog/sox/-3/030.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/sox/-2/030.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/sox/-1/030.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/sox/0/030.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/sox/1/030.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/sox/2/030.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/sox/3/030.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap>neurFPS<br> <b>Result</b> </td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/fcps/-3/030.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/fcps/-2/030.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/fcps/-1/030.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/fcps/0/030.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/fcps/1/030.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/fcps/2/030.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/fcps/3/030.wav" type="audio/wav"></audio></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br>
+    <a name="neurfps.eng">
+      <h3>A.2. neurFPS algorithm for English female speaker (LJSpeech)</h3>
+    </a>
+    <table>
+      <tbody>
+        <tr>
+          <td> </td>
+          <td align="center">-3</td>
+          <td align="center">-2</td>
+          <td align="center">-1</td>
+          <td align="center">0<b><br>Formant Gate</b></td>
+          <td align="center">1</td>
+          <td align="center">2</td>
+          <td align="center">3</td>
+        </tr>
+        <tr>
+          <td nowrap>Pitch shift <br> <b>Excitation Gate</b> </td>
+          
+          <td><audio style="width:100px;height:32px" controls="">
+            <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-3.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+            <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-2.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+            <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-1.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+            <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+            <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_1.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+            <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_2.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+            <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_3.wav" type="audio/wav"></audio></td>
+        </tr>
+        <tr>
+          <td nowrap>neurFPS<br> <b>Result</b> </td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-3.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-2.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-1.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_1.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_2.wav" type="audio/wav"></audio></td>
+          <td><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_3.wav" type="audio/wav"></audio></td>
+        </tr>
+        
+      </tbody>
+    </table>
+
+
+    <div><br />We augmented 
 
       <!-- The synthsized speech samples below are converted from mel-scale spectrogram to speech waveform by using the -->
       <!-- Griffin-Lim algorithm. -->
