@@ -1,4 +1,5 @@
 <html>
+<meta charset="utf-8">
 
 <!-- Background theme -->
 <div id="background">
@@ -32,16 +33,16 @@
     <div id="toc_container" >
     <h5>Contents</h5>
     <ol type="A">
-        <li><a href="#neurfps"><b>[NCFemale]</b> Audio Samples for Korean Female Speaker in Paper</a></li>
+        <li><a href="#kor"><b>[NCFemale]</b> Audio Samples for Korean Female Speaker in Paper</a></li>
             <ol type="1">
                 <li><a href="#neurfps.kor">Neural Formant-Preserving Pitch Shift</a></li>
-                <li><a href="#fastpitch.kor">FastPitch with Pitch-Augmented Databases</a></li>
+                <li><a href="#fastpitch.kor">Improved TTS System with Pitch-Augmented Databases</a></li>
             </ol>
         <br>
-        <li><a href="#fastpitch"><b>[LJSpeech]</b> Additional Samples for English Listeners </a></li>
+        <li><a href="#eng"><b>[LJSpeech]</b> Additional Samples for English Listeners </a></li>
             <ol type="1">
                 <li><a href="#neurfps.eng">Neural Formant-Preserving Pitch Shift</a></li>
-                <li><a href="#fastpitch.eng">FastSpeech2 with Pitch-Augmented Databases</a></li>
+                <li><a href="#fastpitch.eng">Improved TTS System with Pitch-Augmented Databases</a></li>
             </ol>
     </ol>
     </div>
@@ -52,7 +53,6 @@
 
 <head>
   <title> Demo Page, "FastPitch TTS with Extended Pitch Controllability Using Personlaity-Preserving Pitch Augmentation" </title>
-  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
@@ -74,11 +74,16 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
 
 <body class="text-center">
     <!-- <div id="index"></div> -->
-    <div id="neurfps" class="container scrollspy">
+    
+    
+
+    <div id="kor" class="container scrollspy">
+        <hr style="color:lightslategrey" size="0.5px"></hr>
+        <br><br><br>
         <a>
         <h3><b>A. <b>[NCFemale]</b> Audio Samples for Korean Female Speaker in Paper</b></h3>
         </a>
-        <br><br><br>
+        <br><br><br><br>
         &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/fig_FPPS-diagram.png" alt="My Image" width="600"><br>
         <h6><b>Fig. 1.</b> Structure of mel-VGG and schematic diagram of the neurFPS algorithm.</h6>
 
@@ -101,15 +106,18 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
                 <td align="center">3</td>
               </tr> -->
               <tr>
-                <td> &alpha; </td>
-                <td align="center">-4</td>
+                <td style="color:salmon"> <b>&alpha;</b> </td>
+                <td align="center">-3</td>
                 <td align="center">-2</td>
-                <td align="center">0</td>
-                <td align="center">2</td>
-                <td align="center">4</td>
+                <td align="center">-1</td>
+                <td style="color:mediumturquoise">Input Speech</td>
+                <td align="center">+1</td>
+                <td align="center">+2</td>
+                <td align="center">+3</td>
               </tr>
+              
               <tr>
-                <td nowrap>Pitch shift <br> <b>Excitation Gate</b> </td>
+                <td style="color:lightslategrey">Pitch shift <br> <b>Excitation Gate</b> </td>
                 
                 <td><audio style="width:100px;height:32px" controls="">
                   <source src="samples/exp1_sox_fcps/dialog/sox/-3/030.wav" type="audio/wav"></audio></td>
@@ -127,7 +135,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
                     <source src="samples/exp1_sox_fcps/dialog/sox/3/030.wav" type="audio/wav"></audio></td>
               </tr>
               <tr>
-                <td nowrap>neurFPS<br> <b>Result</b> </td>
+                <td >neurFPS<br> <b>Result</b> </td>
                 <td><audio style="width:100px;height:32px" controls="">
                     <source src="samples/exp1_sox_fcps/dialog/fcps/-3/030.wav" type="audio/wav"></audio></td>
                 <td><audio style="width:100px;height:32px" controls="">
@@ -150,55 +158,118 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
 
           <a name="fastpitch.kor">
             <br><br>
-            <h3><b>A.2. FastPitch with Pitch-Augmented Databases</b></h3>
-            <br><br>
+            <h3><b>A.2. Improved TTS System with Pitch-Augmented Databases</b></h3>
+            <br>
           </a>
+
+          <div>
+            <div class="align-center mt-60">
+              <h5 style="color:mediumturquoise;display:inline-block;"> <b>Sample #1 </b></h5>
+              <h5 style="color:salmon;display:inline-block;"><b>[&alpha; = -4] </b> </h5><br>
+              <h5 style="display:inline-block;">정신과의사 </h5> 
+              <h5 style="color:crimson;display:inline-block;"><b>도움을 받아 원인을 알아봤더니, </b></h5> 
+              <h5 style="display:inline-block;">부모가 싸우는 날 </h5>
+              <h5 style="color:crimson;display:inline-block;"><b>밤엔 </b></h5>
+              <h5 style="display:inline-block;"> 꼭 천식증상이 나타났다. </h5> <br>
+              <h6>With the help of a psychiatrist, I learned that asthma symptoms always appear when the night of the parents' fight.</h6>
+            </div><br>
+
+            <div class="align-center mt-60">
+              <h5 style="color:mediumturquoise;display:inline-block;"> <b>Sample #2 </b></h5>
+              <h5 style="color:salmon;display:inline-block;"><b>[&alpha; = -4] </b> </h5><br>
+              <h5 style="display:inline-block;">물론 옛날에 </h5> 
+              <h5 style="color:crimson;display:inline-block;"><b>나였으면</b></h5> 
+              <h5 style="display:inline-block;"> 붙잡았을 거 같은데, 지금은 아예 </h5>
+              <h5 style="color:crimson;display:inline-block;"><b>연락을 안 하지 </b></h5>
+              <h5 style="display:inline-block;">않을까?  </h5> <br>
+              <h6>In the past, I would have tried getting her back. But now there's no reason to be with her, isn't it?</h6>
+            </div><br>
+
+            <div class="align-center mt-60">
+              <h5 style="color:mediumturquoise;display:inline-block;"> <b>Sample #3 </b></h5>
+              <h5 style="color:salmon;display:inline-block;"><b>[&alpha; = +4] </b> </h5><br>
+              <h5 style="display:inline-block;">근데 약간 그렇게 키가 비슷한 친구를 </h5> 
+              <h5 style="color:crimson;display:inline-block;"><b>딱</b></h5> 
+              <h5 style="display:inline-block;">이렇게 막상 마주하니까, </h5>
+              <h5 style="color:crimson;display:inline-block;"><b>친근한</b></h5>
+              <h5 style="display:inline-block;"> 느낌이 들었어 </h5>
+              <h5 style="color:crimson;display:inline-block;"><b>설렘보다는.</b></h5><br>
+              <h6>However, because I met a friend of similar height, I felt friendly rather than fluttering.</h6>
+            </div><br>
+            <div class="align-center mt-60">
+              <h5 style="color:mediumturquoise;display:inline-block;"> <b>Sample #4 </b></h5>
+              <h5 style="color:salmon;display:inline-block;"><b>[&alpha; = +4] </b> </h5><br>
+              <h5 style="display:inline-block;">얘한테는 그런 아쉬움이 없어서, 나랑 엄마는 다행인데</h5> 
+              <h5 style="color:crimson;display:inline-block;"><b> 모르겠어. </b></h5> 
+              <h5 style="display:inline-block;">계속 연락오면 </h5>
+              <h5 style="color:crimson;display:inline-block;"><b>또 흔들릴 수 </b></h5>
+              <h5 style="display:inline-block;">있잖아. </h5>
+              <h6>We have no regrets about it, so we feel relieved. But we do not know. If he keeps in touch, we might change our mind again.</h6>
+            </div><br>
+            <div class="align-center mt-60">
+              <h5 style="color:mediumturquoise;display:inline-block;"> <b>Sample #5 </b></h5>
+              <h5 style="color:salmon;display:inline-block;"><b>[&alpha; = +4] </b> </h5><br>
+              <h5 style="display:inline-block;">집 오는 길 골목에 </h5> 
+              <h5 style="color:crimson;display:inline-block;"><b>도는데</b></h5> 
+              <h5 style="display:inline-block;"> 거기서 강아지 나와가지고 </h5>
+              <h5 style="color:crimson;display:inline-block;"><b>깜짝 </b></h5>
+              <h5 style="display:inline-block;">놀라서 도망가버렸어.</h5>
+              <h6>In the alley on the way home, I was startled and ran away when dog suddenly came out.</h6>
+            </div>
+          </div>
+          <br><br><br>
+          <div>
+            <h4 style="color:mediumturquoise;"> Audio Samples</h4>
+          </div>
+          
           <table>
             <tbody>
               <tr>
-                <td> &alpha; </td>
-                <td align="center">-3</td>
-                <td align="center">-2</td>
-                <td align="center">-1</td>
-                <td style="color:mediumturquoise">Input Speech</td>
+                <td style="color:mediumturquoise"> <b>Sample </b></td>
                 <td align="center">1</td>
                 <td align="center">2</td>
                 <td align="center">3</td>
+                <td align="center">4</td>
+                <td align="center">5</td>
               </tr>
               <tr>
-                <td nowrap>Pitch shift <br> <b>Excitation Gate</b> </td>
+                <td style="color:salmon"> <b>&alpha;</b> </td>
+                <td align="center">-4</td>
+                <td align="center">-4</td>
+                <td align="center">+4</td>
+                <td align="center">+4</td>
+                <td align="center">+4</td>
+              </tr>
+              <tr>
+                <td style="color:lightslategrey">Baseline Model <br> <b>w/o Pitch-Augment.</b> </td>
                 
                 <td><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-3.wav" type="audio/wav"></audio></td>
+                  <source src="samples/exp2_fastpitch/baseline/neutral/all_tgt/-4/005.wav" type="audio/wav"></audio></td>
                 <td><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-2.wav" type="audio/wav"></audio></td>
+                  <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/-4/059.wav" type="audio/wav"></audio></td>
                 <td><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-1.wav" type="audio/wav"></audio></td>
+                  <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/4/036.wav" type="audio/wav"></audio></td>
                 <td><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
+                  <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/4/037.wav" type="audio/wav"></audio></td>
                 <td><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_1.wav" type="audio/wav"></audio></td>
-                <td><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_2.wav" type="audio/wav"></audio></td>
-                <td><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_3.wav" type="audio/wav"></audio></td>
+                  <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/4/055.wav" type="audio/wav"></audio></td>
+                
+                
               </tr>
               <tr>
-                <td nowrap>neurFPS<br> <b>Result</b> </td>
+                <td nowrap>Augment. Model<br> <b>Proposed</b> </td>
                 <td><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-3.wav" type="audio/wav"></audio></td>
+                  <source src="samples/exp2_fastpitch/augment/neutral/all_tgt/-4/005.wav" type="audio/wav"></audio></td>
                 <td><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-2.wav" type="audio/wav"></audio></td>
+                  <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/-4/059.wav" type="audio/wav"></audio></td>
                 <td><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-1.wav" type="audio/wav"></audio></td>
+                  <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/4/036.wav" type="audio/wav"></audio></td>
                 <td><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
+                  <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/4/037.wav" type="audio/wav"></audio></td>
                 <td><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_1.wav" type="audio/wav"></audio></td>
-                <td><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_2.wav" type="audio/wav"></audio></td>
-                <td><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_3.wav" type="audio/wav"></audio></td>
+                  <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/4/055.wav" type="audio/wav"></audio></td>
+                
+                
               </tr>
               
             </tbody>
@@ -219,7 +290,9 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
 
 <body class="text-center">
     <!-- <div id="index"></div> -->
-    <div id="neurfps" class="container scrollspy">
+    <div id="eng" class="container scrollspy">
+        <hr style="color:lightslategrey" size="0.5px"></hr>
+        <br><br><br>
         <a>
         <h3><b>B. <b>[LJSpeech]</b> Additional Samples for English Listeners</b></h3>
         </a>
@@ -232,7 +305,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
           <table>
             <tbody>
               <tr>
-                <td> &alpha; </td>
+                <td style="color:salmon"> <b>&alpha;</b> </td>
                 <td align="center">-3</td>
                 <td align="center">-2</td>
                 <td align="center">-1</td>
@@ -279,7 +352,16 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
               
             </tbody>
           </table>
-      
+          
+          
+          <br>
+
+          <a name="fastpitch.eng">
+            <br><br>
+            <h3><b>B.2. Improved TTS System with Pitch-Augmented Databases</b></h3>
+            <h3><b>(Coming Soon)</b></h3>
+            <br>
+          </a>
 
 
     </div>
