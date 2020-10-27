@@ -1,383 +1,442 @@
 <html>
+<meta charset="utf-8">
+
+<!-- Background theme -->
+<div id="background">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <img src="img/logo.svg" alt="ci_logo">/<img>
+    <div class="bg3"></div>
+    <div class="bg4"></div>
+</div>
+
+<div id="gvc_header" class="container scrollspy">
+    <div>
+    <h4>A NEURAL TEXT-TO-SPEECH MODEL <br>UTILIZING BROADCAST DATA MIXED WITH BACKGROUND MUSIC </h4>
+    <h3>Hanbin Bae, Jae-Sung Bae, et al</h3>
+    <h3 style="font-size:1rem;">bhb0722@ncsoft.com</h3></div>
+    <br>
+    <div>
+    <h6><h5>Abstract</h5>
+      
+        &nbsp;&nbsp;&nbsp;&nbsp;Recently, it has become easier to obtain speech data from various media such as the internet<br>
+        or YouTube, but directly utilizing them to train a neural text-to-speech (TTS) model is difficult.<br>
+        The proportion of clean speech is insufficient and the remainder includes background music. <br>
+        Even with the global style token (GST). Therefore, we propose the following method to successfully <br>
+        train an end-to-end TTS model with limited broadcast data. First, the background music is removed <br>
+        from the speech by introducing a music filter. Second, the GST-TTS model with an auxiliary quality <br>
+        classifier is trained with the filtered speech and a small amount of clean speech. In particular, the <br>
+        quality classifier makes the embedding vector of the GST layer focus on representing the speech  <br>
+        quality (filtered or clean) of the input speech. The experimental results verified that the proposed  <br>
+        method synthesized much more high-quality speech than conventional methods.<br></h6></div>
+
+    <br>
+    <div id="toc_container" >
+    <h5>Contents</h5>
+    <ol type="A">
+        <li><a href="#src">Pre-trained Music Filter</a></li>
+            <ol type="1">
+              <li><a href="#src.kspon">KSponSpeech Dataset</a></li>
+              <li><a href="#src.kspon">Comparing music-mixed speech and filtered speech</a></li>
+            </ol>
+        <br>
+        <li><a href="#gst-tts">Proposed Systems (models w/ SER lower than 50%)</a></li>
+    </ol>
+    </div>
+    <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed neurFPS </a>
+    <a href="#gvc_demo" class="waves-effect waves-light btn header-btn"><i></i> improved FastPitch </a> -->
+</div>
+
 
 <head>
-  <meta charset="UTF-8">
-  <title>Audio samples from "A NEURAL TEXT-TO-SPEECH MODEL UTILIZING BROADCAST DATA MIXED WITH BACKGROUND MUSIC"</title>
+  <title> Demo Page, "A NEURAL TEXT-TO-SPEECH MODEL UTILIZING BROADCAST DATA MIXED WITH BACKGROUND MUSIC" </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 </head>
 
-<body>
-  <article>
-    <header>
-      <h1>Audio samples from "A NEURAL TEXT-TO-SPEECH MODEL UTILIZING BROADCAST DATA MIXED WITH BACKGROUND MUSIC"</h1>
-    </header>
-  </article>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">   
+$(document).ready( function() {
 
-  <div><b>Paper:</b> The paper will be uploaded.</div>
-  <div><b>Authors:</b> Hanbin Bae, Jae-Sung Bae, Young-Sun Joo, Young-Ik Kim, Hoon-Young Cho</div>
+$("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
 
-  <p><b>Abstract:</b></div>
-    Recently, it has become easier to obtain speech data from various media such as the internet or YouTube, but directly utilizing them to train a neural text-to-speech (TTS) model is difficult. The proportion of clean speech is insufficient and the remainder includes background music. Even with the global style token (GST). Therefore, we propose the following method to successfully train an end-to-end TTS model with limited broadcast data. First, the background music is removed from the speech by introducing a music filter. Second, the GST-TTS model with an auxiliary quality classifier is trained with the filtered speech and a small amount of clean speech. In particular, the quality classifier makes the embedding vector of the GST layer focus on representing the speech quality (filtered or clean) of the input speech. The experimental results verified that the proposed method synthesized much more high-quality speech than conventional methods.
-
-  <p><b>Proposed System Architecture:</b></div><br>
-    <img src="images/2020_ICASSP_fig3_v3.png" alt="My Image" width="1200" height="276">
-
-    &nbsp;
-
-    <p class="toc_title"><br>
-      <h2>Contents</h2>
-    </p>
-    <div id="toc_container">
-      <ol type="A">
-        <li><a href="#src">Pre-trained Music Filter</a></li>
-        <ol type="1">
-          <li><a href="#src.kspon">KSponSpeech Dataset</a></li>
-          <li><a href="#src.kspon">Comparing music-mixed speech and filtered speech</a></li>
-        </ol>
-        <li><a href="#gst-tts">Proposed Systems (models w/ SER lower than 50%)</a></li>
-      </ul>
-    </div>
+});
+</script>
 
 
-    <div><br />We selected speech samples from the test set, which are not used for expressive TTS model training.
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    
+    
 
-      <!-- The synthsized speech samples below are converted from mel-scale spectrogram to speech waveform by using the -->
-      <!-- Griffin-Lim algorithm. -->
-    </div>
+    <div id="kor" class="container scrollspy">
+        <hr style="color:lightslategrey" size="0.5px"></hr>
+        <br><br><br>
+        <a>
+        <h3><b>A. Pre-trained Music Filter</b></h3>
+        </a>
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/2020_ICASSP_fig3_v3.png" alt="My Image" width="1200"><br>
+        <h6><b>Fig. 1.</b> Architecture of the proposed GST-TTS learning method for utilizing a personal broadcast data (training phase).</h6>
 
+        <br><br><br>
+        <a name="src.kspon">
+            <h3><b>A.1. KSponSpeech Dataset [15]</b></h3>
+            <br>
+        </a>
+        To train a speaker-independent music filter, we use the KsponSpeech dataset.
+        dataset, which comprises approximatly 1,000 h of spontaneous speech samples recorded by 2,000 people talking about various topics, sampled at 16 kHz.
+        <br>
+        1. Male
+        <br>
+        <audio controls="">
+          <source src="Kspon_sample/kspon_male.wav" type="audio/wav">
+        </audio>
+        <br>
+        2. Female
+        <br>
+  
+        <audio controls="">
+          <source src="Kspon_sample/kspon_female.wav" type="audio/wav">
+        </audio>
+        <br><br><br>
 
-    &nbsp;
-
-    <div>
-      <a name="src">
-        <h2>A. Pre-trained Music Filter</h2>
-      </a>
-      <div>
-      </div>
-
-
-      <a name="src.kspon">
-        <h3>A.1. KSponSpeech Dataset</h3>
-      </a>
-
-      To train a speaker-independent music filter, we use the KsponSpeech dataset.
-      dataset, which comprises approximatly 1,000 h of spontaneous speech samples recorded by 2,000 people talking about various topics, sampled at 16 kHz.
-      <br>
-      1. Male
-      <br>
-      <audio controls>
-        <source src="Kspon_sample/kspon_male.wav" type="audio/wav">
-      </audio>
-      <br>
-      2. Female
-      <br>
-
-      <audio controls>
-        <source src="Kspon_sample/kspon_female.wav" type="audio/wav">
-      </audio>
-      <br>
-
-
-      <a name="src.filter">
-        <h3>A.2. Comparing music-mixed speech and filtered speech</h3>
-
-      </a>
-
-      <br>
-
-      1. 가고시마에서는 연습경기를 통해 실전 감각을 끌어올린다는 계획이다.
-
-      <table>
-        <tbody>
-          <tr>
-            <td nowrap></td>
-            <td align="center">0dB</td>
-            <td align="center">5dB</td>
-            <td align="center">10dB</td>
-            <td align="center">15dB</td>
-            <td align="center">20dB</td>
-          </tr>
-          <tr>
-            <td nowrap>Mixed</td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p01_u001_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-          <tr>
-            <td nowrap>Filtered</td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p01_u001_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <br>
-      2. 리니지 쿠우 서버 어떻게 하나요?
-
-      <table>
-        <tbody>
-          <tr>
-            <td nowrap></td>
-            <td align="center">0dB</td>
-            <td align="center">5dB</td>
-            <td align="center">10dB</td>
-            <td align="center">15dB</td>
-            <td align="center">20dB</td>
-          </tr>
-          <tr>
-            <td nowrap>Mixed</td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p04_u005_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-          <tr>
-            <td nowrap>Filtered</td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p04_u005_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <br>
-      3. 직장인 소액대출 알아봅니다.
-
-      <table>
-        <tbody>
-          <tr>
-            <td nowrap></td>
-            <td align="center">0dB</td>
-            <td align="center">5dB</td>
-            <td align="center">10dB</td>
-            <td align="center">15dB</td>
-            <td align="center">20dB</td>
-          </tr>
-          <tr>
-            <td nowrap>Mixed</td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/mixed/general_set1_p10_u014_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-          <tr>
-            <td nowrap>Filtered</td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_0dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_5dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_10dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_15dB.wav" type="audio/wav"></audio></td>
-            <td><audio controls="">
-                <source src="generalset/filtered/general_set1_p10_u014_20dB.wav" type="audio/wav"></audio></td>
-          </tr>
-        </tbody>
-      </table>
-
-<!--
-      <a name="src.found">
-        <h3>A.3. Found Data Application</h3>
-      </a>
-      <video id="myVideo" src="images/kma_jtbc_news_20190814_demo.mp4" controls width="640" height="360"></video> <br> -->
-    </div>
-
-
-
-    <div><br><br><br>
-      <a name="gst-tts">
-        <h2>B. Proposed Systems (models w/ SER lower than 50%)</h2>
-      </a>
-      <div>
-      </div>
-      <div><br>
-        <b>1. TTS:</b> the DC-TTS [2] model usedconducted in the pre-liminary experiments.
-      <br>
-        <b>2.  GST:</b>  the GST-TTS model where the quality embeddingfrom the GST layers was concatenated into the encoderstate of DC-TTS.
-      <br>
-        <b>3.  GST+MF:</b>   the  GST-TTS  model  trained  with  filteredspeech obtained from the pre-trained music filter.
-      <br>
-        <b>4.  GST+MF+Aux.:</b>  the GST+MF model with an auxiliaryclassifier.
-      </div>
-      <div><br>
-        Sample1: 눈은 내일 새벽까지 이어지다가 점차 그치겠고요.<br>
-        Sample2: 도심형 생활주택 구매 어떤가요?<br>
-        Sample3: 또 동해안을 중심으로는 건조 주의보가 발효 중입니다.<br>
-
-
-      </div>
-
-      <table>
-        <tbody>
-          <tr>
-            <td align="center">Model</td>
-            <td align="center">TTS</td>
-            <td align="center">GST</td>
-            <td align="center">GST+MF</td>
-            <td align="center">GST+MF+Aux.</td>
-            <td align="center">GST+MF+Aux.</td>
-            <td align="center">GST+MF+Aux.</td>
-          </tr>
-          <tr>
-            <td align="center">(Clean/Noisy)</td>
-            <td align="center">(5h/0h)</td>
-            <td align="center">(2.5h/2.5h)</td>
-            <td align="center">(2.5h/2.5h)</td>
-            <td align="center">(0.5h/4.5h)</td>
-            <td align="center">(1.5h/3.5h)</td>
-            <td align="center">(2.5h/2.5h)</td>
-          </tr>
-          <tr>
-            <td align="center">SER(%)</td>
-            <td align="center">13.45</td>
-            <td align="center">Training Failed</td>
-            <td align="center">49.12</td>
-            <td align="center">29.80</td>
-            <td align="center">15.89</td>
-            <td align="center">16.52</td>
-          </tr>
-          <tr>
-            <td nowrap>Sample 1</td>
-            <td>
-            <audio controls>
-                <source src="demo/T2M_2.wav" type="audio/wav">
-            </audio>
-            </td>
-            <td>
-            <audio controls>
-                <source src="demo/GST_mixed_c5m5_2.wav" type="audio/wav">
-            </audio></td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_dist_c5d5_2.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c1d9_2.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/gst_aux_c3d7_2.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c5d5_2.wav" type="audio/wav">
-              </audio>
-            </td>
-          </tr>
-
-
-
-          <tr>
-            <td nowrap>Sample 2</td>
-            <td>
-            <audio controls>
-                <source src="demo/T2M_4.wav" type="audio/wav">
-            </audio>
-            </td>
-            <td>
-            <audio controls>
-                <source src="demo/GST_mixed_c5m5_4.wav" type="audio/wav">
-            </audio></td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_dist_c5d5_4.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c1d9_4.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c3d7_4.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c5d5_4.wav" type="audio/wav">
-              </audio>
-            </td>
-          </tr>
-
-
-
-          <tr>
-            <td nowrap>Sample 3</td>
-            <td>
-            <audio controls>
-                <source src="demo/T2M_6.wav" type="audio/wav">
-            </audio>
-            </td>
-            <td>
-            <audio controls>
-                <source src="demo/GST_mixed_c5m5_6.wav" type="audio/wav">
-            </audio></td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_dist_c5d5_6.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c1d9_6.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c3d7_6.wav" type="audio/wav">
-              </audio>
-            </td>
-            <td>
-              <audio controls>
-                <source src="demo/GST_Aux_c5d5_6.wav" type="audio/wav">
-              </audio>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        
+        <a name="src.filter">
+          <h3><b>A.2. Comparing music-mixed speech and filtered speech</b></h3>
+  
+        </a>
+  
+        <br>
+  
+        1. 가고시마에서는 연습경기를 통해 실전 감각을 끌어올린다는 계획이다.
+  
+        <table>
+          <tbody>
+            <tr>
+              <td nowrap></td>
+              <td align="center">0dB</td>
+              <td align="center">5dB</td>
+              <td align="center">10dB</td>
+              <td align="center">15dB</td>
+              <td align="center">20dB</td>
+            </tr>
+            <tr>
+              <td nowrap>Mixed</td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p01_u001_0dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p01_u001_5dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p01_u001_10dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p01_u001_15dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p01_u001_20dB.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td nowrap>Filtered</td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p01_u001_0dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p01_u001_5dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p01_u001_10dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p01_u001_15dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p01_u001_20dB.wav" type="audio/wav"></audio></td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <br>
+        2. 리니지 쿠우 서버 어떻게 하나요?
+  
+        <table>
+          <tbody>
+            <tr>
+              <td nowrap></td>
+              <td align="center">0dB</td>
+              <td align="center">5dB</td>
+              <td align="center">10dB</td>
+              <td align="center">15dB</td>
+              <td align="center">20dB</td>
+            </tr>
+            <tr>
+              <td nowrap>Mixed</td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p04_u005_0dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p04_u005_5dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p04_u005_10dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p04_u005_15dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p04_u005_20dB.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td nowrap>Filtered</td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p04_u005_0dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p04_u005_5dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p04_u005_10dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p04_u005_15dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p04_u005_20dB.wav" type="audio/wav"></audio></td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <br>
+        3. 직장인 소액대출 알아봅니다.
+  
+        <table>
+          <tbody>
+            <tr>
+              <td nowrap></td>
+              <td align="center">0dB</td>
+              <td align="center">5dB</td>
+              <td align="center">10dB</td>
+              <td align="center">15dB</td>
+              <td align="center">20dB</td>
+            </tr>
+            <tr>
+              <td nowrap>Mixed</td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p10_u014_0dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p10_u014_5dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p10_u014_10dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p10_u014_15dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/mixed/general_set1_p10_u014_20dB.wav" type="audio/wav"></audio></td>
+            </tr>
+            <tr>
+              <td nowrap>Filtered</td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p10_u014_0dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p10_u014_5dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p10_u014_10dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p10_u014_15dB.wav" type="audio/wav"></audio></td>
+              <td><audio style="width:100px;height:32px" controls="">
+                  <source src="generalset/filtered/general_set1_p10_u014_20dB.wav" type="audio/wav"></audio></td>
+            </tr>
+          </tbody>
+        </table>
 
     </div>
 
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
+<br><br><br>
+
+
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    <div id="gst-tts" class="container scrollspy">
+        <hr style="color:lightslategrey" size="0.5px"></hr>
+        <br><br><br>
+        <a>
+          <h3><b>B. Proposed Systems (models w/ SER lower than 50%)</b></h3>
+        </a>
+        <div>
+        </div>
+        <div><br>
+          <b>1. TTS:</b> the DC-TTS [2] model usedconducted in the pre-liminary experiments.
+        <br>
+          <b>2.  GST:</b>  the GST-TTS model where the quality embeddingfrom the GST layers was concatenated into the encoderstate of DC-TTS.
+        <br>
+          <b>3.  GST+MF:</b>   the  GST-TTS  model  trained  with  filteredspeech obtained from the pre-trained music filter.
+        <br>
+          <b>4.  GST+MF+Aux.:</b>  the GST+MF model with an auxiliaryclassifier.
+        </div>
+        <div>
+          <h5>
+          <br>
+          Sample #1 : 눈은 내일 새벽까지 이어지다가 점차 그치겠고요.<br><br>
+          Sample #2 : 도심형 생활주택 구매 어떤가요?<br><br>
+          Sample #3 : 또 동해안을 중심으로는 건조 주의보가 발효 중입니다.
+          </h5>
+  
+        </div>
+        <br>
+        <div>
+          <h4 style="color:mediumturquoise;display:inline-block;"> Audio Samples</h4>
+        </div>
+        <table>
+          <tbody>
+            <tr>
+              <td align="center">Model</td>
+              <td align="center">TTS</td>
+              <td align="center">GST</td>
+              <td align="center">GST+MF</td>
+              <td align="center">GST+MF+Aux.</td>
+              <td align="center">GST+MF+Aux.</td>
+              <td align="center">GST+MF+Aux.</td>
+            </tr>
+            <tr>
+              <td align="center">(Clean/Noisy)</td>
+              <td align="center">(5h/0h)</td>
+              <td align="center">(2.5h/2.5h)</td>
+              <td align="center">(2.5h/2.5h)</td>
+              <td align="center">(0.5h/4.5h)</td>
+              <td align="center">(1.5h/3.5h)</td>
+              <td align="center">(2.5h/2.5h)</td>
+            </tr>
+            <tr>
+              <td align="center">SER(%)</td>
+              <td align="center">13.45</td>
+              <td align="center">Training Failed</td>
+              <td align="center">49.12</td>
+              <td align="center">29.80</td>
+              <td align="center">15.89</td>
+              <td align="center">16.52</td>
+            </tr>
+            <tr>
+              <td nowrap>Sample 1</td>
+              <td>
+              <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/T2M_2.wav" type="audio/wav">
+              </audio>
+              </td>
+              <td>
+              <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/GST_mixed_c5m5_2.wav" type="audio/wav">
+              </audio></td>
+              <td>
+                <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/GST_dist_c5d5_2.wav" type="audio/wav">
+                </audio>
+              </td>
+              <td>
+                <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/GST_Aux_c1d9_2.wav" type="audio/wav">
+                </audio>
+              </td>
+              <td>
+                <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/gst_aux_c3d7_2.wav" type="audio/wav">
+                </audio>
+              </td>
+              <td>
+                <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/GST_Aux_c5d5_2.wav" type="audio/wav">
+                </audio>
+              </td>
+            </tr>
+  
+  
+  
+            <tr>
+              <td nowrap>Sample 2</td>
+              <td>
+              <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/T2M_4.wav" type="audio/wav">
+              </audio>
+              </td>
+              <td>
+              <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/GST_mixed_c5m5_4.wav" type="audio/wav">
+              </audio></td>
+              <td>
+                <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/GST_dist_c5d5_4.wav" type="audio/wav">
+                </audio>
+              </td>
+              <td>
+                <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/GST_Aux_c1d9_4.wav" type="audio/wav">
+                </audio>
+              </td>
+              <td>
+                <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/GST_Aux_c3d7_4.wav" type="audio/wav">
+                </audio>
+              </td>
+              <td>
+                <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/GST_Aux_c5d5_4.wav" type="audio/wav">
+                </audio>
+              </td>
+            </tr>
+  
+  
+  
+            <tr>
+              <td nowrap>Sample 3</td>
+              <td>
+              <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/T2M_6.wav" type="audio/wav">
+              </audio>
+              </td>
+              <td>
+              <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/GST_mixed_c5m5_6.wav" type="audio/wav">
+              </audio></td>
+              <td>
+                <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/GST_dist_c5d5_6.wav" type="audio/wav">
+                </audio>
+              </td>
+              <td>
+                <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/GST_Aux_c1d9_6.wav" type="audio/wav">
+                </audio>
+              </td>
+              <td>
+                <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/GST_Aux_c3d7_6.wav" type="audio/wav">
+                </audio>
+              </td>
+              <td>
+                <audio style="width:100px;height:32px" controls="">
+                  <source src="demo/GST_Aux_c5d5_6.wav" type="audio/wav">
+                </audio>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  
+      </div>
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+
+
+<!-- 
+<body class="text-center">
+  
+  
+<div id="index"></div>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="js/script.js"></script>
+</body> -->
 </html>
