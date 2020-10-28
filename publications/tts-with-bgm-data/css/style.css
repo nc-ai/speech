@@ -63,7 +63,7 @@ body {
 }
 
 #gvc_header {
-    padding-top: 15vh;
+    padding-top: 0vh;
 }
 
 #gvc_header h3 {
@@ -110,8 +110,9 @@ html .header-btn {
 
 html .container {
     width: 80%;
-    margin: 0 auto;
-    min-height: calc(100vh + 1px);
+    margin-left: 100px;
+    /* margin: 0 auto; */
+    /* min-height: calc(100vh + 1px); */
 }
 
 html .btn {
@@ -130,8 +131,22 @@ html h1 {
 }
 
 html h3 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 100;
+    margin: 0;
+    /* margin-bottom: 5rem; */
+}
+
+html h4 {
+    font-size: 1.8rem;
+    /* font-weight: 100;/ */
+    margin: 0;
+    /* margin-bottom: 5rem; */
+}
+
+html h5 {
+    font-size: 1.4rem;
+    /* font-weight: 100;/ */
     margin: 0;
     /* margin-bottom: 5rem; */
 }
