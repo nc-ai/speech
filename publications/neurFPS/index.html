@@ -1,6 +1,21 @@
 <html>
 <meta charset="utf-8">
 
+<script lang="javascript">
+var wavesurfer = WaveSurfer.create({
+    // your options here
+    plugins: [
+        WaveSurfer.spectrogram.create({
+            wavesurfer: wavesurfer,
+            container: "#wave-spectrogram",
+            labels: true
+        })
+    ]
+});
+
+// wavesurfer.load('../media/demo.wav');
+</script>
+
 <!-- Background theme -->
 <div id="background">
     <div class="bg1"></div>
@@ -34,16 +49,16 @@
     <div id="toc_container" >
     <h5>Contents</h5>
     <ol type="A">
-        <li><a href="#kor"><b>[NCFemale]</b> Audio Samples for Korean Female Speaker in Paper</a></li>
+        <li><a href="#nv">Neural Vocoder(mel-VGG) Samples</a></li>
             <ol type="1">
-                <li><a href="#neurfps.kor">Neural Formant-Preserving Pitch Shift</a></li>
-                <li><a href="#fastpitch.kor">Improved TTS System with Pitch-Augmented Databases</a></li>
+                <li><a href="#nv.gate">Excitation Gate and Formant Gate</a></li>
+                <li><a href="#nv.neurfps">Nueral Formant-Preserving Pitch Shift</a></li>
             </ol>
-        <br>
-        <li><a href="#eng"><b>[LJSpeech]</b> Additional Samples for English Listeners </a></li>
+        <br>  
+        <li><a href="#tts">Improved TTS System with Pitch-Augmented Databases</a></li>
             <ol type="1">
-                <li><a href="#neurfps.eng">Neural Formant-Preserving Pitch Shift</a></li>
-                <li><a href="#fastpitch.eng">Improved TTS System with Pitch-Augmented Databases</a></li>
+                <li><a href="#tts.kor">FastPitch for NCFemale (KOR)</a></li>
+                <li><a href="#tts.eng">FastSpeech2 for LJSpeech (ENG)</a></li>
             </ol>
     </ol>
     </div>
@@ -74,265 +89,536 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
 </script>
 
 
-<body class="text-center">
-    <!-- <div id="index"></div> -->
+<body class="text-center" style="margin-bottom:180px;">
     
     <br><br>
 
-    <div id="kor" class="container">
-        <hr style="color:lightslategrey" size="0.5px"></hr>
-        <br><br><br>
-        <a>
-        <h3 ><b>A. <b>[NCFemale]</b> Audio Samples for Korean Female Speaker in Paper</b></h3>
-        </a>
-        <br><br><br><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/fig_FPPS-diagram.png" alt="My Image" width="600"><br>
-        <h6><b>Fig. 1.</b> Structure of mel-VGG and schematic diagram of the neurFPS algorithm.</h6>
+    <div id="nv" class="container">
+      <hr style="color:lightslategrey" size="0.5px"></hr>
+      <br><br><br>
+      <a>
+        <h3 ><b>A. Neural Vocoder(mel-VGG) Samples</b></h3>
+      </a>
+      <br><br>
 
-        <br><br><br>
-        <a name="neurfps.kor">
-            <h3><b>A.1. Neural Formant-Preserving Pitch Shift</b></h3>
-            <br><br>
-        </a>
       
-          <table>
-            <tbody>
-              <!-- <tr>
-                <td> </td>
-                <td style="text-align:center;"></td>
-                <td style="text-align:center;"></td>
-                <td style="text-align:center;"></td>
-                <td style="text-align:center;"><b><br>Formant Gate</b></td>
-                <td style="text-align:center;"></td>
-                <td style="text-align:center;"></td>
-                <td style="text-align:center;">3</td>
-              </tr> -->
-              <tr>
-                <td style="text-align:center;color:salmon"> <b>&alpha;</b> </td>
-                <td style="text-align:center;">-3</td>
-                <td style="text-align:center;">-2</td>
-                <td style="text-align:center;">-1</td>
-                <td style="text-align:center;color:mediumturquoise">Input Speech</td>
-                <td style="text-align:center;">+1</td>
-                <td style="text-align:center;">+2</td>
-                <td style="text-align:center;">+3</td>
-              </tr>
-              
-              <tr>
-                <td style="text-align:center;color:lightslategrey">Pitch shift <br> <b>Excitation Gate</b> </td>
-                
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/dialog/sox/-3/030.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/dialog/sox/-2/030.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/dialog/sox/-1/030.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/dialog/sox/0/030.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/dialog/sox/1/030.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/dialog/sox/2/030.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/dialog/sox/3/030.wav" type="audio/wav"></audio></td>
-              </tr>
-              <tr>
-                <td style="text-align:center;">neurFPS<br> <b>Result</b> </td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/dialog/fcps/-3/030.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/dialog/fcps/-2/030.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/dialog/fcps/-1/030.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/dialog/fcps/0/030.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/dialog/fcps/1/030.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/dialog/fcps/2/030.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/dialog/fcps/3/030.wav" type="audio/wav"></audio></td>
-              </tr>
-            </tbody>
-          </table>
-      
-          <br>
-
-          <a name="fastpitch.kor">
-            <br><br>
-            <h3><b>A.2. Improved TTS System with Pitch-Augmented Databases</b></h3><br>
-            <h6 style="color:salmon;display:inline-block;"><b>[For &alpha;=&pm;4] </b> </h6>
-            <h6 style="color:crimson;display:inline-block;"><b>"Red color" means mis-pronunciation of Baseline model.</b></h6>
-            
-            <br>
-          </a>
-
-          <div>
-            <div class="align-center mt-60">
-              <h5 style="color:mediumturquoise"> <b>Sample #1 </b></h5><br>
-              <h5 style="display:inline-block;">정신과의사 </h5> 
-              <h5 style="color:crimson;display:inline-block;"><b>도움을 받아 원인을 알아봤더니, </b></h5> 
-              <h5 style="display:inline-block;">부모가 싸우는 날 </h5>
-              <h5 style="color:crimson;display:inline-block;"><b>밤엔 </b></h5>
-              <h5 style="display:inline-block;"> 꼭 천식증상이 나타났다. </h5> <br>
-              <h6>With the help of a psychiatrist, I learned that asthma symptoms always appear when the night of the parents' fight.</h6>
-            </div><br>
-
-            <div class="align-center mt-60">
-              <h5 style="color:mediumturquoise"> <b>Sample #2 </b></h5><br>
-              <h5 style="display:inline-block;">물론 옛날에 </h5> 
-              <h5 style="color:crimson;display:inline-block;"><b>나였으면</b></h5> 
-              <h5 style="display:inline-block;"> 붙잡았을 거 같은데, 지금은 아예 </h5>
-              <h5 style="color:crimson;display:inline-block;"><b>연락을 안 하지 </b></h5>
-              <h5 style="display:inline-block;">않을까?  </h5> <br>
-              <h6>In the past, I would have tried getting her back. But now there's no reason to be with her, isn't it?</h6>
-            </div><br>
-
-            <div class="align-center mt-60">
-              <h5 style="color:mediumturquoise"> <b>Sample #3 </b></h5><br>
-              <h5 style="display:inline-block;">근데 약간 그렇게 키가 비슷한 친구를 </h5> 
-              <h5 style="color:crimson;display:inline-block;"><b>딱</b></h5> 
-              <h5 style="display:inline-block;">이렇게 막상 마주하니까, </h5>
-              <h5 style="color:crimson;display:inline-block;"><b>친근한</b></h5>
-              <h5 style="display:inline-block;"> 느낌이 들었어 </h5>
-              <h5 style="color:crimson;display:inline-block;"><b>설렘보다는.</b></h5><br>
-              <h6>However, because I met a friend of similar height, I felt friendly rather than fluttering.</h6>
-            </div><br>
-            <div class="align-center mt-60">
-              <h5 style="color:mediumturquoise"> <b>Sample #4 </b></h5><br>
-              <h5 style="display:inline-block;">얘한테는 그런 아쉬움이 없어서, 나랑 엄마는 다행인데</h5> 
-              <h5 style="color:crimson;display:inline-block;"><b> 모르겠어. </b></h5> 
-              <h5 style="display:inline-block;">계속 연락오면 </h5>
-              <h5 style="color:crimson;display:inline-block;"><b>또 흔들릴 수 </b></h5>
-              <h5 style="display:inline-block;">있잖아. </h5>
-              <h6>We have no regrets about it, so we feel relieved. But we do not know. If he keeps in touch, we might change our mind again.</h6>
-            </div><br>
-            <div class="align-center mt-60">
-              <h5 style="color:mediumturquoise"> <b>Sample #5 </b></h5><br>
-              <h5 style="display:inline-block;">집 오는 길 골목에 </h5> 
-              <h5 style="color:crimson;display:inline-block;"><b>도는데</b></h5> 
-              <h5 style="display:inline-block;"> 거기서 강아지 나와가지고 </h5>
-              <h5 style="color:crimson;display:inline-block;"><b>깜짝 </b></h5>
-              <h5 style="display:inline-block;">놀라서 도망가버렸어.</h5>
-              <h6>In the alley on the way home, I was startled and ran away when dog suddenly came out.</h6>
-            </div>
-          </div>
-          <br><br><br>
-          <div>
-            <h4 style="color:mediumturquoise;display:inline-block;"> Audio Samples for</h4>  <h4 style="color:salmon;display:inline-block;"> &alpha; = &pm;4</h4>
-          </div>
-          
-          <table>
-            <tbody>
-              <tr>
-                <td style="text-align:center;color:mediumturquoise"> <b>Sample </b></td>
-                <td style="text-align:center;">1</td>
-                <td style="text-align:center;">2</td>
-                <td style="text-align:center;">3</td>
-                <td style="text-align:center;">4</td>
-                <td style="text-align:center;">5</td>
-              </tr>
-              <tr>
-                <td style="text-align:center;color:salmon"> <b>&alpha;</b> </td>
-                <td style="text-align:center;">-4</td>
-                <td style="text-align:center;">-4</td>
-                <td style="text-align:center;">+4</td>
-                <td style="text-align:center;">+4</td>
-                <td style="text-align:center;">+4</td>
-              </tr>
-              <tr>
-                <td style="text-align:center;color:lightslategrey">Baseline Model <br> <b>w/o Pitch-Augment.</b> </td>
-                
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/baseline/neutral/all_tgt/-4/005.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/-4/059.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/4/036.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/4/037.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/4/055.wav" type="audio/wav"></audio></td>
-                
-                
-              </tr>
-              <tr>
-                <td style="text-align:center;">Augment. Model<br> <b>Proposed</b> </td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/augment/neutral/all_tgt/-4/005.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/-4/059.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/4/036.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/4/037.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/4/055.wav" type="audio/wav"></audio></td>
-                
-                
-              </tr>
-              
-            </tbody>
-          </table>
-      
+      <a name="nv.gate">
+          <h3><b>A.1. Excitation Gate and Formant Gate</b></h3>
           <br><br>
-          <div>
-            <h4 style="color:mediumturquoise;display:inline-block;"> Audio Samples for</h4>  <h4 style="color:salmon;display:inline-block;"> &alpha; &in; {-2, 0, +2}</h4>
-          </div>
-          
-          <table>
-            <tbody>
-              <tr>
-                <td style="text-align:center;color:mediumturquoise"> <b>Sample </b></td>
-                <td style="text-align:center;">1</td>
-                <td style="text-align:center;">2</td>
-                <td style="text-align:center;">3</td>
-                <td style="text-align:center;">4</td>
-                <td style="text-align:center;">5</td>
-              </tr>
-              <tr>
-                <td style="text-align:center;color:salmon"> <b>&alpha;</b> </td>
-                <td style="text-align:center;">+2</td>
-                <td style="text-align:center;">+2</td>
-                <td style="text-align:center;">0</td>
-                <td style="text-align:center;">-2</td>
-                <td style="text-align:center;">-2</td>
-              </tr>
-              <tr>
-                <td style="text-align:center;color:lightslategrey">Baseline Model <br> <b>w/o Pitch-Augment.</b> </td>
-                
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/baseline/neutral/all_tgt/2/005.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/2/059.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/0/036.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/-2/037.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/-2/055.wav" type="audio/wav"></audio></td>
-                
-                
-              </tr>
-              <tr>
-                <td style="text-align:center;">Augment. Model<br> <b>Proposed</b> </td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/augment/neutral/all_tgt/2/005.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/2/059.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/0/036.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/-2/037.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/-2/055.wav" type="audio/wav"></audio></td>
-                
-                
-              </tr>
-              
-            </tbody>
-          </table>
+      </a>
+      <!-- <br><br><br><br> -->
+      &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/fig_mel-gate-output_v2.png" alt="My Image" width="500"><br>
+      <h6 style="width:550px;"><b>Fig. 2.</b> Mel-spectrograms of (a) input recorded speech, (b)speech generated from the excitation gate, (c) speech generated from the formant gate. (d) Power spectrums of (a), (b)and (c) at the same frame.</h6>
 
+      <!-- <br><br><br> -->
+      <table>
+        <tbody>
+          <tr>
+            <td > </td>
+            <td style="text-align:center;color:mediumseagreen">Input Speech</td>
+            <td style="text-align:center;color:orangered"> Excitation Gate </td>
+            <td style="text-align:center;color:mediumblue">Formant Gate <br> *Warning </td>
+          </tr>
+          
+          <tr>
+            <td style="text-align:center;">NCFemale (KOR) </td>
+            
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/example/ncf.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/example/ncf_exc.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/example/ncf_for.wav" type="audio/wav"></audio></td>
+          </tr>
+          <tr>
+            <td style="text-align:center;">LJSpeech (ENG) </td>
+            
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/example/lj.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/example/lj_exc.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/example/lj_for.wav" type="audio/wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br><br><br>
+      <a name="nv.neurfps">
+          <h3><b>A.2. Nueral Formant-Preserving Pitch Shift</b></h3>
+          <br><br>
+      </a>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/fig_FPPS-diagram.png" alt="My Image" width="550"><br>
+
+        <h6><b>Fig. 1.</b> Structure of mel-VGG and schematic diagram of the neurFPS algorithm.</h6>
+      <br><br><br>
+
+      <table>
+        <tbody>
+          <tr>
+            <td style="text-align:center;color:salmon"> <b>&alpha;</b> </td>
+            <td style="text-align:center;">-3</td>
+            <td style="text-align:center;">-2</td>
+            <td style="text-align:center;">-1</td>
+            <td style="text-align:center;color:mediumturquoise">NCFemale (KOR)</td>
+            <td style="text-align:center;">+1</td>
+            <td style="text-align:center;">+2</td>
+            <td style="text-align:center;">+3</td>
+          </tr>
+          
+          <tr>
+            <td style="text-align:center;color:lightslategrey">Pitch shift  </td>
+            
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/dialog/sox/-3/030.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/sox/-2/030.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/sox/-1/030.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/sox/0/030.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/sox/1/030.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/sox/2/030.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/sox/3/030.wav" type="audio/wav"></audio></td>
+          </tr>
+          <tr>
+            <td style="text-align:center;"><b>neurFPS</b> </td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/fcps/-3/030.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/fcps/-2/030.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/fcps/-1/030.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/fcps/0/030.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/fcps/1/030.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/fcps/2/030.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/dialog/fcps/3/030.wav" type="audio/wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <tbody>
+          <tr>
+            <td style="text-align:center;color:salmon"> <b>&alpha;</b> </td>
+            <td style="text-align:center;">-3</td>
+            <td style="text-align:center;">-2</td>
+            <td style="text-align:center;">-1</td>
+            <td style="text-align:center;color:mediumturquoise">LJSpeech (ENG)</td>
+            <td style="text-align:center;">1</td>
+            <td style="text-align:center;">2</td>
+            <td style="text-align:center;">3</td>
+          </tr>
+          <tr>
+            <td style="text-align:center;color:lightslategrey">Pitch shift  </td>            
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-3.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-2.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-1.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_1.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_2.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_3.wav" type="audio/wav"></audio></td>
+          </tr>
+          <tr>
+            <td style="text-align:center;"> <b>neurFPS</b> </td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-3.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-2.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-1.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_1.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_2.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+                <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_3.wav" type="audio/wav"></audio></td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+    <div id="tts" class="container">
+      <hr style="color:lightslategrey" size="0.5px"></hr>
+      <br><br><br>
+      <a>
+      <h3 ><b>B. Improved TTS System with Pitch-Augmented Databases </b></h3>
+      </a>
+      <br><br>
+
+
+      <a name="tts.kor">
+        <h3><b>B.1. FastPitch for NCFemale (KOR)</b></h3><br>        
+      </a>
+
+      &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/fig_SER-graph-3.png" alt="My Image" width="450"><br>
+      <h6 style="width:550px;"><b>Fig. 3.</b> Results of the SER test for pronunciation accuracy foreach model.</h6>
+      <br><br>
+      <h6 style="color:salmon;display:inline-block;"><b>[For &alpha;=&pm;4] </b> </h6>
+      <h6 style="color:crimson;display:inline-block;"><b>"Red color" means mis-pronunciation of Baseline model.</b></h6>
+      
+      <br>
+
+      <div>
+        <div class="align-center mt-60">
+          <h5 style="color:mediumturquoise"> <b>Sample #1 </b></h5><br>
+          <h5 style="display:inline-block;">정신과의사 </h5> 
+          <h5 style="color:crimson;display:inline-block;"><b>도움을 받아 원인을 알아봤더니, </b></h5> 
+          <h5 style="display:inline-block;">부모가 싸우는 날 </h5>
+          <h5 style="color:crimson;display:inline-block;"><b>밤엔 </b></h5>
+          <h5 style="display:inline-block;"> 꼭 천식증상이 나타났다. </h5> <br>
+          <h6>With the help of a psychiatrist, I learned that asthma symptoms always appear when the night of the parents' fight.</h6>
+        </div><br>
+
+        <div class="align-center mt-60">
+          <h5 style="color:mediumturquoise"> <b>Sample #2 </b></h5><br>
+          <h5 style="display:inline-block;">물론 옛날에 </h5> 
+          <h5 style="color:crimson;display:inline-block;"><b>나였으면</b></h5> 
+          <h5 style="display:inline-block;"> 붙잡았을 거 같은데, 지금은 아예 </h5>
+          <h5 style="color:crimson;display:inline-block;"><b>연락을 안 하지 </b></h5>
+          <h5 style="display:inline-block;">않을까?  </h5> <br>
+          <h6>In the past, I would have tried getting her back. But now there's no reason to be with her, isn't it?</h6>
+        </div><br>
+
+        <div class="align-center mt-60">
+          <h5 style="color:mediumturquoise"> <b>Sample #3 </b></h5><br>
+          <h5 style="display:inline-block;">근데 약간 그렇게 키가 비슷한 친구를 </h5> 
+          <h5 style="color:crimson;display:inline-block;"><b>딱</b></h5> 
+          <h5 style="display:inline-block;">이렇게 막상 마주하니까, </h5>
+          <h5 style="color:crimson;display:inline-block;"><b>친근한</b></h5>
+          <h5 style="display:inline-block;"> 느낌이 들었어 </h5>
+          <h5 style="color:crimson;display:inline-block;"><b>설렘보다는.</b></h5><br>
+          <h6>However, because I met a friend of similar height, I felt friendly rather than fluttering.</h6>
+        </div><br>
+        <div class="align-center mt-60">
+          <h5 style="color:mediumturquoise"> <b>Sample #4 </b></h5><br>
+          <h5 style="display:inline-block;">얘한테는 그런 아쉬움이 없어서, 나랑 엄마는 다행인데</h5> 
+          <h5 style="color:crimson;display:inline-block;"><b> 모르겠어. </b></h5> 
+          <h5 style="display:inline-block;">계속 연락오면 </h5>
+          <h5 style="color:crimson;display:inline-block;"><b>또 흔들릴 수 </b></h5>
+          <h5 style="display:inline-block;">있잖아. </h5>
+          <h6>We have no regrets about it, so we feel relieved. But we do not know. If he keeps in touch, we might change our mind again.</h6>
+        </div><br>
+        <div class="align-center mt-60">
+          <h5 style="color:mediumturquoise"> <b>Sample #5 </b></h5><br>
+          <h5 style="display:inline-block;">집 오는 길 골목에 </h5> 
+          <h5 style="color:crimson;display:inline-block;"><b>도는데</b></h5> 
+          <h5 style="display:inline-block;"> 거기서 강아지 나와가지고 </h5>
+          <h5 style="color:crimson;display:inline-block;"><b>깜짝 </b></h5>
+          <h5 style="display:inline-block;">놀라서 도망가버렸어.</h5>
+          <h6>In the alley on the way home, I was startled and ran away when dog suddenly came out.</h6>
+        </div>
+      </div>
+
+
+      <br><br><br>
+      <div>
+        <h4 style="color:mediumturquoise;display:inline-block;"> Audio Samples for</h4>  <h4 style="color:salmon;display:inline-block;"> &alpha; = &pm;4</h4>
+      </div>
+      
+      <table>
+        <tbody>
+          <tr>
+            <td style="text-align:center;color:mediumturquoise"> <b>Sample </b></td>
+            <td style="text-align:center;">1</td>
+            <td style="text-align:center;">2</td>
+            <td style="text-align:center;">3</td>
+            <td style="text-align:center;">4</td>
+            <td style="text-align:center;">5</td>
+          </tr>
+          <tr>
+            <td style="text-align:center;color:salmon"> <b>&alpha;</b> </td>
+            <td style="text-align:center;">-4</td>
+            <td style="text-align:center;">-4</td>
+            <td style="text-align:center;">+4</td>
+            <td style="text-align:center;">+4</td>
+            <td style="text-align:center;">+4</td>
+          </tr>
+          <tr>
+            <td style="text-align:center;color:lightslategrey">Baseline Model <br> <b>w/o Pitch-Augment.</b> </td>
+            
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/neutral/all_tgt/-4/005.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/-4/059.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/4/036.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/4/037.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/4/055.wav" type="audio/wav"></audio></td>
+            
+            
+          </tr>
+          <tr>
+            <td style="text-align:center;">Augment. Model<br> <b>Proposed</b> </td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/neutral/all_tgt/-4/005.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/-4/059.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/4/036.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/4/037.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/4/055.wav" type="audio/wav"></audio></td>
+            
+            
+          </tr>
+          
+        </tbody>
+      </table>
+  
+      <br><br>
+      <div>
+        <h4 style="color:mediumturquoise;display:inline-block;"> Audio Samples for</h4>  <h4 style="color:salmon;display:inline-block;"> &alpha; &in; {-2, 0, +2}</h4>
+      </div>
+      
+      <table>
+        <tbody>
+          <tr>
+            <td style="text-align:center;color:mediumturquoise"> <b>Sample </b></td>
+            <td style="text-align:center;">1</td>
+            <td style="text-align:center;">2</td>
+            <td style="text-align:center;">3</td>
+            <td style="text-align:center;">4</td>
+            <td style="text-align:center;">5</td>
+          </tr>
+          <tr>
+            <td style="text-align:center;color:salmon"> <b>&alpha;</b> </td>
+            <td style="text-align:center;">+2</td>
+            <td style="text-align:center;">+2</td>
+            <td style="text-align:center;">0</td>
+            <td style="text-align:center;">-2</td>
+            <td style="text-align:center;">-2</td>
+          </tr>
+          <tr>
+            <td style="text-align:center;color:lightslategrey">Baseline Model <br> <b>w/o Pitch-Augment.</b> </td>
+            
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/neutral/all_tgt/2/005.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/2/059.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/0/036.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/-2/037.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/-2/055.wav" type="audio/wav"></audio></td>
+            
+            
+          </tr>
+          <tr>
+            <td style="text-align:center;">Augment. Model<br> <b>Proposed</b> </td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/neutral/all_tgt/2/005.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/2/059.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/0/036.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/-2/037.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/-2/055.wav" type="audio/wav"></audio></td>
+            
+            
+          </tr>
+          
+        </tbody>
+      </table>
+
+
+      
+      <a name="tts.eng">
+        <br><br>
+        <h3><b>B.2. FastSpeech2 for LJSpeech (ENG)</b></h3>
+        <br><br>
+      </a>
+
+      <div>
+        <div class="align-center mt-60">
+          <h5 style="color:mediumturquoise"> <b>Sample #1 </b></h5><br>
+          <h5 style="color:crimson;display:inline-block;"><b>And it was </b></h5> 
+          <h5 style="display:inline-block;">a matter of course that in the Middle Ages, </h5>
+          <h5 style="color:crimson;display:inline-block;"><b>when </b></h5> 
+          <h5 style="display:inline-block;">the craftsmen took care that beautiful form should always be a part of their productions </h5>
+          <h5 style="color:crimson;display:inline-block;"><b>whatever </b></h5>
+          <h5 style="display:inline-block;">they were.</h5> <br>
+        </div><br>
+
+        <div class="align-center mt-60">
+          <h5 style="color:mediumturquoise"> <b>Sample #2 </b></h5><br>
+          <h5 style="display:inline-block;">On the whole </h5> 
+          <h5 style="color:crimson;display:inline-block;"><b>the type of </b></h5> 
+          <h5 style="display:inline-block;"> this book may be </h5>
+          <h5 style="color:crimson;display:inline-block;"><b>considered the ne-plus-ultra of Gothic type.</b></h5>
+        </div><br>
+
+        <div class="align-center mt-60">
+          <h5 style="color:mediumturquoise"> <b>Sample #3 </b></h5><br>
+          <h5 style="display:inline-block;">근데 약간 그렇게 키가 비슷한 친구를 </h5> 
+          <h5 style="color:crimson;display:inline-block;"><b>딱</b></h5> 
+          <h5 style="display:inline-block;">이렇게 막상 마주하니까, </h5>
+          <h5 style="color:crimson;display:inline-block;"><b>친근한</b></h5>
+          <h5 style="display:inline-block;"> 느낌이 들었어 </h5>
+          <h5 style="color:crimson;display:inline-block;"><b>설렘보다는.</b></h5><br>
+          <h6>However, because I met a friend of similar height, I felt friendly rather than fluttering.</h6>
+        </div><br>
+        <div class="align-center mt-60">
+          <h5 style="color:mediumturquoise"> <b>Sample #4 </b></h5><br>
+          <h5 style="display:inline-block;">얘한테는 그런 아쉬움이 없어서, 나랑 엄마는 다행인데</h5> 
+          <h5 style="color:crimson;display:inline-block;"><b> 모르겠어. </b></h5> 
+          <h5 style="display:inline-block;">계속 연락오면 </h5>
+          <h5 style="color:crimson;display:inline-block;"><b>또 흔들릴 수 </b></h5>
+          <h5 style="display:inline-block;">있잖아. </h5>
+          <h6>We have no regrets about it, so we feel relieved. But we do not know. If he keeps in touch, we might change our mind again.</h6>
+        </div><br>
+        <div class="align-center mt-60">
+          <h5 style="color:mediumturquoise"> <b>Sample #5 </b></h5><br>
+          <h5 style="display:inline-block;">집 오는 길 골목에 </h5> 
+          <h5 style="color:crimson;display:inline-block;"><b>도는데</b></h5> 
+          <h5 style="display:inline-block;"> 거기서 강아지 나와가지고 </h5>
+          <h5 style="color:crimson;display:inline-block;"><b>깜짝 </b></h5>
+          <h5 style="display:inline-block;">놀라서 도망가버렸어.</h5>
+          <h6>In the alley on the way home, I was startled and ran away when dog suddenly came out.</h6>
+        </div>
+      </div>
+      <br><br><br>
+      <div>
+        <h4 style="color:mediumturquoise;display:inline-block;"> Audio Samples for</h4>  <h4 style="color:salmon;display:inline-block;"> &alpha; = &pm;4</h4>
+      </div>
+      
+      <table>
+        <tbody>
+          <tr>
+            <td style="text-align:center;color:mediumturquoise"> <b>Sample </b></td>
+            <td style="text-align:center;">1</td>
+            <td style="text-align:center;">2</td>
+            <td style="text-align:center;">3</td>
+            <td style="text-align:center;">4</td>
+            <td style="text-align:center;">5</td>
+          </tr>
+          <tr>
+            <td style="text-align:center;color:salmon"> <b>&alpha;</b> </td>
+            <td style="text-align:center;">-4</td>
+            <td style="text-align:center;">-4</td>
+            <td style="text-align:center;">+4</td>
+            <td style="text-align:center;">+4</td>
+            <td style="text-align:center;">+4</td>
+          </tr>
+          <tr>
+            <td style="text-align:center;color:lightslategrey">Baseline Model <br> <b>w/o Pitch-Augment.</b> </td>
+            
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/neutral/all_tgt/-4/005.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/-4/059.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/4/036.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/4/037.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/4/055.wav" type="audio/wav"></audio></td>
+            
+            
+          </tr>
+          <tr>
+            <td style="text-align:center;">Augment. Model<br> <b>Proposed</b> </td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/neutral/all_tgt/-4/005.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/-4/059.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/4/036.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/4/037.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/4/055.wav" type="audio/wav"></audio></td>
+            
+            
+          </tr>
+          
+        </tbody>
+      </table>
+  
+      <br><br>
+      <div>
+        <h4 style="color:mediumturquoise;display:inline-block;"> Audio Samples for</h4>  <h4 style="color:salmon;display:inline-block;"> &alpha; &in; {-2, 0, +2}</h4>
+      </div>
+      
+      <table>
+        <tbody>
+          <tr>
+            <td style="text-align:center;color:mediumturquoise"> <b>Sample </b></td>
+            <td style="text-align:center;">1</td>
+            <td style="text-align:center;">2</td>
+            <td style="text-align:center;">3</td>
+            <td style="text-align:center;">4</td>
+            <td style="text-align:center;">5</td>
+          </tr>
+          <tr>
+            <td style="text-align:center;color:salmon"> <b>&alpha;</b> </td>
+            <td style="text-align:center;">+2</td>
+            <td style="text-align:center;">+2</td>
+            <td style="text-align:center;">0</td>
+            <td style="text-align:center;">-2</td>
+            <td style="text-align:center;">-2</td>
+          </tr>
+          <tr>
+            <td style="text-align:center;color:lightslategrey">Baseline Model <br> <b>w/o Pitch-Augment.</b> </td>
+            
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/neutral/all_tgt/2/005.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/2/059.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/0/036.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/-2/037.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/baseline/dialog/all_tgt/-2/055.wav" type="audio/wav"></audio></td>
+            
+            
+          </tr>
+          <tr>
+            <td style="text-align:center;">Augment. Model<br> <b>Proposed</b> </td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/neutral/all_tgt/2/005.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/2/059.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/0/036.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/-2/037.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples/exp2_fastpitch/augment/dialog/all_tgt/-2/055.wav" type="audio/wav"></audio></td>
+            
+            
+          </tr>
+          
+        </tbody>
+      </table>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -341,103 +627,4 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
     <script src="js/script.js"></script>
 </body>
 
-<br><br><br>
-
-
-<body class="text-center">
-    <!-- <div id="index"></div> -->
-    <div id="eng" class="container">
-        <hr style="color:lightslategrey" size="0.5px"></hr>
-        <br><br><br>
-        <a>
-        <h3><b>B. <b>[LJSpeech]</b> Additional Samples for English Listeners</b></h3>
-        </a>
-        
-          <a name="neurfps.eng">
-            <br><br>
-            <h3><b>B.1. Neural Formant-Preserving Pitch Shift</b></h3>
-            <br><br>
-          </a>
-          <table>
-            <tbody>
-              <tr>
-                <td style="text-align:center;color:salmon"> <b>&alpha;</b> </td>
-                <td style="text-align:center;">-3</td>
-                <td style="text-align:center;">-2</td>
-                <td style="text-align:center;">-1</td>
-                <td style="text-align:center;color:mediumturquoise">Input Speech</td>
-                <td style="text-align:center;">1</td>
-                <td style="text-align:center;">2</td>
-                <td style="text-align:center;">3</td>
-              </tr>
-              <tr>
-                <td style="text-align:center;">Pitch shift <br> <b>Excitation Gate</b> </td>
-                
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-3.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-2.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-1.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_1.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_2.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                  <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_3.wav" type="audio/wav"></audio></td>
-              </tr>
-              <tr>
-                <td style="text-align:center;">neurFPS<br> <b>Result</b> </td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-3.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-2.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-1.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_1.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_2.wav" type="audio/wav"></audio></td>
-                <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                    <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_3.wav" type="audio/wav"></audio></td>
-              </tr>
-              
-            </tbody>
-          </table>
-          
-          
-          <br>
-
-          <a name="fastpitch.eng">
-            <br><br>
-            <h3><b>B.2. Improved TTS System with Pitch-Augmented Databases</b></h3>
-            <h3><b>(Coming Soon)</b></h3>
-            <br>
-          </a>
-
-
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="js/script.js"></script>
-</body>
-
-
-
-<!-- 
-<body class="text-center">
-  
-  
-<div id="index"></div>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="js/script.js"></script>
-</body> -->
 </html>
