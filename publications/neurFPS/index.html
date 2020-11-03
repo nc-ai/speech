@@ -101,7 +101,37 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
       </a>
       <br><br>
 
-      
+      <h6>We use the pitch adjustment value <b>&alpha;</b> using semitone units, such that <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\alpha}=12\cdot&space;\log_{2}(\mathbf{f^{\alpha}_{0}}/\mathbf{f_0})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{\alpha}=12\cdot&space;\log_{2}(\mathbf{f^{\alpha}_{0}}/\mathbf{f_0})" title="\mathbf{\alpha}=12\cdot \log_{2}(\mathbf{f^{\alpha}_{0}}/\mathbf{f_0})" /></a>. </h6>
+      <h6>Table shows the ratio between pitch-shifted fundamental frequency and its.</h6>
+
+      <table>
+        <tbody>
+          <tr>
+            <td style="text-align:center;color:salmon;width:100px;"> <b>&alpha;</b> </td>
+            <td style="text-align:center;width:100px;">-6</td>
+            <td style="text-align:center;width:100px;">-4</td>
+            <td style="text-align:center;width:100px;">-2</td>
+            <td style="text-align:center;color:mediumturquoise;width:100px;">0</td>
+            <td style="text-align:center;width:100px;">2</td>
+            <td style="text-align:center;width:100px;">4</td>
+            <td style="text-align:center;width:100px;">6</td>
+          </tr>
+          
+          <tr>
+            <td style="text-align:center;width:100px;"> <a href="https://www.codecogs.com/eqnedit.php?latex=r_{\alpha}=\mathbf{f^{\alpha}_0}/\mathbf{f_0}&space;*&space;100" target="_blank"><img src="https://latex.codecogs.com/gif.latex?r_{\alpha}=\mathbf{f^{\alpha}_0}/\mathbf{f_0}&space;*&space;100" title="r_{\alpha}=\mathbf{f^{\alpha}_0}/\mathbf{f_0} * 100" /></a> </td>
+            
+            <td style="text-align:center;width:100px;">70%</td>
+            <td style="text-align:center;width:100px;">79%</td>
+            <td style="text-align:center;width:100px;">89%</td>
+            <td style="text-align:center;color:mediumturquoise;width:100px;">100 %</td>
+            <td style="text-align:center;width:100px;">112%</td>
+            <td style="text-align:center;width:100px;">126%</td>
+            <td style="text-align:center;width:100px;">141%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <br><br>
       <a name="nv.gate">
           <h3><b>A.1. Excitation Gate and Formant Gate</b></h3>
           <br><br>
@@ -114,14 +144,14 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
       <table>
         <tbody>
           <tr>
-            <td > </td>
+            <td style="width:200px;"> </td>
             <td style="text-align:center;color:mediumseagreen">Input Speech</td>
             <td style="text-align:center;color:orangered"> Excitation Gate </td>
             <td style="text-align:center;color:mediumblue">Formant Gate <br> *Warning </td>
           </tr>
           
           <tr>
-            <td style="text-align:center;">NCFemale (KOR) </td>
+            <td style="text-align:center;width:200px;">NCFemale (KOR) </td>
             
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
               <source src="samples/example/ncf.wav" type="audio/wav"></audio></td>
@@ -131,7 +161,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
                 <source src="samples/example/ncf_for.wav" type="audio/wav"></audio></td>
           </tr>
           <tr>
-            <td style="text-align:center;">LJSpeech (ENG) </td>
+            <td style="text-align:center;width:200px;">LJSpeech (ENG) </td>
             
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
               <source src="samples/example/lj.wav" type="audio/wav"></audio></td>
@@ -260,6 +290,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
 
 
     <div id="tts" class="container">
+      <br><br><br>
       <hr style="color:lightslategrey" size="0.5px"></hr>
       <br><br><br>
       <a>
