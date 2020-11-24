@@ -135,13 +135,16 @@ html h3 {
     font-weight: 100;
     margin: 0;
     /* margin-bottom: 5rem; */
+    line-height: 130%;
 }
 
 html h4 {
     font-size: 1.8rem;
+    /* font-weight: bold; */
     /* font-weight: 100;/ */
     margin: 0;
     /* margin-bottom: 5rem; */
+    line-height: 120%;
 }
 
 html h5 {
@@ -175,4 +178,13 @@ html .select-wrapper input.select-dropdown:focus {
 
 html .dropdown-content li>span {
     color: #004C98;
+}
+
+span.red_highlight {
+    color:red;
+}
+span.en_pronun{
+    color:gray;
+    font-size: 90%;
+    font-style: italic;
 }
