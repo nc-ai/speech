@@ -1,0 +1,262 @@
+<html>
+<meta charset="utf-8">
+
+<!-- Background theme -->
+<div id="background">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <img src="img/logo.svg" alt="ci_logo"><img>
+    <div class="bg3"></div>
+    <div class="bg4"></div>
+</div>
+
+<br>
+
+<div id="gvc_header" class="container">
+    <div>
+    <h4> N-Singer : Non-Autoregressive Korean Singing Voice Synthesis</h4>
+    <h4> System for Pronunciation Enhancement </h4>
+    <br>
+    <h3 style="display:inline"> Gyeong-Hoon Lee, Tae-Woo Kim, Hanbin Bae et al</h3>
+    <h3 style="font-size:1rem;">{ghlee3401, ktw0114, bhb0722}@ncsoft.com</h3></div>
+    <br>
+    <div>
+    <h6><h5>Abstract</h5> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;We propose N-Singer, a fast and robust non-autoregressive Korean singing<br>
+        voice synthesis system that can synthesize high-quality and articulate pronounced <br>
+        Korean singing in parallel. N-Singer consists of a transformer-based mel-generator,<br>
+        a convolutional network-based postnet, and voicing-aware discriminators: 1) For <br>
+        accurate pronunciation, N-Singer separately models linguistic and pitch information<br>
+        without other acoustic features, e.g. mel-spectrogram. 2) To achieve improved mel- <br>
+        spectrograms, N-Singer uses a combination of transformer-based modules and con-<br>
+        volutional network-based modules. 3) In the adversarial training, we use  voicing-<br>
+        aware conditional discriminators to capture harmonic features of voiced segments <br>
+        and noise components of unvoiced segments respectively. The experimental results <br>
+        prove that N-Singer can synthesize a natural singing voice in parallel with more <br>
+        accurate pronunciation than the baseline.</h6></div>
+
+    <br>
+    <div id="toc_container" >
+    <h5>Contents</h5>
+    <ol type="A">
+        <li><a href="#kor">Audio Samples (Korean)</a></li>
+            <!-- <ol type="1">
+                <li><a href="#neurfps.kor">Neural Formant-Preserving Pitch Shift</a></li>
+                <li><a href="#fastpitch.kor">Improved TTS System with Pitch-Augmented Databases</a></li>
+            </ol> -->
+        <!-- <li><a href="#eng">Not yet (English) </a></li> -->
+            
+    </ol>
+    </div>
+    <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed neurFPS </a>
+    <a href="#gvc_demo" class="waves-effect waves-light btn header-btn"><i></i> improved FastPitch </a> -->
+</div>
+
+
+<head>
+  <title> Demo page of N-Singer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="../../images/nc.png">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">   
+$(document).ready( function() {
+
+$("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+});
+</script>
+
+<br>
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    <div id="kor" class="container">
+      <a name="kss"><h3 style="color:black;" font-weight="bold"><br>1. Audio Samples (Korean)</br></h3></a>
+      <hr color="gray" size="1px"></hr> 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 잘 지내는 척 해도 <span class="red_highlight">돌아서면</span> 혼자 <br>
+          <span class="en_pronun">(Pronunciation): jal jinaeneun cheog haedo <span class="red_highlight">'dol-aseomyeon'</span> honja </span>
+          </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">ATK (Baseline)<br> <span class="red_highlight">Incorrect pronunciation</span>  </td>
+            <td style="text-align: center;">N-Singer (Ours)</td>
+            <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/ATK_46_thirty_007.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/nsingerA_46_thirty_007.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/GT_46_thirty_007.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 쓸쓸히 <span class="red_highlight">혼자</span> 걸어보다가 다리에 힘이 풀려 <br>
+          <span class="en_pronun">(Pronunciation): 
+            sseulsseulhi <span class="red_highlight">honja</span> geol-eobodaga dalie him-i pullyeo </span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">ATK (Baseline)<br> <span class="red_highlight">Incorrect pronunciation</span>  </td>
+          <td style="text-align: center;">N-Singer (Ours)</td>
+          <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/ATK_46_thirty_015.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/nsingerA_46_thirty_015.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/GT_46_thirty_015.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp;
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 한참동안 <span class="red_highlight">주저앉아</span> 울기만 했어 <br>
+          <span class="en_pronun">(Pronunciation): 
+            hanchamdong-an <span class="red_highlight">jujeoanj-a</span> ulgiman haess-eo </span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">ATK (Baseline)<br> <span class="red_highlight">Incorrect pronunciation</span>  </td>
+          <td style="text-align: center;">N-Singer (Ours)</td>
+          <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/ATK_46_thirty_016.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/nsingerA_46_thirty_016.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/GT_46_thirty_016.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 나 사실 <span class="red_highlight">너무</span> 힘들어 잘 지내보려해도 <br>
+          <span class="en_pronun">(Pronunciation): 
+            na sasil <span class="red_highlight">neomu</span> himdeul-eo jal jinaebolyeohaedo </span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">ATK (Baseline)<br> <span class="red_highlight">Incorrect pronunciation</span>  </td>
+          <td style="text-align: center;">N-Singer (Ours)</td>
+          <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/ATK_46_thirty_017.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/nsingerA_46_thirty_017.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/GT_46_thirty_017.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: <span class="red_highlight">깜빡이며</span>널 기다렸어 무슨 얘길 하고픈지  <br>
+          <span class="en_pronun">(Pronunciation): 
+            <span class="red_highlight">kkamppag-imyeo</span> neol gidalyeoss-eo museun yaegil hagopeunji </span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">ATK (Baseline)<br> <span class="red_highlight">Incorrect pronunciation</span>  </td>
+          <td style="text-align: center;">N-Singer (Ours)</td>
+          <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/ATK_47_todaybye_002.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/nsingerA_47_todaybye_002.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/GT_47_todaybye_002.wav"></audio></td>
+        </tr>
+      </table>
+      &nbsp; 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 화가 나서 <span class="red_highlight">소리치듯</span> 가란 내 <span class="red_highlight">말에</span>  <br>
+          <span class="en_pronun">(Pronunciation): 
+            hwaga naseo <span class="red_highlight">solichideus</span> galan nae <span class="red_highlight">mal-e</span>  </span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">ATK (Baseline)<br> <span class="red_highlight">Incorrect pronunciation</span>  </td>
+          <td style="text-align: center;">N-Singer (Ours)</td>
+          <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/ATK_47_todaybye_006.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/nsingerA_47_todaybye_006.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/GT_47_todaybye_006.wav"></audio></td>
+        </tr>
+      </table>
+      &nbsp; 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 오늘 <span class="red_highlight">헤어졌어요</span> 우리 헤어졌어  <br>
+          <span class="en_pronun">(Pronunciation): 
+            oneul <span class="red_highlight">heeojyeoss-eoyo</span> uli heeojyeoss-eo  </span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">ATK (Baseline)<br> <span class="red_highlight">Incorrect pronunciation</span>  </td>
+          <td style="text-align: center;">N-Singer (Ours)</td>
+          <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/ATK_47_todaybye_008.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/nsingerA_47_todaybye_008.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/GT_47_todaybye_008.wav"></audio></td>
+        </tr>
+      </table>
+      &nbsp; 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: <span class="red_highlight">소중했을까</span> 머리 위로 <span class="red_highlight">현구름이</span> <br>
+          <span class="en_pronun">(Pronunciation): 
+            <span class="red_highlight">sojunghaess-eulkka</span> meoli wilo <span class="red_highlight">hyeonguleum-i</span> </span></td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">ATK (Baseline)<br> <span class="red_highlight">Incorrect pronunciation</span>  </td>
+          <td style="text-align: center;">N-Singer (Ours)</td>
+          <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/ATK_50_blueblue_011.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/nsingerA_50_blueblue_011.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/GT_50_blueblue_011.wav"></audio></td>
+        </tr>
+      </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+<br><br><br>
+
+
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    <div id="eng" class="container">
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+
+
+<!-- 
+<body class="text-center">
+  
+  
+<div id="index"></div>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="js/script.js"></script>
+</body> -->
+</html>
