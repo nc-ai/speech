@@ -151,6 +151,13 @@ html h5 {
     /* margin-bottom: 5rem; */
 }
 
+html h6 {
+    font-size: 1rem;
+    /* font-weight: 100;/ */
+    margin: 0;
+    /* margin-bottom: 5rem; */
+}
+
 html .input-field {
     width: 80%;
 }
@@ -175,4 +182,13 @@ html .select-wrapper input.select-dropdown:focus {
 
 html .dropdown-content li>span {
     color: #004C98;
+}
+
+span .red_highlight {
+    color:red;
+}
+span .en_pronun{
+    color:gray;
+    font-size: 90%;
+    font-style: italic;
 }

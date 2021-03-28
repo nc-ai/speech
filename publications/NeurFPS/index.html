@@ -27,48 +27,49 @@ var wavesurfer = WaveSurfer.create({
 
 <div id="gvc_header" class="container" style="margin-top: 100px;">
     <div>
-    <h4>FastPitch TTS with Extended Pitch Controllability <br>Using Personality-Preserving Pitch Augmentation </h4>
+    <h4>Enhancing Pitch-Controllable Text-to-Speech using <br> Formant-Preserving Pitch-Shifting Based Pitch Augmentation</h4>
     <h3 style="display:inline">Hanbin Bae, Young-Sun Joo, Hoon-Young Cho</h3>
     <h3 style="font-size:1rem;">bhb0722@ncsoft.com</h3></div>
     <br>
     <div>
     <h6><h5>Abstract</h5>
-        &nbsp;&nbsp;&nbsp;&nbsp;Recently, neural text-to-speech models with additional input features have been proposed.<br>
-        For example, the FastPitch model uses pitch and duration as additional inputs. However, for <br>
-        pitch values that significantly deviate from the average pitch, the quality of the synthesized <br>
-        speech is reduced considerably. To address this issue, we propose two algorithms to ensure <br>
-        the robustness of FastPitch: a personality-preserving pitch augmentation using the neural <br>
-        formant-preserving pitch shift (neurFPS) algorithm, and a learning algorithm to use pitch-<br>
-        augmented datasets with different pitch ranges in the same sentence. Our results indicate <br>
-        that FastPitch when applied with our proposed algorithms ensure pitch controllability within <br>
-        at least four semitones from the predicted pitch. This clearly improved a pitch controllability <br>
-        of the baseline FastPitch that can generate natural speech within at most two semitones from <br>
-        the predicted pitch.</h6></div>
+        &nbsp;&nbsp;&nbsp;&nbsp;In this paper, we propose methods for enhancing the robustness of pitch-controllable <br>
+        text-to-speech (TTS) models. A recently developed pitch-controllable TTS model, e.g. FastPitch,<br>
+        is additionally conditioned on fundamental frequency contours. However, the quality of the <br>
+        synthesized speech degrades considerably for pitch values that deviate significantly from the<br>
+        average pitch. In other words, the ability to control the pitch is limited. To address this <br>
+        issue, we propose two algorithms to ensure the robustness of pitch-controllable TTS model. <br>
+        First, we propose the neural formant-preserving pitch-shifting (NeurFPS) algorithm for natural<br>
+        pitch augmentation. By applying the proposed NeurFPS algorithm, the pitch-shifted speech samples<br>
+        sound natural because the speaker’s vocal timbre is maintained. We then propose a learning <br>
+        algorithm for the pitch-controllable TTS model that uses pitch-augmented speech datasets with <br>
+        different pitch ranges for the same sentence. Experimental results demonstrate that the proposed <br>
+        algorithms improve the pitch controllability of FastPitch.</h6></div>
 
     <br>
     <div id="toc_container" >
     <h5>Contents</h5>
     <ol type="A">
-        <li><a href="#nv">Neural Vocoder (mel-VGG) Samples</a></li>
+        <li><a href="#nv">Neural Vocoder (VocGAN) Samples</a></li>
             <ol type="1">
                 <li><a href="#nv.gate">Excitation Gate and Formant Gate</a></li>
-                <li><a href="#nv.neurfps">Nueral Formant-Preserving Pitch Shift (neurFPS)</a></li>
+                <li><a href="#nv.NeurFPS">Nueral Formant-Preserving Pitch Shift (NeurFPS)</a></li>
             </ol>
         <br>  
-        <li><a href="#tts">Improved TTS System with Pitch-Augmented Databases</a></li>
+        <li><a href="#tts">Improved Pitch-Controllable TTS Model with Pitch-Augmented Datasets</a></li>
             <ol type="1">
                 <li><a href="#tts.kor">FastPitch for NCFemale (KOR)</a></li>
                 <li><a href="#tts.eng">FastSpeech2 for LJSpeech (ENG)</a></li>
             </ol>
     </ol>
     </div>
-    <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed neurFPS </a>
+    <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed NeurFPS </a>
     <a href="#gvc_demo" class="waves-effect waves-light btn header-btn"><i></i> improved FastPitch </a> -->
 </div>
 
 
 <head>
-  <title> Demo Page, "FastPitch TTS with Extended Pitch Controllability Using Personlaity-Preserving Pitch Augmentation" </title>
+  <title> Demo Page, NeurFPS </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
@@ -97,7 +98,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
       <hr style="color:lightslategrey" size="0.5px"></hr>
       <br><br><br>
       <a>
-        <h3 ><b>A. Neural Vocoder (mel-VGG) Samples</b></h3>
+        <h3 ><b>A. Neural Vocoder (VocGAN) Samples</b></h3>
       </a>
       <br><br>
 
@@ -137,8 +138,8 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
           <br><br>
       </a>
       <!-- <br><br><br><br> -->
-      &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/fig_mel-gate-output_v2.png" alt="My Image" width="500"><br>
-      <h6 style="width:550px;"><b>Fig. 2.</b> Mel-spectrograms of (a) input recorded speech, (b)speech generated from the excitation gate, (c) speech generated from the formant gate. (d) Power spectrums of (a), (b)and (c) at the same frame.</h6>
+      &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/fig_mel-gate-output_v2.png" alt="My Image" width="400"><br>
+      <h6 style="width:500px;"><b>Figure 1</b> Mel-spectrograms, where (a) represents recorded speech, (b) and (c) represent output waveforms from the excitation and formant gates respectively. (d) Power spectra of them.</h6>
 
       <!-- <br><br><br> -->
       <table>
@@ -174,14 +175,21 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
       </table>
 
       <br><br><br>
-      <a name="nv.neurfps">
-          <h3><b>A.2. Nueral Formant-Preserving Pitch Shift (neurFPS)</b></h3>
+      <a name="nv.NeurFPS">
+          <h3><b>A.2. Nueral Formant-Preserving Pitch Shift (NeurFPS)</b></h3>
           <br><br>
       </a>
+        <b>
+        &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/neurfps.png" alt="My Image" width="450"><br>
+        <h6 style="width:450px;"><b>Figure 2</b> Schematic of the NeurFPS algorithm. ‘C’ denotes the
+          one-dimensional convolutional layer, ‘up(r)’ and ‘res stack’ denote
+          the upsampling layer and the residual stack layer, respectively</h6>
+        </b>
+        <b>
+        &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/envelopes.png" alt="My Image" width="450"><br>
 
-        &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/fig_FPPS-diagram.png" alt="My Image" width="550"><br>
-
-        <h6><b>Fig. 1.</b> Structure of mel-VGG and schematic diagram of the neurFPS algorithm.</h6>
+        <h6 style="width:450px;"><b>Figure 3</b> Spectral envelopes of three types of speech waveforms.</h6>
+        </b>
       <br><br><br>
 
       <table>
@@ -198,7 +206,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
           </tr>
           
           <tr>
-            <td style="text-align:center;color:lightslategrey">Pitch shift  </td>
+            <td style="text-align:center;color:lightslategrey">Pitch shift <br> (not preserved) </td>
             
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
               <source src="samples/exp1_sox_fcps/dialog/sox/-3/030.wav" type="audio/wav"></audio></td>
@@ -216,7 +224,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
                 <source src="samples/exp1_sox_fcps/dialog/sox/3/030.wav" type="audio/wav"></audio></td>
           </tr>
           <tr>
-            <td style="text-align:center;"><b>neurFPS</b> </td>
+            <td style="text-align:center;"><b>NeurFPS</b> <br> (preserved) </td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples/exp1_sox_fcps/dialog/fcps/-3/030.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
@@ -248,7 +256,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
             <td style="text-align:center;">3</td>
           </tr>
           <tr>
-            <td style="text-align:center;color:lightslategrey">Pitch shift  </td>            
+            <td style="text-align:center;color:lightslategrey">Pitch shift <br> (not preserved)  </td>            
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
               <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_-3.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
@@ -265,7 +273,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
               <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_3.wav" type="audio/wav"></audio></td>
           </tr>
           <tr>
-            <td style="text-align:center;"> <b>neurFPS</b> </td>
+            <td style="text-align:center;"> <b>NeurFPS</b> <br> (preserved) </td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-3.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
@@ -294,7 +302,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
       <hr style="color:lightslategrey" size="0.5px"></hr>
       <br><br><br>
       <a>
-      <h3 ><b>B. Improved TTS System with Pitch-Augmented Databases </b></h3>
+      <h3 ><b>B. Improved Pitch-Controllable TTS Model with Pitch-Augmented Datasets </b></h3>
       </a>
       <br>
 
@@ -325,7 +333,15 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
           <h5 style="display:inline-block;">부모가 싸우는 날 </h5>
           <h5 style="color:crimson;display:inline-block;"><b>밤엔 </b></h5>
           <h5 style="display:inline-block;"> 꼭 천식증상이 나타났다. </h5> <br>
-          <h6>With the help of a psychiatrist, I learned that asthma symptoms always appear when the night of the parents' fight.</h6>
+          
+          <h6 style="display:inline-block;">jeongsingwa uisa </h6>
+          <h6 style="color:crimson;display:inline-block;"><b>doum-eul bad-a won-in-eul al-a bwassdeoni,</b> </h6>
+          <h6 style="display:inline-block;">bumoga ssauneun nal </h6>
+          <h6 style="color:crimson;display:inline-block;"><b>bam-en </b></h6>
+          <h6 style="display:inline-block;">kkog cheonsig jeungsang-i natanabnida. </h6>
+          
+          
+          <!-- <h6>With the help of a psychiatrist, I learned that asthma symptoms always appear when the night of the parents' fight.</h6> -->
         </div><br>
 
         <div class="align-center mt-60">
@@ -335,7 +351,13 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
           <h5 style="display:inline-block;"> 붙잡았을 거 같은데, 지금은 아예 </h5>
           <h5 style="color:crimson;display:inline-block;"><b>연락을 안 하지 </b></h5>
           <h5 style="display:inline-block;">않을까?  </h5> <br>
-          <h6>In the past, I would have tried getting her back. But now there's no reason to be with her, isn't it?</h6>
+
+          <h6 style="display:inline-block;">mullon yesnal-e </h6> 
+          <h6 style="color:crimson;display:inline-block;"><b>na yeoss-eumyeon </b></h6> 
+          <h6 style="display:inline-block;">but jab-ass-eul geo gat-eunde, jigeum-eun aye </h6> 
+          <h6 style="color:crimson;display:inline-block;"><b>yeonlag-eul anhaji </b></h6> 
+          <h6 style="display:inline-block;">anh-eulkka?</h6> 
+          
         </div><br>
 
         <div class="align-center mt-60">
@@ -346,7 +368,14 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
           <h5 style="color:crimson;display:inline-block;"><b>친근한</b></h5>
           <h5 style="display:inline-block;"> 느낌이 들었어 </h5>
           <h5 style="color:crimson;display:inline-block;"><b>설렘보다는.</b></h5><br>
-          <h6>However, because I met a friend of similar height, I felt friendly rather than fluttering.</h6>
+
+          <h6 style="display:inline-block;">geunde yaggan geuleohge kiga deo chinguleul </h6> 
+          <h6 style="color:crimson;display:inline-block;"><b>ttag </b></h6> 
+          <h6 style="display:inline-block;">ileohge magsang maju hanikka, </h6> 
+          <h6 style="color:crimson;display:inline-block;"><b>chinguenhan </b></h6> 
+          <h6 style="display:inline-block;">neukkim-i deul-eoss-eo </h6> 
+          <h6 style="color:crimson;display:inline-block;"><b>seollembodaneun. </b></h6> 
+           
         </div><br>
         <div class="align-center mt-60">
           <h5 style="color:mediumturquoise"> <b>Sample #4 </b></h5><br>
@@ -354,8 +383,15 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
           <h5 style="color:crimson;display:inline-block;"><b> 모르겠어. </b></h5> 
           <h5 style="display:inline-block;">계속 연락오면 </h5>
           <h5 style="color:crimson;display:inline-block;"><b>또 흔들릴 수 </b></h5>
-          <h5 style="display:inline-block;">있잖아. </h5>
-          <h6>We have no regrets about it, so we feel relieved. But we do not know. If he keeps in touch, we might change our mind again.</h6>
+          <h5 style="display:inline-block;">있잖아. </h5><br>
+
+          <h6 style="display:inline-block;">yae hanteneun geuleon aswium-i eobs-eoseo, nalang eommaneun dahaeng-inde </h6> 
+          <h6 style="color:crimson;display:inline-block;"><b>moleugess-eo. </b></h6> 
+          <h6 style="display:inline-block;">gyesog yeonlag omyeon </h6> 
+          <h6 style="color:crimson;display:inline-block;"><b>tto heundeullil su </b></h6> 
+          <h6 style="display:inline-block;">issjanh-a.</h6> 
+
+             
         </div><br>
         <div class="align-center mt-60">
           <h5 style="color:mediumturquoise"> <b>Sample #5 </b></h5><br>
@@ -363,8 +399,13 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
           <h5 style="color:crimson;display:inline-block;"><b>도는데</b></h5> 
           <h5 style="display:inline-block;"> 거기서 강아지 나와가지고 </h5>
           <h5 style="color:crimson;display:inline-block;"><b>깜짝 </b></h5>
-          <h5 style="display:inline-block;">놀라서 도망가버렸어.</h5>
-          <h6>In the alley on the way home, I was startled and ran away when dog suddenly came out.</h6>
+          <h5 style="display:inline-block;">놀라서 도망가버렸어.</h5><br>
+
+          <h6 style="display:inline-block;">jib oneun gil golmog-e </h6> 
+          <h6 style="color:crimson;display:inline-block;"><b>doneunde </b></h6> 
+          <h6 style="display:inline-block;">geogiseo gang-ajiga nawagajigo </h6> 
+          <h6 style="color:crimson;display:inline-block;"><b>kkamjjag </b></h6> 
+          <h6 style="display:inline-block;">nollaseo domang-ga beolyeo sseo.</h6> 
         </div>
       </div>
 
@@ -567,7 +608,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
       </a>
 
       <h6 style="color:black">For foreign listeners, we used the English female speaker (LJSpeech) to train the FastSpeech2 (another type of pitch controllable TTS). </h6>
-      <h6 style="color:black"><a href="https://www.codecogs.com/eqnedit.php?latex=\bar{\mathbf{p}}=\mathcal{N}(0,&space;4.75),&space;\bar{\mathbf{f_0}}=225.1&space;\mathrm{Hz}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\bar{\mathbf{p}}=\mathcal{N}(0,&space;4.75),&space;\bar{\mathbf{f_0}}=225.1&space;\mathrm{Hz}" title="\bar{\mathbf{p}}=\mathcal{N}(0, 4.75), \bar{\mathbf{f_0}}=225.1 \mathrm{Hz}" /></a></h6>
+      <!-- <h6 style="color:black"><a href="https://www.codecogs.com/eqnedit.php?latex=\bar{\mathbf{p}}=\mathcal{N}(0,&space;4.75),&space;\bar{\mathbf{f_0}}=225.1&space;\mathrm{Hz}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\bar{\mathbf{p}}=\mathcal{N}(0,&space;4.75),&space;\bar{\mathbf{f_0}}=225.1&space;\mathrm{Hz}" title="\bar{\mathbf{p}}=\mathcal{N}(0, 4.75), \bar{\mathbf{f_0}}=225.1 \mathrm{Hz}" /></a></h6> -->
       <h6 style="color:salmon;display:inline-block;font-size:1rem">(* We refered <a href="https://github.com/ming024/FastSpeech2">ming024's FastSpeech2 implementation</a>.) </h6>
       <br><br><br>
 
