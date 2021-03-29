@@ -39,8 +39,8 @@ var wavesurfer = WaveSurfer.create({
         synthesized speech degraded considerably for pitch values that deviated significantly from the<br>
         average pitch. In other words, the ability to control the pitch was limited. To address this <br>
         issue, we propose two algorithms to ensure the robustness of pitch-controllable TTS model. <br>
-        First, we propose a neural formant-preserving pitch-shifting (NeurFPS) algorithm for natural<br>
-        pitch augmentation; by applying the proposed NeurFPS algorithm, the pitch-shifted speech samples<br>
+        First, we propose a neural formant-preserving pitch-shifting (NeurFFPS) algorithm for natural<br>
+        pitch augmentation; by applying the proposed NeurFPPS algorithm, the pitch-shifted speech samples<br>
         sound natural because the speaker’s vocal timbre is maintained. Then, we propose a learning <br>
         algorithm for the pitch-controllable TTS model that uses pitch-augmented speech datasets with <br>
         different pitch ranges for the same sentence. The experimental results demonstrate that the proposed <br>
@@ -53,7 +53,7 @@ var wavesurfer = WaveSurfer.create({
         <li><a href="#nv">Neural Vocoder (VocGAN) Samples</a></li>
             <ol type="1">
                 <li><a href="#nv.gate">Output speech samples from the excitation and formant Gates</a></li>
-                <li><a href="#nv.NeurFPS">Nueral Formant-Preserving Pitch-Shifting (NeurFPS) Algorithm</a></li>
+                <li><a href="#nv.NeurFPPS">Nueral Formant-Preserving Pitch-Shifting (NeurFPPS) Algorithm</a></li>
             </ol>
         <br>  
         <li><a href="#tts">Improved Pitch-Controllable TTS Models with Pitch-Augmented Datasets</a></li>
@@ -63,13 +63,13 @@ var wavesurfer = WaveSurfer.create({
             </ol>
     </ol>
     </div>
-    <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed NeurFPS </a>
+    <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed NeurFPPS </a>
     <a href="#gvc_demo" class="waves-effect waves-light btn header-btn"><i></i> improved FastPitch </a> -->
 </div>
 
 
 <head>
-  <title> Demo Page, NeurFPS </title>
+  <title> Demo Page, NeurFPPS </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
@@ -175,13 +175,13 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
       </table>
 
       <br><br><br>
-      <a name="nv.NeurFPS">
-          <h3><b>A.2. Nueral Formant-Preserving Pitch Shift (NeurFPS)</b></h3>
+      <a name="nv.NeurFPPS">
+          <h3><b>A.2. Nueral Formant-Preserving Pitch Shift (NeurFPPS)</b></h3>
           <br><br>
       </a>
         <b>
         &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/neurfps.png" alt="My Image" width="450"><br>
-        <h6 style="width:450px;"><b>Figure 2</b> Schematic of the NeurFPS algorithm. ‘C’ denotes the
+        <h6 style="width:450px;"><b>Figure 2</b> Schematic of the NeurFPPS algorithm. ‘C’ denotes the
           one-dimensional convolutional layer, ‘up(r)’ and ‘res stack’ denote
           the upsampling layer and the residual stack layer, respectively</h6>
         </b>
@@ -224,7 +224,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
                 <source src="samples/exp1_sox_fcps/dialog/sox/3/030.wav" type="audio/wav"></audio></td>
           </tr>
           <tr>
-            <td style="text-align:center;"><b>NeurFPS</b> <br> (preserved) </td>
+            <td style="text-align:center;"><b>NeurFPPS</b> <br> (preserved) </td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples/exp1_sox_fcps/dialog/fcps/-3/030.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
@@ -273,7 +273,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
               <source src="samples/exp1_sox_fcps/ljspeech/tmp_trans_3.wav" type="audio/wav"></audio></td>
           </tr>
           <tr>
-            <td style="text-align:center;"> <b>NeurFPS</b> <br> (preserved) </td>
+            <td style="text-align:center;"> <b>NeurFPPS</b> <br> (preserved) </td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples/exp1_sox_fcps/ljspeech/LJ001-0001_-3.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
