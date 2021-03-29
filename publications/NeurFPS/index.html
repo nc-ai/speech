@@ -27,23 +27,23 @@ var wavesurfer = WaveSurfer.create({
 
 <div id="gvc_header" class="container" style="margin-top: 100px;">
     <div>
-    <h4>Enhancing Pitch-Controllable Text-to-Speech using <br> Formant-Preserving Pitch-Shifting Based Pitch Augmentation</h4>
+    <h4>Enhancing Pitch-Controllable Text-to-Speech using <br> Formant-Preserving Pitch-Shifting-Based Pitch Augmentation</h4>
     <h3 style="display:inline">Hanbin Bae, Young-Sun Joo, Hoon-Young Cho</h3>
     <h3 style="font-size:1rem;">bhb0722@ncsoft.com</h3></div>
     <br>
     <div>
     <h6><h5>Abstract</h5>
-        &nbsp;&nbsp;&nbsp;&nbsp;In this paper, we propose methods for enhancing the robustness of pitch-controllable <br>
-        text-to-speech (TTS) models. A recently developed pitch-controllable TTS model, e.g. FastPitch,<br>
-        is additionally conditioned on fundamental frequency contours. However, the quality of the <br>
-        synthesized speech degrades considerably for pitch values that deviate significantly from the<br>
-        average pitch. In other words, the ability to control the pitch is limited. To address this <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;In this paper, we propose a method for enhancing the robustness of pitch-controllable <br>
+        text-to-speech (TTS) models. A recently developed pitch-controllable TTS model, i.e. FastPitch,<br>
+        was additionally conditioned for the fundamental frequency contours. However, the quality of the <br>
+        synthesized speech degraded considerably for pitch values that deviated significantly from the<br>
+        average pitch. In other words, the ability to control the pitch was limited. To address this <br>
         issue, we propose two algorithms to ensure the robustness of pitch-controllable TTS model. <br>
-        First, we propose the neural formant-preserving pitch-shifting (NeurFPS) algorithm for natural<br>
-        pitch augmentation. By applying the proposed NeurFPS algorithm, the pitch-shifted speech samples<br>
-        sound natural because the speaker’s vocal timbre is maintained. We then propose a learning <br>
+        First, we propose a neural formant-preserving pitch-shifting (NeurFPS) algorithm for natural<br>
+        pitch augmentation; by applying the proposed NeurFPS algorithm, the pitch-shifted speech samples<br>
+        sound natural because the speaker’s vocal timbre is maintained. Then, we propose a learning <br>
         algorithm for the pitch-controllable TTS model that uses pitch-augmented speech datasets with <br>
-        different pitch ranges for the same sentence. Experimental results demonstrate that the proposed <br>
+        different pitch ranges for the same sentence. The experimental results demonstrate that the proposed <br>
         algorithms improve the pitch controllability of FastPitch.</h6></div>
 
     <br>
@@ -52,11 +52,11 @@ var wavesurfer = WaveSurfer.create({
     <ol type="A">
         <li><a href="#nv">Neural Vocoder (VocGAN) Samples</a></li>
             <ol type="1">
-                <li><a href="#nv.gate">Excitation Gate and Formant Gate</a></li>
-                <li><a href="#nv.NeurFPS">Nueral Formant-Preserving Pitch Shift (NeurFPS)</a></li>
+                <li><a href="#nv.gate">Output speech samples from the excitation and formant Gates</a></li>
+                <li><a href="#nv.NeurFPS">Nueral Formant-Preserving Pitch-Shifting (NeurFPS) Algorithm</a></li>
             </ol>
         <br>  
-        <li><a href="#tts">Improved Pitch-Controllable TTS Model with Pitch-Augmented Datasets</a></li>
+        <li><a href="#tts">Improved Pitch-Controllable TTS Models with Pitch-Augmented Datasets</a></li>
             <ol type="1">
                 <li><a href="#tts.kor">FastPitch for NCFemale (KOR)</a></li>
                 <li><a href="#tts.eng">FastSpeech2 for LJSpeech (ENG)</a></li>
