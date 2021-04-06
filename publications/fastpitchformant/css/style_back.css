@@ -1,0 +1,7 @@
+tr.spaceUnder>td {
+  padding-bottom: 2em;
+}
+td.model_name{
+    font-weight: bold;
+    text-align: center;
+}
