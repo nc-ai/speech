@@ -1,134 +1,199 @@
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Demo page of "GANSpeech"</title>
-    <link rel="shortcut icon" href="../../images/nc.png">
-  </head>
-  <body>
-    <article>
-      <header>
-        <h1>GANSpeech: Adversarial Training for High-fidelity Multi-speaker Speech Synthesis</h1>
-      </header>
-    </article>
-    <div>
-        <h3>Paper</h3>
-        <a href="">	TBA</a>
-        <!-- , submitted to <b>INTERSPEECH 2021</b> -->
-    </div>
+<meta charset="utf-8">
 
-    <div>
-        <h3>Authors</h3>
-        TBA
-        <!-- Jinhyeok Yang, Jae-Sung Bae, Taejun Bak, Youngik Kim, Hoonyoung Cho (NCSOFT) -->
-    </div>
-    <div>
-        <h3>Abstract</h3>
-        TBA
-    </div>
+<!-- Background theme -->
+<div id="background">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <img src="img/logo.svg" alt="ci_logo"><img>
+    <div class="bg3"></div>
+    <div class="bg4"></div>
+</div>
 
-    <div>
-        <h3>GANSpeech Samples (Korean; 1-hour dataset)</h3>
-        <table>
-          <tr>
-            <th>Ground Truth</th>
-            <th>GT mel + VocGAN</th>
-            <th>FastSpeech(MS)</th>
-            <th>FastSpeech2(MS)</th>
-            <th>FastSpeech2(FT)</th>
-            <th>FastSpeech + GANSpeech</th>
-            <th>FastSpeech2 + GANSpeech</th>
-          </tr>
-          <tr>
-            <td colspan="6" align="center">"음극선은 두꺼운 검은색 종이에 쌓여 있었으므로, 그 빛이 음극선일리가 없었다."</td>
-          </tr>
-          <tr>
-            <td colspan="6" align="center">"eumgeukseoneun dukkeoun geomeunsaek jongie ssahyeo isseosseumeuro, geu bicci eumgeukseonilliga eopseossda." </td>
-          </tr>
-          <tr>
-            <td><audio controls><source src="samples/ganspeech/1-gt.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/1-vocgan.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/1-fs1.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/1-fs2.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/1-fs2ft.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/1-gs1.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/1-gs2.wav"></audio></td>
-          </tr>
-          <tr>
-            <td colspan="6" align="center">"예. 집안일은 제게 맡겨두세요."</td>
-          </tr>
-          <tr>
-            <td colspan="6" align="center">"ye. jibanireun jege matgyeoduseyo."</td>
-          </tr>
-          <tr>
-            <td><audio controls><source src="samples/ganspeech/2-gt.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/2-vocgan.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/2-fs1.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/2-fs2.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/2-fs2ft.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/2-gs1.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/2-gs2.wav"></audio></td>
-          </tr>
-          <tr>
-            <td colspan="6" align="center">"한때 명성이 자자했던 화씨 대 가문도 과거에 묻히게 되었다."</td>
-          </tr>
-          <tr>
-            <td colspan="6" align="center">"hanttae myeongseongi jajahaessdeon hwassi dae gamundo gwageoe muthige doeeossda."</td>
-          </tr>
-          <tr>
-            <td><audio controls><source src="samples/ganspeech/3-gt.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/3-vocgan.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/3-fs1.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/3-fs2.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/3-fs2ft.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/3-gs1.wav"></audio></td>
-            <td><audio controls><source src="samples/ganspeech/3-gs2.wav"></audio></td>
-          </tr>
-        </table>
-      </div>
+<br>
 
+<div id="gvc_header" class="container">
     <div>
-      <h3>VocGAN Samples synthesized from true mel spectrograms</h3>
+    <h4>GANSpeech: Adversarial Training for High-fidelity Multi-speaker Speech Synthesis </h4>
+    <h3 style="display:inline">TBA</h3></div>
+    <!-- <h3 style="font-size:1rem;">TBA</h3></div> -->
+    <br>
+    <div>
+    <h6><h5>Abstract</h5>
+        &nbsp;&nbsp;&nbsp;&nbsp;TBA.</h6></div>
+
+    <br>
+    <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed neurFPS </a>
+    <a href="#gvc_demo" class="waves-effect waves-light btn header-btn"><i></i> improved FastPitch </a> -->
+</div>
+
+
+<head>
+  <title> Demo page of GANSpeech</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="../../images/nc.png">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">   
+$(document).ready( function() {
+
+$("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+});
+</script>
+
+<br>
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    <div id="dec" class="container">
+      <a name="dec.kor"><h3><b>GANSpeech Samples (Korean) </b></h3></a>
+      <h6>MS: multi-speaker. FT: fine-tuning. Total dataset has 190 hours including target speaker dataset (1-hour respectively) </h6>
+      <br>
       <table>
         <tr>
-            <th>Ground Truth</th>
-            <th>VocGAN w/o SFML</th>
-            <th>VocGAN w/ SFML</th>
+          <td colspan="7">Sentence: "음극선은 두꺼운 검은색 종이에 쌓여 있었으므로, 그 빛이 음극선일리가 없었다." <br>
+          <span class="en_pronun">(Pronunciation): "eumgeukseoneun dukkeoun geomeunsaek jongie ssahyeo isseosseumeuro, geu bicci eumgeukseonilliga eopseossda." </span>
+          </td>
         </tr>
         <tr>
-          <td colspan="4" align="center">"차대<span style="color:red;">웅</span>, 너 그렇게 안봤는데 그럼 책임져야지, 멋지다."</td>
+          <th style="text-align:center;">Ground Truth</th>
+          <th style="text-align:center;">GT mel + VocGAN</th>
+          <th style="text-align:center;">FastSpeech(MS)</th>
+          <th style="text-align:center;">FastSpeech2(MS)</th>
+          <th style="text-align:center;">FastSpeech2(FT)</th>
+          <th style="text-align:center;">FastSpeech + GANSpeech</th>
+          <th style="text-align:center;">FastSpeech2 + GANSpeech</th>
         </tr>
         <tr>
-          <td colspan="4" align="center">"chadae<span style="color:red;">ung</span>, neo geureohge anbwassneunde geureom chaegimjyeoyaji, meosjida." </td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/1-gt.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/1-vocgan.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/1-fs1.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/1-fs2.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/1-fs2ft.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/1-gs1.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/1-gs2.wav"></audio></td>
         </tr>
         <tr>
-            <td><audio controls><source src="samples/vocgan/1-gt.wav"></audio></td>
-            <td><audio controls><source src="samples/vocgan/1-baseline.wav"></audio></td>
-            <td><audio controls><source src="samples/vocgan/1-sfml.wav"></audio></td>
+          <td colspan="7">Sentence: "예. 집안일은 제게 맡겨두세요." <br>
+          <span class="en_pronun">(Pronunciation): "ye. jibanireun jege matgyeoduseyo." </span>
+          </td>
         </tr>
         <tr>
-          <td colspan="4" align="center">"본<span style="color:red;">문</span> 이백구쪽 일단의 북진은 가공할 사태 부분."</td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/2-gt.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/2-vocgan.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/2-fs1.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/2-fs2.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/2-fs2ft.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/2-gs1.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/2-gs2.wav"></audio></td>
         </tr>
         <tr>
-          <td colspan="4" align="center">"bon<span style="color:red;">mun</span> ibaekgujjok ildanui bukjineun gagonghal satae bubun."</td>
+          <td colspan="7">Sentence: "한때 명성이 자자했던 화씨 대 가문도 과거에 묻히게 되었다." <br>
+          <span class="en_pronun">(Pronunciation): "hanttae myeongseongi jajahaessdeon hwassi dae gamundo gwageoe muthige doeeossda." </span>
+          </td>
         </tr>
         <tr>
-            <td><audio controls><source src="samples/vocgan/2-gt.wav"></audio></td>
-            <td><audio controls><source src="samples/vocgan/2-baseline.wav"></audio></td>
-            <td><audio controls><source src="samples/vocgan/2-sfml.wav"></audio></td>
-        </tr>
-        <tr>
-          <td colspan="4" align="center">"<span style="color:red;">뭐</span> 그런 투에."</td>
-        </tr>
-        <tr>
-          <td colspan="4" align="center">"<span style="color:red;">mwo</span> geureon tue ."</td>
-        </tr>
-        <tr>
-            <td><audio controls><source src="samples/vocgan/3-gt.wav"></audio></td>
-            <td><audio controls><source src="samples/vocgan/3-baseline.wav"></audio></td>
-            <td><audio controls><source src="samples/vocgan/3-sfml.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/3-gt.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/3-vocgan.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/3-fs1.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/3-fs2.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/3-fs2ft.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/3-gs1.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/3-gs2.wav"></audio></td>
         </tr>
       </table>
+  
+    </div>
+    <br><br><br>
+
+    <div id="dec", class="container">
+      <a name="dec.kor"><h3><b>VocGAN Samples synthesized from true mel spectrograms</b></h3></a>
+        <br>
+
+      <table>
+        <tbody>
+          <tr>
+            <th style="text-align:center;">Ground Truth</th>
+            <th style="text-align:center;">VocGAN w/o SFML</th>
+            <th style="text-align:center;">VocGAN w/ SFML</th>
+          </tr>
+          <tr>
+            <hr color="gray" size="1px"></hr> 
+            <!-- <hr color="gray" size="1px"></hr>  -->
+            <td colspan="3">Sentence: "차대<span style="color:red;">웅</span>, 너 그렇게 안봤는데 그럼 책임져야지, 멋지다." <br>
+            <span class="en_pronun">(Pronunciation): "chadae<span style="color:red;">ung</span>, neo geureohge anbwassneunde geureom chaegimjyeoyaji, meosjida." </span>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/1-gt.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/1-baseline.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/1-sfml.wav"></audio></td>
+          </tr>
+          <tr>
+            <!-- <hr color="gray" size="1px"></hr>  -->
+            <td colspan="3">Sentence: "본<span style="color:red;">문</span> 이백구쪽 일단의 북진은 가공할 사태 부분." <br>
+            <span class="en_pronun">(Pronunciation): "bon<span style="color:red;">mun</span> ibaekgujjok ildanui bukjineun gagonghal satae bubun." </span>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/2-gt.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/2-baseline.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/2-sfml.wav"></audio></td>
+          </tr>
+          <tr>
+            <td colspan="3">Sentence: "<span style="color:red;">뭐</span> 그런 투에." <br>
+            <span class="en_pronun">(Pronunciation): "<span style="color:red;">mwo</span> geureon tue ." </span>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/3-gt.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/3-baseline.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/3-sfml.wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br><br><br>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+<br><br><br>
+
+
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    <div id="eng" class="container">
+
+
     </div>
 
-  </body>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+
+
+<!-- 
+<body class="text-center">
+  
+  
+<div id="index"></div>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="js/script.js"></script>
+</body> -->
 </html>
