@@ -92,6 +92,10 @@ body {
     margin-right: 20px;
 }
 
+#border_th th {
+    border: 2px solid #000000; 
+}
+
 .nav {
     height: 150px;
     position: fixed;

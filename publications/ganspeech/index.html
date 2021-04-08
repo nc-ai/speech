@@ -14,7 +14,8 @@
 
 <div id="gvc_header" class="container">
     <div>
-    <h4>GANSpeech: Adversarial Training for High-fidelity Multi-speaker Speech Synthesis </h4>
+    <h4>GANSpeech: Adversarial Training for <br>
+      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;High-Fidelity Multi-Speaker Speech Synthesis </h4>
     <h3 style="display:inline">TBA</h3></div>
     <!-- <h3 style="font-size:1rem;">TBA</h3></div> -->
     <br>
@@ -54,22 +55,24 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
     <!-- <div id="index"></div> -->
     <div id="dec" class="container">
       <a name="dec.kor"><h3><b>GANSpeech Samples (Korean) </b></h3></a>
-      <h6>MS: multi-speaker. FT: fine-tuning. Total dataset has 190 hours including target speaker dataset (1-hour respectively) </h6>
+      <h6>Total dataset (190 hours) including target speaker datasets (1-hour respectively) <br>
+        MS: multi-speaker. FT: speaker-specific fine-tuning.
+      </h6>
       <br>
       <table>
+        <tr>
+          <th style="text-align:center;">Ground Truth</th>
+          <th style="text-align:center;">GT mel + VocGAN</th>
+          <th style="border-left:3px solid;text-align:center;">FastSpeech(MS)</th>
+          <th style="text-align:center;">FastSpeech2(MS)</th>
+          <th style="text-align:center;">FastSpeech2(FT)</th>
+          <th style="border-left:3px solid;text-align:center;">FastSpeech + GANSpeech</th>
+          <th style="text-align:center;">FastSpeech2 + GANSpeech</th>
+        </tr>
         <tr>
           <td colspan="7">Sentence: "음극선은 두꺼운 검은색 종이에 쌓여 있었으므로, 그 빛이 음극선일리가 없었다." <br>
           <span class="en_pronun">(Pronunciation): "eumgeukseoneun dukkeoun geomeunsaek jongie ssahyeo isseosseumeuro, geu bicci eumgeukseonilliga eopseossda." </span>
           </td>
-        </tr>
-        <tr>
-          <th style="text-align:center;">Ground Truth</th>
-          <th style="text-align:center;">GT mel + VocGAN</th>
-          <th style="text-align:center;">FastSpeech(MS)</th>
-          <th style="text-align:center;">FastSpeech2(MS)</th>
-          <th style="text-align:center;">FastSpeech2(FT)</th>
-          <th style="text-align:center;">FastSpeech + GANSpeech</th>
-          <th style="text-align:center;">FastSpeech2 + GANSpeech</th>
         </tr>
         <tr>
           <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/1-gt.wav"></audio></td>
@@ -132,9 +135,9 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
             </td>
           </tr>
           <tr>
-            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/1-gt.wav"></audio></td>
-            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/1-baseline.wav"></audio></td>
-            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/1-sfml.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:220px;height:32px" controls=""><source src="samples/vocgan/1-gt.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:220px;height:32px" controls=""><source src="samples/vocgan/1-baseline.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:220px;height:32px" controls=""><source src="samples/vocgan/1-sfml.wav"></audio></td>
           </tr>
           <tr>
             <!-- <hr color="gray" size="1px"></hr>  -->
@@ -143,9 +146,9 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
             </td>
           </tr>
           <tr>
-            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/2-gt.wav"></audio></td>
-            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/2-baseline.wav"></audio></td>
-            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/2-sfml.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:220px;height:32px" controls=""><source src="samples/vocgan/2-gt.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:220px;height:32px" controls=""><source src="samples/vocgan/2-baseline.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:220px;height:32px" controls=""><source src="samples/vocgan/2-sfml.wav"></audio></td>
           </tr>
           <tr>
             <td colspan="3">Sentence: "<span style="color:red;">뭐</span> 그런 투에." <br>
@@ -153,9 +156,9 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
             </td>
           </tr>
           <tr>
-            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/3-gt.wav"></audio></td>
-            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/3-baseline.wav"></audio></td>
-            <td style="text-align: center;"><audio style="width:160px;height:32px" controls=""><source src="samples/vocgan/3-sfml.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:220px;height:32px" controls=""><source src="samples/vocgan/3-gt.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:220px;height:32px" controls=""><source src="samples/vocgan/3-baseline.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:220px;height:32px" controls=""><source src="samples/vocgan/3-sfml.wav"></audio></td>
           </tr>
         </tbody>
       </table>
