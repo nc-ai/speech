@@ -64,7 +64,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
       <br>
       <table>
         <tr>
-          <th style="text-align:center;">Ground Truth</th>
+          <th style="text-align:center;">Recording</th>
           <th style="text-align:center;">GT mel + VocGAN</th>
           <th style="border-left:3px solid;text-align:center;">FastSpeech(MS)</th>
           <th style="text-align:center;">FastSpeech2(MS)</th>
@@ -172,8 +172,38 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
     <div id="dec", class="container">
       <a name="dec.kor"><h3><b>Appendix: multi-speaker conversation made by GANSpeech and VocGAN </b></h3></a>
         <br>
-        <h6>1-hour data for each speaker in the audio</h6> <br>
+        <h6>The same dataset as the above experiments, and recorded for an hour for each speaker in this sample.</h6> <br>
         &emsp;&emsp;<audio style="width:260px;height:32px" controls=""><source src="samples/ganspeech/conversation.wav"></audio>
+    </div>
+    <br><br><br>
+    <div id="dec", class="container">
+      <a name="dec.kor"><h3><b>Appendix: english samples for VCTK</b></h3></a>
+        <br>
+        
+      <table style="width: 600px">
+        <tbody>
+          <tr>
+            <th style="text-align:center;">Recording</th>
+            <th style="text-align:center;">Synthesized</th>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><audio style="width:260px;height:32px" controls=""><source src="samples/additional/p229_363_mic1.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:260px;height:32px" controls=""><source src="samples/additional/p229_synthesized.wav"></audio></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><audio style="width:260px;height:32px" controls=""><source src="samples/additional/p236_351_mic1.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:260px;height:32px" controls=""><source src="samples/additional/p236_synthesized.wav"></audio></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><audio style="width:260px;height:32px" controls=""><source src="samples/additional/p279_072_mic1.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:260px;height:32px" controls=""><source src="samples/additional/p279_synthesized.wav"></audio></td>
+          </tr>
+          <tr>
+            <td style="text-align: center;"><audio style="width:260px;height:32px" controls=""><source src="samples/additional/p307_127_mic1.wav"></audio></td>
+            <td style="text-align: center;"><audio style="width:260px;height:32px" controls=""><source src="samples/additional/p307_synthesized.wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <br><br><br>
     <br><br><br>
