@@ -11,6 +11,10 @@ body {
         sans-serif;
 }
 
+.abstract {
+    width: 65%;
+}
+
 #background .bg1 {
     position: absolute;
     top: 0;

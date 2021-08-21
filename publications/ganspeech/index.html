@@ -21,8 +21,9 @@
     <br>
     <div>
     <h6><h5>Abstract</h5>
-        &nbsp;&nbsp;&nbsp;&nbsp;TBA.</h6></div>
-
+      <div class="abstract">
+        &nbsp;&nbsp;&nbsp;&nbsp;Recent advances in neural multi-speaker text-to-speech (TTS) models have enabled the generation of reasonably good speech quality with a single model and made it possible to synthesize the speech of a speaker with limited training data. Fine-tuning to the target speaker data with the multi-speaker model can achieve better quality, however, there still exists a gap compared to the real speech sample and the model depends on the speaker. In this work, we propose GANSpeech, which is a high-fidelity multi-speaker TTS model that adopts the adversarial training method to a non-autoregressive multi-speaker TTS model. In addition, we propose simple but efficient automatic scaling methods for feature matching loss used in adversarial training. In the subjective listening tests, GANSpeech significantly outperformed the baseline multi-speaker FastSpeech and FastSpeech2 models, and showed a better MOS score than the speaker-specific fine-tuned FastSpeech2.</h6></div>
+      </div>
     <br>
     <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed neurFPS </a>
     <a href="#gvc_demo" class="waves-effect waves-light btn header-btn"><i></i> improved FastPitch </a> -->
@@ -66,11 +67,11 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
         <tr>
           <th style="text-align:center;">Recording</th>
           <th style="text-align:center;">GT mel + VocGAN</th>
-          <th style="border-left:3px solid;text-align:center;">FastSpeech(MS)</th>
+          <th style="border-left:3px solid;text-align:center;">FastSpeech1(MS)</th>
           <th style="text-align:center;">FastSpeech2(MS)</th>
           <th style="text-align:center;">FastSpeech2(FT)</th>
-          <th style="border-left:3px solid;text-align:center;">FastSpeech-based GANSpeech</th>
-          <th style="text-align:center;">FastSpeech2-based GANSpeech</th>
+          <th style="border-left:3px solid;text-align:center;">FS1-based GANSpeech</th>
+          <th style="text-align:center;">FS2-based GANSpeech</th>
         </tr>
         <tr>
           <td colspan="7">Sentence: "음극선은 두꺼운 검은색 종이에 쌓여 있었으므로, 그 빛이 음극선일리가 없었다." <br>
@@ -85,6 +86,20 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
           <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/1-fs2ft.wav"></audio></td>
           <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/1-gs1.wav"></audio></td>
           <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/1-gs2.wav"></audio></td>
+        </tr>
+        <tr>
+          <td colspan="7">Sentence: "소자 다녀왔습니다. 저를 급히 부르셨다고 들었습니다만." <br>
+          <span class="en_pronun">(Pronunciation): "soja danyeowassseupnida. jeoreul geuphi bureusyeossdago deureossseupnidaman." </span>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/4-gt.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/4-vocgan.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/4-fs1.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/4-fs2.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/4-fs2ft.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/4-gs1.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:100px;height:32px" controls=""><source src="samples/ganspeech/4-gs2.wav"></audio></td>
         </tr>
         <tr>
           <td colspan="7">Sentence: "예. 집안일은 제게 맡겨두세요." <br>
@@ -178,7 +193,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
     <br><br><br>
     <div id="dec", class="container">
       <a name="dec.kor"><h3><b>Appendix: english samples for VCTK</b></h3></a>
-        <br>
+        <br> All models were trained using grapheme.
         
       <table style="width: 600px">
         <tbody>
@@ -203,6 +218,55 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
             <td style="text-align: center;"><audio style="width:260px;height:32px" controls=""><source src="samples/additional/p307_synthesized.wav"></audio></td>
           </tr>
         </tbody>
+      </table>
+      
+      <table style="width: 800px">
+        <tr>
+          <th style="text-align:center;">Recording</th>
+          <th style="text-align:center;">FastSpeech1(MS)</th>
+          <th style="text-align:center;">FastSpeech2(MS)</th>
+          <th style="text-align:center;">GANSpeech</th>
+        </tr>
+        <tr>
+          <td colspan="4">Sentence: "I didn't play well last year." <br>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-1-gt.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-1-fs1.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-1-fs2.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-1-gs2.wav"></audio></td>
+        </tr>
+        <tr>
+          <td colspan="4">Sentence: "When the sunlight strikes raindrops in the air, they act as a prism and form a rainbow." <br>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-2-gt.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-2-fs1.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-2-fs2.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-2-gs2.wav"></audio></td>
+        </tr>
+        <tr>
+          <td colspan="4">Sentence: "Nonetheless, the overall picture is healthy." <br>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-3-gt.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-3-fs1.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-3-fs2.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-3-gs2.wav"></audio></td>
+        </tr>
+        <tr>
+          <td colspan="4">Sentence: "Their courage, and their honesty, should be respected." <br>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-4-gt.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-4-fs1.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-4-fs2.wav"></audio></td>
+          <td style="text-align: center;"><audio style="width:200px;height:32px" controls=""><source src="samples/ganspeech/en-4-gs2.wav"></audio></td>
+        </tr>
       </table>
     </div>
     <br><br><br>
