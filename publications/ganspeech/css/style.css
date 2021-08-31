@@ -15,6 +15,13 @@ body {
     width: 65%;
 }
 
+.title {
+    width: 1200px;
+    margin-left: 100px;
+    /* margin: 0 auto; */
+    /* min-height: calc(100vh + 1px); */
+}
+
 #background .bg1 {
     position: absolute;
     top: 0;
@@ -70,9 +77,6 @@ body {
     padding-top: 0vh;
 }
 
-#gvc_header h3 {
-    width: 50%;
-}
 
 #gvc_brief p {
     font-size: 2rem;

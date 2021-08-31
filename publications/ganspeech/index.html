@@ -2,39 +2,21 @@
 <meta charset="utf-8">
 
 <!-- Background theme -->
-<div id="background">
+<!-- <div id="background">
     <div class="bg1"></div>
     <div class="bg2"></div>
     <img src="img/logo.svg" alt="ci_logo"><img>
     <div class="bg3"></div>
     <div class="bg4"></div>
-</div>
+</div> -->
 
 <br>
 
-<div id="gvc_header" class="container">
-    <div>
-    <h4>GANSpeech: Adversarial Training for <br>
-      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;High-Fidelity Multi-Speaker Speech Synthesis </h4>
-    <h3 style="display:inline">Jinhyeok Yang*, Jae-Sung Bae*, Taejun Bak, Young-Ik Kim, Hoon-Young Cho</h3></div>
-    <!-- <h3 style="font-size:1rem;">TBA</h3></div> -->
-    <br>
-    <div>
-    <h6><h5>Abstract</h5>
-      <div class="abstract">
-        &nbsp;&nbsp;&nbsp;&nbsp;Recent advances in neural multi-speaker text-to-speech (TTS) models have enabled the generation of reasonably good speech quality with a single model and made it possible to synthesize the speech of a speaker with limited training data. Fine-tuning to the target speaker data with the multi-speaker model can achieve better quality, however, there still exists a gap compared to the real speech sample and the model depends on the speaker. In this work, we propose GANSpeech, which is a high-fidelity multi-speaker TTS model that adopts the adversarial training method to a non-autoregressive multi-speaker TTS model. In addition, we propose simple but efficient automatic scaling methods for feature matching loss used in adversarial training. In the subjective listening tests, GANSpeech significantly outperformed the baseline multi-speaker FastSpeech and FastSpeech2 models, and showed a better MOS score than the speaker-specific fine-tuned FastSpeech2.</h6></div>
-      </div>
-    <br>
-    <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed neurFPS </a>
-    <a href="#gvc_demo" class="waves-effect waves-light btn header-btn"><i></i> improved FastPitch </a> -->
-</div>
-
-
 <head>
-  <title> Demo page of GANSpeech</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>GANSpeech Demo</title>
+  <link rel="shortcut icon" href="img/nc.png">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
   <link rel="stylesheet" href="css/style.css">
-  <link rel="shortcut icon" href="../../images/nc.png">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -42,17 +24,34 @@
   
 </head>
 
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript">   
-$(document).ready( function() {
-
-$("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
-
-});
-</script>
-
 <br>
 <body class="text-center">
+  
+    <div class="title">
+      <div>
+        <h4>GANSpeech: Adversarial Training for <br>
+          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;High-Fidelity Multi-Speaker Speech Synthesis </h4>
+        <h3 style="display:inline">Jinhyeok Yang*, Jae-Sung Bae*, Taejun Bak, Young-Ik Kim, Hoon-Young Cho</h3>
+      </div>
+      <!-- <h3 style="font-size:1rem;">TBA</h3></div> -->
+      <br>
+      <div>
+        <h5>Paper</h5>
+        <a href="https://arxiv.org/abs/2106.15153">	arXiv:2106.15153</a>
+        , accepted to <b>INTERSPEECH 2021</b>
+      </div>
+      <br>
+      <div>
+      <h6><h5>Abstract</h5>
+        <div class="abstract">
+          &nbsp;&nbsp;&nbsp;&nbsp;Recent advances in neural multi-speaker text-to-speech (TTS) models have enabled the generation of reasonably good speech quality with a single model and made it possible to synthesize the speech of a speaker with limited training data. Fine-tuning to the target speaker data with the multi-speaker model can achieve better quality, however, there still exists a gap compared to the real speech sample and the model depends on the speaker. In this work, we propose GANSpeech, which is a high-fidelity multi-speaker TTS model that adopts the adversarial training method to a non-autoregressive multi-speaker TTS model. In addition, we propose simple but efficient automatic scaling methods for feature matching loss used in adversarial training. In the subjective listening tests, GANSpeech significantly outperformed the baseline multi-speaker FastSpeech and FastSpeech2 models, and showed a better MOS score than the speaker-specific fine-tuned FastSpeech2.
+        </h6>
+        </div>
+      </div>
+      <br>
+      <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed neurFPS </a>
+      <a href="#gvc_demo" class="waves-effect waves-light btn header-btn"><i></i> improved FastPitch </a> -->
+    </div>
     <!-- <div id="index"></div> -->
     <div id="dec" class="container">
       <h6>Most of our samples are of <b>high quality.</b></h6>
