@@ -1,0 +1,205 @@
+<html>
+<meta charset="utf-8">
+
+<!-- Background theme -->
+<div id="background">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <img src="img/logo.svg" alt="ci_logo"><img>
+    <div class="bg3"></div>
+    <div class="bg4"></div>
+</div>
+
+<br>
+
+<div id="gvc_header" class="container">
+    <div>
+    <h4>Hierarchical Context-Aware Transformers <br>for Non-AutoRegressive Text to Speech </h4>
+    <h3 style="display:inline">Jae-Sung Bae, Tae-Jun Bak, Young-Sun Joo, Hoon-Young Cho</h3>
+    <h3 style="font-size:1rem;">jaesungbae@ncsoft.com</h3></div>
+    <br>
+    <div>
+    <h6><h5>Abstract</h5>
+        &nbsp;&nbsp;&nbsp;&nbsp;This paper proposes a hierarchical Transformer structure to increase the modeling performance<br>
+        of Transformer-based non-autoregressive text-to-speech (TNA-TTS). Considering the fact that the <br>
+        text encoder and the audio decoder of TNA-TTS deal with different types and lengths of data and <br>
+        hence the contextual information should be dealt with differently at each layer. In this work, we <br>
+        limited the attention of each layer with different ranges to provide a hierarchical structure. Addit-<br>
+        ionally, to improve the pitch modeling accuracy of the decoder, we provided sentence- and word-<br>
+        level pitch as additional conditions. Both objective and subjective evaluations showed that the <br>
+        proposed approach (hierarchical context-aware Transformers) improved the naturalness, pitch <br>
+        prediction and intelligibility of the synthesized speech samples from the baseline TNA-TTS. <br>
+        the predicted pitch.</h6></div>
+
+    <br>
+    <div id="toc_container" >
+    <h5>Contents</h5>
+    <ol type="A">
+        <li><a href="#kor">Audio Samples (Korean)</a></li>
+            <!-- <ol type="1">
+                <li><a href="#neurfps.kor">Neural Formant-Preserving Pitch Shift</a></li>
+                <li><a href="#fastpitch.kor">Improved TTS System with Pitch-Augmented Databases</a></li>
+            </ol> -->
+        <!-- <li><a href="#eng">Not yet (English) </a></li> -->
+            
+    </ol>
+    </div>
+    <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed neurFPS </a>
+    <a href="#gvc_demo" class="waves-effect waves-light btn header-btn"><i></i> improved FastPitch </a> -->
+</div>
+
+
+<head>
+  <title> Demo page of Hierarchical TNA-TTS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="../../images/nc.png">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">   
+$(document).ready( function() {
+
+$("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+});
+</script>
+
+<br>
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    <div id="kor" class="container">
+      <a name="kss"><h3 style="color:black;" font-weight="bold"><br>1. Audio Samples (Korean)</br></h3></a>
+      <hr color="gray" size="1px"></hr> 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 난 니가 예전이라길<span class="red_highlight">래 한 삼</span> 사 년 전 말하는 줄 알았는데? <br>
+          <span class="en_pronun">(Pronunciation): Nan niga yejeon-ilagil<span class="red_highlight">lae han sam</span> sa nyeon jeon malhaneun jul al-assneunde?</span>
+          </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">FastPitch (Baseline)</td>
+            <td style="text-align: center;">EGW + DW (Ours)</td>
+            <td style="text-align: center;">EGW + DW + HPC (Ours)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_2.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_1.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_61.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 그런 것처럼 계속 뭔가 생겨날 거 <span style="color:red;">같아서</span> 차라리 자식을 안 낳는 게 훨씬 더 좋은 거 같아.<br>
+          <span class="en_pronun">(Pronunciation): 
+            Geuleon geoscheoleom gyesog mwonga saeng-gyeonal geo <span class="red_highlight">gat-aseo</span> chalali jasig-eul an nahneun ge hwolssin deo joh-eun geo gat-a.</span></td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">FastPitch (Baseline)</td>
+            <td style="text-align: center;">EGW + DW (Ours)</td>
+            <td style="text-align: center;">EGW + DW + HPC (Ours)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_33.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_34.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_62.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp;
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 한참 연주 결혼식 준비할 때도 <span style="color:red;">니가</span> 그때 얘가 <span style="color:red;">나쁜</span> 애는 아닌데 지금 상황이 너무 힘들어서 <span style="color:red;">그렇다고</span> 그랬잖아.<br>
+          <span class="en_pronun">(Pronunciation): 
+            Hancham yeonju gyeolhonsig junbihal ttaedo <span class="red_highlight">niga</span> geuttae yaega <span class="red_highlight">nappeun</span> aeneun aninde jigeum sanghwang-i neomu himdeul-eoseo <span class="red_highlight">geuleohdago</span> geulaessjanh-a.</span></td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">FastPitch (Baseline)</td>
+            <td style="text-align: center;">EGW + DW (Ours)</td>
+            <td style="text-align: center;">EGW + DW + HPC (Ours)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_42.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_44.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_63.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 예를 들어 상추쌈을 같이 <span style="color:red;">해서 먹는</span> 다든가 <span style="color:red;">하여튼</span> 채소를 많이 먹으라 그랬던거지.<br>
+          <span class="en_pronun">(Pronunciation): 
+            Yeleul deul-eo sangchussam-eul gat-i <span class="red_highlight">haeseo meogneun</span> dadeunga <span class="red_highlight">hayeoteun</span> chaesoleul manh-i meog-eula geulaessdeongeoji.</span></td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">FastPitch (Baseline)</td>
+            <td style="text-align: center;">EGW + DW (Ours)</td>
+            <td style="text-align: center;">EGW + DW + HPC (Ours)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_45.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_46.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_64.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 일단 도착하자마자 <span style="color:red;">숙소</span>에 짐 <span style="color:red;">풀고</span> 우리 둘은 샤워하고 애들이랑 <span style="color:red;">바다</span> 가서 술 마시고 놀았지.<br>
+          <span class="en_pronun">(Pronunciation): 
+            Ildan dochaghajamaja <span class="red_highlight">sugso</span>-e jim <span class="red_highlight">pulgo</span> uli dul-eun syawohago aedeul-ilang <span class="red_highlight">bada</span> gaseo sul masigo nol-assji.</span></td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">FastPitch (Baseline)</td>
+            <td style="text-align: center;">EGW + DW (Ours)</td>
+            <td style="text-align: center;">EGW + DW + HPC (Ours)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_53.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_52.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_65.wav"></audio></td>
+        </tr>
+      </table>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+<br><br><br>
+
+
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    <div id="eng" class="container">
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+
+
+<!-- 
+<body class="text-center">
+  
+  
+<div id="index"></div>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="js/script.js"></script>
+</body> -->
+</html>
