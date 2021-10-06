@@ -14,22 +14,23 @@
 
 <div id="gvc_header" class="container">
     <div>
-    <h4>Hierarchical Context-Aware Transformers <br>for Non-AutoRegressive Text to Speech </h4>
-    <h3 style="display:inline">Jae-Sung Bae, Tae-Jun Bak, Young-Sun Joo, Hoon-Young Cho</h3>
+    <h4>HIERARCHICAL AND MULTI-SCALE VARIATIONAL AUTOENCODER <br>FOR DIVERSE AND NATURAL SPEECH SYNTHESIS</h4>
+    <h3 style="display:inline">Jae-Sung Bae, Jinhyeok Yang, Tae-Jun Bak, Young-Sun Joo, Hoon-Young Cho</h3>
     <h3 style="font-size:1rem;">jaesungbae@ncsoft.com</h3></div>
     <br>
     <div>
     <h6><h5>Abstract</h5>
-        &nbsp;&nbsp;&nbsp;&nbsp;This paper proposes a hierarchical Transformer structure to increase the modeling performance<br>
-        of Transformer-based non-autoregressive text-to-speech (TNA-TTS). Considering the fact that the <br>
-        text encoder and the audio decoder of TNA-TTS deal with different types and lengths of data and <br>
-        hence the contextual information should be dealt with differently at each layer. In this work, we <br>
-        limited the attention of each layer with different ranges to provide a hierarchical structure. Addit-<br>
-        ionally, to improve the pitch modeling accuracy of the decoder, we provided sentence- and word-<br>
-        level pitch as additional conditions. Both objective and subjective evaluations showed that the <br>
-        proposed approach (hierarchical context-aware Transformers) improved the naturalness, pitch <br>
-        prediction and intelligibility of the synthesized speech samples from the baseline TNA-TTS. <br>
-        the predicted pitch.</h6></div>
+        &nbsp;&nbsp;&nbsp;&nbsp;Previous approaches in expressive text-to-speech (TTS) usually
+        model the prosody of speech in a single-scale or in a multiple scales but without hierarchy.
+        However, we conjecture that the prosody of speech should be first determined in a global-scale
+        utterance-level and then the finer-level details of prosody in a local-scale should be
+        represented depending on it. Accordingly, we propose a hierarchical and multi-scale
+        variational autoencoder-based non-autoregressive TTS (HiMuV-TTS) model that first decides
+        the global-scale prosody via sampling and then determines the local-scale prosody via conditional
+        sampling on the global-scale prosody and the learned text representation. In addition, we improve
+        the quality of speech by adopting the adversarial training technique. Experimental results verify
+        that the proposed HiMuV-TTS model can generate more diverse and natural speech as compared to TTS
+        models with single-scale variational autoencoders.</h6></div>
 
     <br>
     <div id="toc_container" >
@@ -41,7 +42,7 @@
                 <li><a href="#fastpitch.kor">Improved TTS System with Pitch-Augmented Databases</a></li>
             </ol> -->
         <!-- <li><a href="#eng">Not yet (English) </a></li> -->
-            
+
     </ol>
     </div>
     <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed neurFPS </a>
@@ -58,11 +59,11 @@
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+
 </head>
 
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript">   
+<script type="text/javascript">
 $(document).ready( function() {
 
 $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
@@ -75,7 +76,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
     <!-- <div id="index"></div> -->
     <div id="kor" class="container">
       <a name="kss"><h3 style="color:black;" font-weight="bold"><br>1. Audio Samples (Korean)</br></h3></a>
-      <hr color="gray" size="1px"></hr> 
+      <hr color="gray" size="1px"></hr>
       <table>
         <tr>
           <td colspan="3">Sentence: 난 니가 예전이라길<span class="red_highlight">래 한 삼</span> 사 년 전 말하는 줄 알았는데? <br>
@@ -93,11 +94,11 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
             <td style="text-align: center;"><audio controls><source src="samples/sample_61.wav"></audio></td>
         </tr>
       </table>
-    &nbsp; 
+    &nbsp;
       <table>
         <tr>
           <td colspan="3">Sentence: 그런 것처럼 계속 뭔가 생겨날 거 <span style="color:red;">같아서</span> 차라리 자식을 안 낳는 게 훨씬 더 좋은 거 같아.<br>
-          <span class="en_pronun">(Pronunciation): 
+          <span class="en_pronun">(Pronunciation):
             Geuleon geoscheoleom gyesog mwonga saeng-gyeonal geo <span class="red_highlight">gat-aseo</span> chalali jasig-eul an nahneun ge hwolssin deo joh-eun geo gat-a.</span></td>
         </tr>
         <tr>
@@ -115,7 +116,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
       <table>
         <tr>
           <td colspan="3">Sentence: 한참 연주 결혼식 준비할 때도 <span style="color:red;">니가</span> 그때 얘가 <span style="color:red;">나쁜</span> 애는 아닌데 지금 상황이 너무 힘들어서 <span style="color:red;">그렇다고</span> 그랬잖아.<br>
-          <span class="en_pronun">(Pronunciation): 
+          <span class="en_pronun">(Pronunciation):
             Hancham yeonju gyeolhonsig junbihal ttaedo <span class="red_highlight">niga</span> geuttae yaega <span class="red_highlight">nappeun</span> aeneun aninde jigeum sanghwang-i neomu himdeul-eoseo <span class="red_highlight">geuleohdago</span> geulaessjanh-a.</span></td>
         </tr>
         <tr>
@@ -129,11 +130,11 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
             <td style="text-align: center;"><audio controls><source src="samples/sample_63.wav"></audio></td>
         </tr>
       </table>
-    &nbsp; 
+    &nbsp;
       <table>
         <tr>
           <td colspan="3">Sentence: 예를 들어 상추쌈을 같이 <span style="color:red;">해서 먹는</span> 다든가 <span style="color:red;">하여튼</span> 채소를 많이 먹으라 그랬던거지.<br>
-          <span class="en_pronun">(Pronunciation): 
+          <span class="en_pronun">(Pronunciation):
             Yeleul deul-eo sangchussam-eul gat-i <span class="red_highlight">haeseo meogneun</span> dadeunga <span class="red_highlight">hayeoteun</span> chaesoleul manh-i meog-eula geulaessdeongeoji.</span></td>
         </tr>
         <tr>
@@ -147,11 +148,11 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
             <td style="text-align: center;"><audio controls><source src="samples/sample_64.wav"></audio></td>
         </tr>
       </table>
-    &nbsp; 
+    &nbsp;
       <table>
         <tr>
           <td colspan="3">Sentence: 일단 도착하자마자 <span style="color:red;">숙소</span>에 짐 <span style="color:red;">풀고</span> 우리 둘은 샤워하고 애들이랑 <span style="color:red;">바다</span> 가서 술 마시고 놀았지.<br>
-          <span class="en_pronun">(Pronunciation): 
+          <span class="en_pronun">(Pronunciation):
             Ildan dochaghajamaja <span class="red_highlight">sugso</span>-e jim <span class="red_highlight">pulgo</span> uli dul-eun syawohago aedeul-ilang <span class="red_highlight">bada</span> gaseo sul masigo nol-assji.</span></td>
         </tr>
         <tr>
@@ -192,10 +193,10 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
 
 
 
-<!-- 
+<!--
 <body class="text-center">
-  
-  
+
+
 <div id="index"></div>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
