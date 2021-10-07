@@ -1,0 +1,262 @@
+<html>
+<meta charset="utf-8">
+
+<!-- Background theme -->
+<div id="background">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <img src="img/logo.svg" alt="ci_logo"><img>
+    <div class="bg3"></div>
+    <div class="bg4"></div>
+</div>
+
+<br>
+
+<div id="gvc_header" class="container">
+    <div>
+    <h4>Improving Intelligibility of Any-to-One Voice Conversion using Phoneme Focal CTC loss </h4>
+    <h3 style="display:inline">Hyunho Seo, Hanbin Bae, Jae-Sung Bae, Young-Sun Joo, Hoon-Young Cho</h3>
+    <h3 style="font-size:1rem;">hhseo@ncsoft.com</h3></div>
+    <br>
+    <div>
+    <h6><h5>Abstract</h5>
+        &nbsp;&nbsp;&nbsp;&nbsp; Recently, phonetic posteriorgrams (PPG)-based voice conversion (VC) has <br> 
+		been diversified and improved. The PPG-based VC achieved the similarity and the naturalness in terms of <br>
+		the conversion of the unknown source speakers. However, PPG-based VC often drops the intelligibility of <br>
+		converted speech. Because the PPG has the different values between any unseen sources and a target. <br>
+		we propose a any-to-one VC system that introduces a phoneme focal connectionist temporal classification <br>
+		(focal CTC) loss function and an auxiliary phoneme classifier (APC). To improve the intelligibility,<br>
+		i.e., pronunciation accuracy, a phoneme focal CTC loss is adopted, and an APC is introduced. <br>
+		Because the loss function focus on the reducing the imbalanced problem of the phoneme classes in the APC <br>
+		and on the reliving the issue of the different values between any unseen source speakers and a target speaker.<br>
+		Furthermore, for improving to generate the mel-spectrogram of the converted speech, our system applies <br>
+		a transformer encoder with a windowed attention-based decoder. Because the windowed attention makes the <br>
+		self-attention focus on the local condition and also requires less computation cost. The qualitative and <br>
+		quantitative evaluation results prove that our proposed system is more effective than the baseline system.
+        </h6></div>
+
+    <br>
+    <div id="toc_container" >
+    <h5>Contents</h5>
+    <ol type="B">		
+        <li><a href="#target">Target Audio Samples (Korean)</a></li>
+		<li><a href="#f2f">Converted Audio Samples (Korean) Female to Female</a></li>
+		<li><a href="#m2f">Converted Audio Samples (Korean) Male to Female</a></li>
+            
+    </ol>
+
+    </div>
+    <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed neurFPS </a>
+    <a href="#gvc_demo" class="waves-effect waves-light btn header-btn"><i></i> improved FastPitch </a> -->
+</div>
+
+
+<head>
+  <title> Demo page of Improving Intelligibility of Any-to-One Voice Conversion using Phoneme Focal CTC loss</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="../../images/nc.png">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">   
+$(document).ready( function() {
+
+$("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+});
+</script>
+
+<br>
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+	<div id="target" class="container">
+      <a name="kss"><h3 style="color:black;" font-weight="bold"><br>1. Target Audio Samples (Korean)</br></h3></a>
+      <hr color="gray" size="1px"></hr> 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 지금은 거의 신화가 되가고 있다. <br>
+          <span class="en_pronun">(Pronunciation): jigeum-eun geoui sinhwaga doegago issda. </span>
+          </td>
+        </tr>
+        <tr colspan="3">
+            <td style="text-align: center;"><audio controls><source src="samples/target_001.wav"></audio></td>
+        </tr>
+		<tr >
+          <td colspan="3">Sentence: 어린 나이에 엄마 아빠 없이 혼자 갔으면 너무 힘들었을거 같애. <br>
+          <span class="en_pronun">(Pronunciation): eolin naie eomma appa eobs-i honja gass-eumyeon neomu himdeul-eoss-eulgeo gat-ae.</span>
+          </td>
+        </tr>
+        <tr >
+            <td colspan="3" style="text-align: center;"><audio controls><source src="samples/target_002.wav"></audio></td>
+        </tr>
+      </table>
+	</div>
+    <div id="f2f" class="container">
+      <a name="kss"><h3 style="color:black;" font-weight="bold"><br>2. Converted Audio Samples (Korean) Female to Female</br></h3></a>
+      <hr color="gray" size="1px"></hr> 
+      <table>
+        <tr>
+		  
+          <td colspan="4">(Female to Female) Sentence: 그렇게 만들기 위해선 뭐든지 할 겁니다. <br>					 
+          <span class="en_pronun">(Pronunciation): euleohge mandeulgi wihaeseon mwodeunji hal geobnida</span>
+          </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">BLSTM (Baseline)</td>
+            <td style="text-align: center;">TE </td>
+            <td style="text-align: center;">TE + CTC</td>
+			<td style="text-align: center;">TE + focal CTC (Proposed)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_005_30.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_006_30.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_007_30.wav"></audio></td>
+			<td style="text-align: center;"><audio controls><source src="samples/sample_008_30.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+      <table>
+        <tr>
+          <td colspan="4">(Female to Female) Sentence: 아니? 그가 가장 의심스럽다. 이런 상황에 굳이 하씨 가문을 건드렸으니 경계를 하겠지.<br>
+          <span class="en_pronun">(Pronunciation): ani? geuga gajang uisimseuleobda. ileon sanghwang-e gud-i hassi gamun-eul geondeulyeoss-euni gyeong-gyeleul hagessji.</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">BLSTM (Baseline)</td>
+            <td style="text-align: center;">TE </td>
+            <td style="text-align: center;">TE + CTC</td>
+			<td style="text-align: center;">TE + focal CTC (Proposed)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_009_23.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_010_23.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_011_23.wav"></audio></td>
+			<td style="text-align: center;"><audio controls><source src="samples/sample_012_23.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp;
+      <table>
+        <tr>
+          <td colspan="4">(Female to Female) Sentence: 안녕하세요? 외국어 못하는데 통역관 없나요?<br>
+          <span class="en_pronun">(Pronunciation): 
+            annyeonghaseyo? oegug-eo moshaneunde tong-yeoggwan eobsnayo?</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">BLSTM (Baseline)</td>
+            <td style="text-align: center;">TE </td>
+            <td style="text-align: center;">TE + CTC</td>
+			<td style="text-align: center;">TE + focal CTC (Proposed)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_001_17.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_002_17.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_003_17.wav"></audio></td>
+			<td style="text-align: center;"><audio controls><source src="samples/sample_004_17.wav"></audio></td>
+        </tr>
+      </table>
+    </div>
+	<div id="m2f" class="container">
+      <a name="kss"><h3 style="color:black;" font-weight="bold"><br>2. Converted Audio Samples (Korean) Mmale to Female</br></h3></a>
+      <hr color="gray" size="1px"></hr> 
+
+      <table>
+        <tr>
+          <td colspan="4">(Male to Female) Sentence: 인터넷 휴대전화 판매사이트에서 아이폰 파이브의 할부원금이 삼십이만 원까지 내려갔기 때문인데요.<br>
+          <span class="en_pronun">(Pronunciation): 
+            inteones hyudaejeonhwa panmaesaiteueseo aipon paibeuui halbuwongeum-i samsib-iman wonkkaji naelyeogassgi ttaemun-indeyo.</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">BLSTM (Baseline)</td>
+            <td style="text-align: center;">TE </td>
+            <td style="text-align: center;">TE + CTC</td>
+			<td style="text-align: center;">TE + focal CTC (Proposed)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_013_26.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_014_26.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_015_26.wav"></audio></td>
+			<td style="text-align: center;"><audio controls><source src="samples/sample_016_26.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+      <table>
+        <tr>
+          <td colspan="4">(Male to Female) Sentence: 혼자서는 일어서기도 힘들 정도로 쇠약해졌습니다.<br>
+          <span class="en_pronun">(Pronunciation): 
+            honjaseoneun il-eoseogido himdeul jeongdolo soeyaghaejyeossseubnida.</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">BLSTM (Baseline)</td>
+            <td style="text-align: center;">TE </td>
+            <td style="text-align: center;">TE + CTC</td>
+			<td style="text-align: center;">TE + focal CTC (Proposed)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_017_05.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_018_05.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_019_05.wav"></audio></td>
+			<td style="text-align: center;"><audio controls><source src="samples/sample_020_05.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+      <table>
+        <tr>
+          <td colspan="4">(Male to Female) Sentence: 피파 쓰리 백섭 가능성 없나요?<br>
+          <span class="en_pronun">(Pronunciation): 
+            pipa sseuli baegseob ganeungseong eobsnayo?</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">BLSTM (Baseline)</td>
+            <td style="text-align: center;">TE </td>
+            <td style="text-align: center;">TE + CTC</td>
+			<td style="text-align: center;">TE + focal CTC (Proposed)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_021_45.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_022_45.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/sample_023_45.wav"></audio></td>
+			<td style="text-align: center;"><audio controls><source src="samples/sample_024_45.wav"></audio></td>
+        </tr>
+      </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+<br><br><br>
+
+
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    <div id="eng" class="container">
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+
+
+<!-- 
+<body class="text-center">
+  
+  
+<div id="index"></div>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="js/script.js"></script>
+</body> -->
+</html>
