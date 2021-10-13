@@ -19,9 +19,8 @@
     <h3 style="font-size:1rem;">jaesungbae@ncsoft.com</h3></div>
     <br>
     <div>
-    <h5>Abstract</h5>
-    <br>
     <h6>
+    <h5>Abstract</h5>
         &nbsp;&nbsp;&nbsp;&nbsp;We propose a hierarchical and multi-scale variational auto-encoder-based text-to-speech
         (HiMuV-TTS) model that first determines the global-scale prosody and then determines the local-scale prosody via
         conditioning on the global-scale prosody and the learned text representation. In addition, we improve the quality
@@ -133,19 +132,14 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
       <hr color="gray" size="1px"></hr>
       <table>
         <tr>
-          <td colspan="3">Sentence: 난 니가 예전이라길<span class="red_highlight">래 한 삼</span> 사 년 전 말하는 줄 알았는데? <br>
-          <span class="en_pronun">(Pronunciation): Nan niga yejeon-ilagil<span class="red_highlight">lae han sam</span> sa nyeon jeon malhaneun jul al-assneunde?</span>
-          </td>
+          <td style="text-align: center; font-weight: bold;">Text</td>
+          <td style="text-align: center; font-weight: bold;">HiMuV-TTS-G</td>
+          <td style="text-align: center; font-weight: bold;">HiMuV-TTS-L</td>
         </tr>
         <tr>
-            <td style="text-align: center;">FastPitch (Baseline)</td>
-            <td style="text-align: center;">EGW + DW (Ours)</td>
-            <td style="text-align: center;">EGW + DW + HPC (Ours)</td>
-        </tr>
-        <tr>
-            <td style="text-align: center;"><audio controls><source src="samples/sample_2.wav"></audio></td>
-            <td style="text-align: center;"><audio controls><source src="samples/sample_1.wav"></audio></td>
-            <td style="text-align: center;"><audio controls><source src="samples/sample_61.wav"></audio></td>
+          <td> BLABLA </td>
+          <td style="text-align:center;"><audio style="width:200px;height:64px" controls=""><source src="ms/19.wav" type="audio/wav"></audio></td>
+          <td style="text-align:center;"><audio style="width:200px;height:64px" controls=""><source src="ms/14.wav" type="audio/wav"></audio></td>
         </tr>
       </table>
 
