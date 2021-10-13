@@ -163,13 +163,16 @@ html .table-of-contents li {
 }
 
 html .table-of-contents a {
-    border-left: 5px solid #F1CB89;
+    /* border-left: 5px solid #F1CB89; */
+    border-left: 1px solid #F1CB89;
 }
 
 html .table-of-contents a.active,
 html .table-of-contents a:hover {
-    border-left: 5px solid #003569;
-    padding-left: 16px;
+    /* border-left: 5px solid #003569;
+    padding-left: 16px; */
+    border-left: 1px solid #003569;
+    padding-left: 1px;
 }
 
 html .select-wrapper input.select-dropdown:focus {
