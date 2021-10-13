@@ -30,7 +30,9 @@
     <div id="toc_container" >
     <h5>Contents</h5>
     <ol type="A">
-        <li><a href="#kor">Audio Samples (Korean)</a></li>
+        <li><a href="#sec1">1. Audio Samples for Model Comparison</a></li>
+        <li><a href="#sec2">2. Latent Representation of Each Scale of HiMuV-TTS Model</a></li>
+        <li><a href="#sec3">3. Additional Examples on Sampling</a></li>
             <!-- <ol type="1">
                 <li><a href="#neurfps.kor">Neural Formant-Preserving Pitch Shift</a></li>
                 <li><a href="#fastpitch.kor">Improved TTS System with Pitch-Augmented Databases</a></li>
@@ -45,7 +47,7 @@
 
 
 <head>
-  <title> Demo page of Hierarchical TNA-TTS</title>
+  <title> Demo page of HiMuV-TTS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="../../images/nc.png">
@@ -68,14 +70,11 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
 <br>
 <body class="text-center">
     <!-- <div id="index"></div> -->
-    <div id="kor" class="container">
+    <div id="sec1" class="container">
       <a name="kss"><h3 style="color:black;" font-weight="bold"><br>1. Audio Samples for Model Comparison</br></h3></a>
       <hr color="gray" size="1px"></hr>
       <table>
         <tr>
-          {% comment %} <td colspan="3">Sentence: 난 니가 예전이라길<span class="red_highlight">래 한 삼</span> 사 년 전 말하는 줄 알았는데? <br> {% endcomment %}
-          {% comment %} <span class="en_pronun">(Pronunciation): Nan niga yejeon-ilagil<span class="red_highlight">lae han sam</span> sa nyeon jeon malhaneun jul al-assneunde?</span>
-          </td> {% endcomment %}
           <td colspan="3">Text: </td>
         </tr>
         <tr>
@@ -88,13 +87,13 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
             <td style="text-align: center;">HiMuV-TTS (tau=0.0) (Ours)</td>
         </tr>
         <tr>
-            <td style="text-align: center;"><audio controls><source src="ms/19.wav"></audio></td>
-            <td style="text-align: center;"><audio controls><source src="ms/14.wav"></audio></td>
-            <td style="text-align: center;"><audio controls><source src="ms/20.wav"></audio></td>
-            <td style="text-align: center;"><audio controls><source src="ms/16.wav"></audio></td>
-            <td style="text-align: center;"><audio controls><source src="ms/17.wav"></audio></td>
-            <td style="text-align: center;"><audio controls><source src="ms/15.wav"></audio></td>
-            <td style="text-align: center;"><audio controls><source src="ms/18.wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:200px;height:64px" controls=""><source src="ms/19.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:200px;height:64px" controls=""><source src="ms/14.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:200px;height:64px" controls=""><source src="ms/20.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:200px;height:64px" controls=""><source src="ms/16.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:200px;height:64px" controls=""><source src="ms/17.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:200px;height:64px" controls=""><source src="ms/15.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:200px;height:64px" controls=""><source src="ms/18.wav" type="audio/wav"></audio></td>
         </tr>
       </table>
     &nbsp;
@@ -182,7 +181,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
 
 <body class="text-center">
     <!-- <div id="index"></div> -->
-    <div id="kor" class="container">
+    <div id="sec2" class="container">
       <a name="kss"><h3 style="color:black;" font-weight="bold"><br>2. Latent Representation of Each Scale of HiMuV-TTS Model</br></h3></a>
       <hr color="gray" size="1px"></hr>
       <table>
@@ -287,7 +286,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
 
 <body class="text-center">
     <!-- <div id="index"></div> -->
-    <div id="kor" class="container">
+    <div id="sec3" class="container">
       <a name="kss"><h3 style="color:black;" font-weight="bold"><br>3. Additional Examples on Sampling</br></h3></a>
       <hr color="gray" size="1px"></hr>
       <table>
