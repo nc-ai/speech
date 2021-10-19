@@ -1,0 +1,287 @@
+<html>
+<meta charset="utf-8">
+
+<!-- Background theme -->
+<div id="background">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <img src="img/logo.svg" alt="ci_logo"><img>
+    <div class="bg3"></div>
+    <div class="bg4"></div>
+</div>
+
+<br>
+
+<div id="gvc_header" class="container">
+    <div>
+    <h4> KOREAN SINGING VOICE SYNTHESIS SYSTEM </h4>
+    <h4> FOR CROSS-SINGER STYLE TRANSFER </h4>
+    <br>
+    <h3 style="display:inline"> Tae-Woo Kim, Gyeong-Hoon Lee, Hanbin Bae et al</h3>
+    <h3 style="font-size:1rem;">{ktw0114, ghlee3401, bhb0722}@ncsoft.com</h3></div>
+    <br>
+    <div>
+    <h6><h5>Abstract</h5> <br>
+      <br>
+      <textarea style="width:55%;min-height:440px;max-height:550px;font-size:17px;color:#000000;resize:none;line-height: 1.45;border:none" readonly>
+        In this paper, we propose a Korean singing voice synthesis system that separately models timbre and pitch for crosssinger style transfer. The proposed system is composed of a non-autoregressive acoustic model and a parametric vocoder. To separately predict timbre and pitch, the acoustic model is designed with one encoder and two decoders. One decoder predicts the F0 sequence, and the other decoder predicts acoustic features except F0. This architecture is effective for changing the pitch style while preserving timbre and generating dynamic F0 contours. The encoder and decoders consist of Conformer blocks that capture the global and local components in the singing voices. For high-quality sound, the generator is adversarially trained with multiple random window discriminators using true mel-spectrograms. In our experiments, the proposed system showed higher mean opinion scores in pronunciation accuracy, sound quality, and naturalness than the baseline system. In the evaluation for timbre and pitch, the proposed system is proven to be effective for cross-singer style transfer.
+      </textarea>
+
+        
+        <br>
+    <div id="toc_container" >
+    <h5>Contents</h5>
+    <ol type="1">
+        <li><a href="#single">Single-Singer Samples</a></li>
+        <li><a href="#cross">Cross-Singer Style Transfer Samples</a></li>
+            
+    </ol>
+    </div>
+</div>
+
+
+<head>
+  <title> Demo for SVS-Cross-Singer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="../../images/nc.png">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">   
+$(document).ready( function() {
+
+$("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+});
+</script>
+
+<br>
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    <div id="single" class="container">
+      <a><h3 style="color:black;" font-weight="bold"><br>1. Single-Singer Samples</br></h3></a>
+      <hr color="gray" size="1px"></hr> 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 기차 타고 신나게 달려가 보자 <br>
+          <span class="en_pronun">(Pronunciation): gicha tago sinnage dallyeoga boja </span>
+          </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">Baseline </td>
+            <td style="text-align: center;"><b>Proposed</b></td>
+            <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/single_model/Baseline_train_kr_1d_001.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/single_model/Proposed_train_kr_1d_001.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/single_model/GT_train_kr_1d_001.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+    <table>
+      <tr>
+        <td colspan="3">Sentence: 이슬비 내리는 이른 아침에 우산 셋이 나란히 걸어갑니다 <br>
+        <span class="en_pronun">(Pronunciation): iseulbi naerineun ireun achime usan sesi naranhi georeogapnida </span>
+        </td>
+      </tr>
+      <tr>
+          <td style="text-align: center;">Baseline </td>
+          <td style="text-align: center;"><b>Proposed</b></td>
+          <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center;"><audio controls><source src="samples/single_model/Baseline_umbrella_kr_0u_004.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/single_model/Proposed_umbrella_kr_0u_004.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/single_model/GT_umbrella_kr_0u_004.wav"></audio></td>
+      </tr>
+    </table>
+  &nbsp; 
+  <table>
+    <tr>
+      <td colspan="3">Sentence: 숲속을 걸어요 맑은 바람 솔바람 이는 <br>
+      <span class="en_pronun">(Pronunciation): supsogeul georeoyo malkeun baram solbaram ineun </span>
+      </td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">Baseline </td>
+        <td style="text-align: center;"><b>Proposed</b></td>
+        <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;"><audio controls><source src="samples/single_model/Baseline_walkforest_kr_0u_005.wav"></audio></td>
+        <td style="text-align: center;"><audio controls><source src="samples/single_model/Proposed_walkforest_kr_0u_005.wav"></audio></td>
+        <td style="text-align: center;"><audio controls><source src="samples/single_model/GT_walkforest_kr_0u_005.wav"></audio></td>
+    </tr>
+  </table>
+&nbsp; 
+<table>
+  <tr>
+    <td colspan="3">Sentence: 당신은 누구십니까 나는 초등학생 그 이름 씩씩하구나 <br>
+    <span class="en_pronun">(Pronunciation): dangsineun nugusipnikka naneun chodeunghaksaeng geu ireum ssikssikhaguna </span>
+    </td>
+  </tr>
+  <tr>
+      <td style="text-align: center;">Baseline </td>
+      <td style="text-align: center;"><b>Proposed</b></td>
+      <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+  </tr>
+  <tr>
+      <td style="text-align: center;"><audio controls><source src="samples/single_model/Baseline_who_kr_0u_004.wav"></audio></td>
+      <td style="text-align: center;"><audio controls><source src="samples/single_model/Proposed_who_kr_0u_004.wav"></audio></td>
+      <td style="text-align: center;"><audio controls><source src="samples/single_model/GT_who_kr_0u_004.wav"></audio></td>
+  </tr>
+</table>
+&nbsp; 
+<table>
+  <tr>
+    <td colspan="3">Sentence: 창밖을 보라 창밖을 보라 흰눈이 내린다 <br>
+    <span class="en_pronun">(Pronunciation): changbakkeul bora changbakkeul bora huinnuni naerinda </span>
+    </td>
+  </tr>
+  <tr>
+      <td style="text-align: center;">Baseline </td>
+      <td style="text-align: center;"><b>Proposed</b></td>
+      <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+  </tr>
+  <tr>
+      <td style="text-align: center;"><audio controls><source src="samples/single_model/Baseline_window_kr_0u_001.wav"></audio></td>
+      <td style="text-align: center;"><audio controls><source src="samples/single_model/Proposed_window_kr_0u_001.wav"></audio></td>
+      <td style="text-align: center;"><audio controls><source src="samples/single_model/GT_window_kr_0u_001.wav"></audio></td>
+  </tr>
+</table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+<br><br><br>
+
+<br>
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    <div id="cross" class="container">
+      <a><h3 style="color:black;" font-weight="bold"><br>2. Cross-Singer Style Transfer Samples</br></h3></a>
+      <hr color="gray" size="1px"></hr> 
+      &nbsp;
+
+      <h3 style="width:100%;font-size:16px;margin-left:20px">
+        (1) All samples were generated by <b>proposed model</b>.<br>
+        (2) <b>AA</b> means the combination of <b>A</b>'s timbre and <b>A</b>'s pitch style. <br>
+        (3) <b>AB</b> means the combination of <b>A</b>'s timbre and <b>B</b>'s pitch style.
+      </h3>
+      <br>
+
+      <table>
+        <tr>
+          <td style="width:90%" colspan="3">Sentence: 나 사실 너무 힘들어 잘 지내는 척해도 돌아서면 혼자 남겨진 방에서 울기만 했어 <br>
+          <span class="en_pronun">(Pronunciation): na sasil neomu himdeureo jal jinaeneun cheokhaedo doraseomyeon honja namgyeojin bangeseo ulgiman haesseo </span>
+          </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">AA</td>
+            <td style="text-align: center;">AB</td>
+            <td style="text-align: center;">BA</td>
+            <td style="text-align: center;">BB</td>
+        </tr>
+        <tr>
+            <td style="text-align: center"><audio controls style="width:180px"><source src="samples/cross_singer/AA_46_thirty_005.wav"></audio></td>
+            <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/AB_46_thirty_005.wav"></audio></td>
+            <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/BA_46_thirty_005.wav"></audio></td>
+            <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/BB_46_thirty_005.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+    <table>
+      <tr>
+        <td colspan="3">Sentence: 나는 안되나봐요 역시 아닌가봐요 <br>
+        <span class="en_pronun">(Pronunciation): naneun andoenabwayo yeoksi aningabwayo </span>
+        </td>
+      </tr>
+      <tr>
+          <td style="text-align: center;">AA </td>
+          <td style="text-align: center;">AB</td>
+          <td style="text-align: center;">BA</td>
+          <td style="text-align: center;">BB</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><audio controls style="width:180px"><source src="samples/cross_singer/AA_47_todaybye_006.wav"></audio></td>
+          <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/AB_47_todaybye_006.wav"></audio></td>
+          <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/BA_47_todaybye_006.wav"></audio></td>
+          <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/BB_47_todaybye_006.wav"></audio></td>
+      </tr>
+    </table>
+  &nbsp; 
+  <table>
+    <tr>
+      <td colspan="3">Sentence: 이별이 오지 못하게 하늘에 기도할까요 <br>
+      <span class="en_pronun">(Pronunciation): ibyeori oji moshage haneure gidohalkkayo  </span>
+      </td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">AA </td>
+        <td style="text-align: center;">AB</td>
+        <td style="text-align: center;">BA</td>
+        <td style="text-align: center;">BB</td>
+    </tr>
+    <tr>
+        <td style="text-align: center"><audio controls style="width:180px"><source src="samples/cross_singer/AA_48_dontbye_006.wav"></audio></td>
+        <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/AB_48_dontbye_006.wav"></audio></td>
+        <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/BA_48_dontbye_006.wav"></audio></td>
+        <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/BB_48_dontbye_006.wav"></audio></td>
+    </tr>
+  </table>
+&nbsp; 
+<table>
+  <tr>
+    <td colspan="3">Sentence: 눈을 마주치면 터질듯한 마음 내겐 들키고 싶지 않은데 <br>
+    <span class="en_pronun">(Pronunciation): nuneul majuchimyeon teojildeushan maeum naegen deulkigo sipji anheunde  </span>
+    </td>
+  </tr>
+  <tr>
+      <td style="text-align: center;">AA </td>
+      <td style="text-align: center;">AB</td>
+      <td style="text-align: center;">BA</td>
+      <td style="text-align: center;">BB</td>
+  </tr>
+  <tr>
+      <td style="text-align: center"><audio controls style="width:180px"><source src="samples/cross_singer/AA_49_like_007.wav"></audio></td>
+      <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/AB_49_like_007.wav"></audio></td>
+      <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/BA_49_like_007.wav"></audio></td>
+      <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/BB_49_like_007.wav"></audio></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td colspan="3">Sentence: 너의 기억은 어떨까<br>
+    <span class="en_pronun">(Pronunciation): neoui gieogeun eotteolkka  </span>
+    </td>
+  </tr>
+  <tr>
+      <td style="text-align: center;">AA </td>
+      <td style="text-align: center;">AB</td>
+      <td style="text-align: center;">BA</td>
+      <td style="text-align: center;">BB</td>
+  </tr>
+  <tr>
+      <td style="text-align: center"><audio controls style="width:180px"><source src="samples/cross_singer/AA_50_blueblue_008.wav"></audio></td>
+      <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/AB_50_blueblue_008.wav"></audio></td>
+      <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/BA_50_blueblue_008.wav"></audio></td>
+      <td style="text-align: center;"><audio controls style="width:180px"><source src="samples/cross_singer/BB_50_blueblue_008.wav"></audio></td>
+  </tr>
+</table>
+&nbsp; 
+
+</body>
+
+
+</html>

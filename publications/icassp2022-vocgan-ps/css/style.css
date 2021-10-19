@@ -2,6 +2,12 @@ html {
     position: relative;
     min-height: 100%;
 }
+/* @media print {
+    @page {
+        size: 210mm 297mm;
+    }
+} */
+
 
 body {
     min-height: 100%;
@@ -67,7 +73,7 @@ body {
 }
 
 #gvc_header h3 {
-    width: 50%;
+    width: 90%;
 }
 
 #gvc_brief p {

@@ -27,34 +27,22 @@ var wavesurfer = WaveSurfer.create({
 
 <div id="gvc_header" class="container" style="margin-top: 100px;">
     <div>
-    <h4>Robust Pitch-Controllable Text-to-Speech with Pitch Augmentation <br>Using Formant-Preserving Pitch-Shift</h4>
+    <h4>Extended Pitch Controllability of FastPitch <br>Using Timbre-Preserving Pitch Augmentation</h4>
     <h3 style="display:inline">Hanbin Bae, Young-Sun Joo, Hoon-Young Cho</h3>
     <h3 style="font-size:1rem;">bhb0722@ncsoft.com</h3></div>
     <br>
     <div>
-    <h6><h5>Abstract</h5>
-        &nbsp;&nbsp;&nbsp;&nbsp;In this paper, we propose a method for enhancing the robustness of pitch-controllable <br>
-        text-to-speech (TTS) models. A recently developed pitch-controllable TTS model, i.e. FastPitch,<br>
-        was additionally conditioned for the fundamental frequency contours. However, the quality of the <br>
-        synthesized speech degraded considerably for pitch values that deviated significantly from the<br>
-        average pitch. In other words, the ability to control the pitch was limited. To address this <br>
-        issue, we propose two algorithms to ensure the robustness of pitch-controllable TTS model. <br>
-        First, we propose a neural formant-preserving pitch-shift (NeurFPPS) algorithm for natural<br>
-        pitch augmentation; by applying the proposed NeurFPPS algorithm, the pitch-shifted speech samples<br>
-        sound natural because the speaker’s vocal timbre is maintained. Then, we propose a learning <br>
-        algorithm for the pitch-controllable TTS model that uses pitch-augmented speech datasets with <br>
-        different pitch ranges for the same sentence. The experimental results demonstrate that the proposed <br>
-        algorithms improve the pitch controllability of FastPitch.</h6></div>
-
+    <h5>Abstract</h5>
+    <br>
+    <textarea style="width:55%;min-height:340px;max-height:500px;font-size:17px;color:#000000;resize:none;line-height: 1.45;border:none" readonly>
+      The recently developed pitch-controllable text-to-speech (TTS) model, i.e. FastPitch, was conditioned for the fundamental frequency contours. However, the quality of the synthesized speech degraded considerably for pitch values that deviated significantly from the average pitch; i.e. the ability to control vocal pitch was limited. To address this issue, we propose two algorithms to improve the robustness of FastPitch. First, we propose a novel timbre-preserving pitch-shifting algorithm for natural pitch augmentation. Pitch-shifted speech samples sound more natural when using the proposed algorithm because the speaker's vocal timbre is maintained. Moreover, we propose a learning algorithm that defines FastPitch using pitch-augmented speech datasets with different pitch ranges for the same sentence. The experimental results demonstrate that the proposed algorithms improve the pitch controllability of FastPitch
+    </textarea>
     <br>
     <div id="toc_container" >
     <h5>Contents</h5>
     <ol type="A">
-        <li><a href="#nv">Neural Vocoder (VocGAN) Samples</a></li>
-            <ol type="1">
-                <li><a href="#nv.gate">Output speech samples from the excitation and formant Gates</a></li>
-                <li><a href="#nv.NeurFPPS">Nueral Formant-Preserving Pitch-Shifting (NeurFPPS) Algorithm</a></li>
-            </ol>
+        <li><a href="#nv">Proposed VocGAN-based Pitch-Shifting Algorithms </a></li>
+
         <br>  
         <li><a href="#tts">Improved Pitch-Controllable TTS Models with Pitch-Augmented Datasets</a></li>
             <ol type="1">
@@ -63,13 +51,11 @@ var wavesurfer = WaveSurfer.create({
             </ol>
     </ol>
     </div>
-    <!-- <a href="#gvc_brief" class="waves-effect waves-light btn header-btn"><i></i> proposed NeurFPPS </a>
-    <a href="#gvc_demo" class="waves-effect waves-light btn header-btn"><i></i> improved FastPitch </a> -->
 </div>
 
 
 <head>
-  <title> Demo Page, NeurFPPS </title>
+  <title> Demo Page, ICASSP2022-VocGAN-PS </title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
@@ -90,7 +76,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
 </script>
 
 
-<body class="text-center" style="margin-bottom:180px;">
+<body class="text-center" style="margin-bottom:180px">
     
     <br><br>
 
@@ -98,10 +84,10 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
       <hr style="color:lightslategrey" size="0.5px"></hr>
       <br><br><br>
       <a>
-        <h3 ><b>A. Neural Vocoder (VocGAN) Samples</b></h3>
+        <h3><b>A. Proposed VocGAN-based PS (VocGAN-PS) Algorithm</b></h3>
       </a>
       <br><br>
-
+      <h6></h6>
       <h6>We use the pitch adjustment value <b>&alpha;</b> using semitone units, such that <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\alpha}=12\cdot&space;\log_{2}(\mathbf{f^{\alpha}_{0}}/\mathbf{f_0})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{\alpha}=12\cdot&space;\log_{2}(\mathbf{f^{\alpha}_{0}}/\mathbf{f_0})" title="\mathbf{\alpha}=12\cdot \log_{2}(\mathbf{f^{\alpha}_{0}}/\mathbf{f_0})" /></a>. </h6>
       <h6>Table shows the ratio between pitch-shifted fundamental frequency and its.</h6>
       <br>
@@ -133,26 +119,33 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
       </table>
 
       <br><br>
-      <a name="nv.gate">
-          <h3><b>A.1. Excitation Gate and Formant Gate</b></h3>
-          <br><br>
-      </a>
+      <!-- <a name="nv.ps">
+        <h3><b>A.1. Proposed VocGAN-based PS (VocGAN-PS) Algorithm</b></h3>
+        <br><br>
+      </a> -->
       <!-- <br><br><br><br> -->
-      &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/fig_mel-gate-output_v2.png" alt="My Image" width="400"><br>
-      <h6 style="width:500px;"><b>Figure 1</b> Mel-spectrograms, where (a) represents recorded speech, (b) and (c) represent output waveforms from the excitation and formant gates respectively. (d) Power spectra of them.</h6>
-
+      <b>
+        &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/vocganps.jpg" alt="My Image" width="90%"><br>
+        <h6 style="width:90%;"><b>Figure 1</b> Schematic of the VocGAN-PS algorithm and Spectral envelopes of the three types of speech waveforms.</h6>
+        </b>
+      <br>
       <!-- <br><br><br> -->
       <table>
         <tbody>
           <tr>
+            <td></td>
+            <td colspan="3" style="text-align:center;color:rgb(0, 0, 0);text-align:center"> <b>Sample 1</b> Output samples by the Source and Filter gates. </td>
+
+          </tr>
+          <tr>
             <td style="width:200px;"> </td>
             <td style="text-align:center;color:mediumseagreen">Input Speech</td>
-            <td style="text-align:center;color:orangered"> Excitation Gate </td>
-            <td style="text-align:center;color:mediumblue">Formant Gate <br> *Warning </td>
+            <td style="text-align:center;color:orangered"> Source Gate </td>
+            <td style="text-align:center;color:mediumblue">(Vocal Tract) Filter Gate <br> *Warning </td>
           </tr>
           
           <tr>
-            <td style="text-align:center;width:200px;">NCFemale (KOR) </td>
+            <td style="text-align:center;width:200px;"> Korean (NCFemale) </td>
             
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
               <source src="samples_v2/example/ncf.wav" type="audio/wav"></audio></td>
@@ -162,7 +155,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
                 <source src="samples_v2/example/ncf_for.wav" type="audio/wav"></audio></td>
           </tr>
           <tr>
-            <td style="text-align:center;width:200px;">LJSpeech (ENG) </td>
+            <td style="text-align:center;width:200px;"> English (LJSpeech) </td>
             
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
               <source src="samples_v2/example/lj.wav" type="audio/wav"></audio></td>
@@ -174,39 +167,28 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
         </tbody>
       </table>
 
-      <br><br><br>
-      <a name="nv.NeurFPPS">
-          <h3><b>A.2. Nueral Formant-Preserving Pitch Shift (NeurFPPS)</b></h3>
-          <br><br>
-      </a>
-        <b>
-        &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/neurfps.png" alt="My Image" width="450"><br>
-        <h6 style="width:450px;"><b>Figure 2</b> Schematic of the NeurFPPS algorithm. ‘C’ denotes the
-          one-dimensional convolutional layer, ‘up(r)’ and ‘res stack’ denote
-          the upsampling layer and the residual stack layer, respectively</h6>
-        </b>
-        <b>
-        &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/envelopes.png" alt="My Image" width="450"><br>
-
-        <h6 style="width:450px;"><b>Figure 3</b> Spectral envelopes of three types of speech waveforms.</h6>
-        </b>
-      <br><br><br>
+      <br>
 
       <table>
         <tbody>
           <tr>
-            <td style="text-align:center;color:salmon"> <b>&alpha;</b> </td>
+            <td></td>
+            <td colspan="7" style="text-align:center;color:rgb(0, 0, 0);text-align:center"><b>Sample 2</b> VocGAN-PS samples / Timbre-<a style="color:rgb(250, 98, 98);">preserving</a> or <a style="color:rgb(51, 48, 252)">not</a></td>
+
+          </tr>
+          <tr>
+            <td style="text-align:center;color:rgb(0, 0, 0)"> <b>&alpha;</b> </td>
             <td style="text-align:center;">-3</td>
             <td style="text-align:center;">-2</td>
             <td style="text-align:center;">-1</td>
-            <td style="text-align:center;color:mediumturquoise">NCFemale (KOR)</td>
+            <td style="text-align:center;color:mediumseagreen">Input (KOR)</td>
             <td style="text-align:center;">+1</td>
             <td style="text-align:center;">+2</td>
             <td style="text-align:center;">+3</td>
           </tr>
           
           <tr>
-            <td style="text-align:center;color:lightslategrey">Pitch shift <br> (not preserved) </td>
+            <td style="text-align:center;color:rgb(51, 48, 252);width:300px">Sampling Rate <br> Conversion </td>
             
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
               <source src="samples_v2/exp1_sox_fcps/dialog/sox/-3/030.wav" type="audio/wav"></audio></td>
@@ -214,7 +196,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
                 <source src="samples_v2/exp1_sox_fcps/dialog/sox/-2/030.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples_v2/exp1_sox_fcps/dialog/sox/-1/030.wav" type="audio/wav"></audio></td>
-            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+            <td rowspan="2" style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples_v2/exp1_sox_fcps/dialog/sox/0/030.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples_v2/exp1_sox_fcps/dialog/sox/1/030.wav" type="audio/wav"></audio></td>
@@ -224,15 +206,13 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
                 <source src="samples_v2/exp1_sox_fcps/dialog/sox/3/030.wav" type="audio/wav"></audio></td>
           </tr>
           <tr>
-            <td style="text-align:center;"><b>NeurFPPS</b> <br> (preserved) </td>
+            <td style="text-align:center;;color:rgb(250, 98, 98)"><b>VocGAN-PS</b> </td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples_v2/exp1_sox_fcps/dialog/fcps/-3/030.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples_v2/exp1_sox_fcps/dialog/fcps/-2/030.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples_v2/exp1_sox_fcps/dialog/fcps/-1/030.wav" type="audio/wav"></audio></td>
-            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                <source src="samples_v2/exp1_sox_fcps/dialog/fcps/0/030.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples_v2/exp1_sox_fcps/dialog/fcps/1/030.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
@@ -246,24 +226,24 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
       <table>
         <tbody>
           <tr>
-            <td style="text-align:center;color:salmon"> <b>&alpha;</b> </td>
+            <td style="text-align:center;color:rgb(0, 0, 0)"> <b>&alpha;</b> </td>
             <td style="text-align:center;">-3</td>
             <td style="text-align:center;">-2</td>
             <td style="text-align:center;">-1</td>
-            <td style="text-align:center;color:mediumturquoise">LJSpeech (ENG)</td>
+            <td style="text-align:center;color:mediumseagreen">Input (ENG)</td>
             <td style="text-align:center;">1</td>
             <td style="text-align:center;">2</td>
             <td style="text-align:center;">3</td>
           </tr>
           <tr>
-            <td style="text-align:center;color:lightslategrey">Pitch shift <br> (not preserved)  </td>            
+            <td style="text-align:center;color:rgb(51, 48, 252);width:300px">Sampling Rate <br> Conversion </td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
               <source src="samples_v2/exp1_sox_fcps/ljspeech/tmp_trans_-3.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
               <source src="samples_v2/exp1_sox_fcps/ljspeech/tmp_trans_-2.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
               <source src="samples_v2/exp1_sox_fcps/ljspeech/tmp_trans_-1.wav" type="audio/wav"></audio></td>
-            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+            <td rowspan="2" style="text-align:center;"><audio style="width:100px;height:32px" controls="">
               <source src="samples_v2/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
               <source src="samples_v2/exp1_sox_fcps/ljspeech/tmp_trans_1.wav" type="audio/wav"></audio></td>
@@ -273,15 +253,13 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
               <source src="samples_v2/exp1_sox_fcps/ljspeech/tmp_trans_3.wav" type="audio/wav"></audio></td>
           </tr>
           <tr>
-            <td style="text-align:center;"> <b>NeurFPPS</b> <br> (preserved) </td>
+            <td style="text-align:center;;color:rgb(250, 98, 98)"><b>VocGAN-PS</b> </td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples_v2/exp1_sox_fcps/ljspeech/LJ001-0001_-3.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples_v2/exp1_sox_fcps/ljspeech/LJ001-0001_-2.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples_v2/exp1_sox_fcps/ljspeech/LJ001-0001_-1.wav" type="audio/wav"></audio></td>
-            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
-                <source src="samples_v2/exp1_sox_fcps/ljspeech/LJ001-0001_0.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
                 <source src="samples_v2/exp1_sox_fcps/ljspeech/LJ001-0001_1.wav" type="audio/wav"></audio></td>
             <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
@@ -292,6 +270,83 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
           
         </tbody>
       </table>
+      <br>
+      <table>
+        <tbody>
+          <tr>
+            <td></td>
+            <td colspan="7" style="text-align:center;color:rgb(0, 0, 0);text-align:center"><b>Sample 3</b> Timbre-Preserving PS Alogirithms :<br> (1) TD-PSOLA-PS, (2) WORLD-PS and (3) VocGAN-PS (Proposed)</td>
+
+          </tr>
+
+          <tr>
+            <td style="text-align:center;color:rgb(0, 0, 0)"> <b>&alpha;</b> </td>
+            <td style="text-align:center;">-3</td>
+            <td style="text-align:center;">-2</td>
+            <td style="text-align:center;">-1</td>
+            <td style="text-align:center;color:mediumseagreen">Input (KOR)</td>
+            <td style="text-align:center;">+1</td>
+            <td style="text-align:center;">+2</td>
+            <td style="text-align:center;">+3</td>
+          </tr>
+          
+          <tr>
+            <td style="text-align:center;color:lightslategray;width:300px">(1) TD-PSOLA-PS </td>
+            
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/td_-3.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/td_-2.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/td_-1.wav" type="audio/wav"></audio></td>
+            <td rowspan="3" style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/input_0.wav" type="audio/wav"></audio></td>
+            <!-- <td style="text-align:center;"></td> -->
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/td_+1.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/td_+2.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/td_+3.wav" type="audio/wav"></audio></td>
+          </tr>
+          <tr>
+            <td style="text-align:center;color:lightslategray;width:300px">(2) WORLD-PS </td>
+            
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/world_-3.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/world_-2.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/world_-1.wav" type="audio/wav"></audio></td>
+            
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/world_+1.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/world_+2.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/world_+3.wav" type="audio/wav"></audio></td>
+          </tr>
+          <tr>
+            <td style="text-align:center;;color:rgb(250, 98, 98)"><b>(3) VocGAN-PS</b> </td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/vg_-3.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/vg_-2.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/vg_-1.wav" type="audio/wav"></audio></td>
+            <!-- <td style="text-align:center;"></td> -->
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/vg_+1.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/vg_+2.wav" type="audio/wav"></audio></td>
+            <td style="text-align:center;"><audio style="width:100px;height:32px" controls="">
+              <source src="samples_v2/example/vg_+3.wav" type="audio/wav"></audio></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
     </div>
 
 
@@ -317,8 +372,8 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
         <h3><b>B.1. FastPitch for NCFemale (KOR)</b></h3><br> <br>
       </a>
 
-      &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/ser.png" alt="My Image" width="450"><br>
-      <h6 style="width:550px;"><b>Fig. 3.</b> Results of the SER test for pronunciation accuracy foreach model.</h6>
+      &nbsp;&nbsp;&nbsp;&nbsp;<img src="images/vocganps_fastpitch.png" alt="My Image" width="90%"><br>
+      <h6 style="width:550px;"><b>Figure 2</b> Results of performance evaluations for each model.</h6>
       <br><br>
       <h6 style="color:salmon;display:inline-block;"><b>[For &alpha;=&pm;4] </b> </h6>
       <h6 style="color:crimson;display:inline-block;"><b>"Red color" means mis-pronunciation of Baseline model.</b></h6>
@@ -609,7 +664,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
 
       <h6 style="color:black">For foreign listeners, we used the English female speaker (LJSpeech) to train the FastSpeech2 (another type of pitch controllable TTS). </h6>
       <!-- <h6 style="color:black"><a href="https://www.codecogs.com/eqnedit.php?latex=\bar{\mathbf{p}}=\mathcal{N}(0,&space;4.75),&space;\bar{\mathbf{f_0}}=225.1&space;\mathrm{Hz}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\bar{\mathbf{p}}=\mathcal{N}(0,&space;4.75),&space;\bar{\mathbf{f_0}}=225.1&space;\mathrm{Hz}" title="\bar{\mathbf{p}}=\mathcal{N}(0, 4.75), \bar{\mathbf{f_0}}=225.1 \mathrm{Hz}" /></a></h6> -->
-      <h6 style="color:salmon;display:inline-block;font-size:1rem">(* We refered <a href="https://github.com/ming024/FastSpeech2">ming024's FastSpeech2 implementation</a>.) </h6>
+      <h6 style="color:salmon;display:inline-block;font-size:1rem">(* We referred <a href="https://github.com/ming024/FastSpeech2">ming024's FastSpeech2 implementation</a>.) </h6>
       <br><br><br>
 
       <h6 style="color:salmon;display:inline-block;"><b>[For &alpha;=&pm;6] </b> </h6>
