@@ -73,6 +73,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
     <div id="sec1" class="container">
       <a name="kss"><h3 style="color:black; font-weight: bold;"><br>1. Audio Samples for Model Comparison</br></h3></a>
       <!-- <hr color="gray" size="1px"></hr> -->
+      The VAE-based TTS models (GVAE, LVAE, and HiMuV-TTS) can generate speech in multiple ways via sampling. The &tau; is a temperature value mutiplied to the prior standard deviation. That is, the HiMuV-TTS (&tau;=0.0) model generate speech without sampling.
       <table style = "table-layout: auto; width: 150%; table-layout: fixed;" >
         <colgroup>
         <col width="25%" />
@@ -92,7 +93,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
             <td style="text-align: center; font-weight: bold;">GVAE</td>
             <td style="text-align: center; font-weight: bold;">LVAE</td>
             <td style="text-align: center; font-weight: bold;">HiMuV-TTS (Ours)</td>
-            <td style="text-align: center; font-weight: bold;">HiMuV-TTS (tau=0.0) (Ours)</td>
+            <td style="text-align: center; font-weight: bold;">HiMuV-TTS (&tau;=0.0) (Ours)</td>
         </tr>
         <tr>
             <td style="width:400px">In another portion of the garden more clothing partly male and partly female was discovered. </td>
@@ -209,6 +210,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
     <!-- <div id="index"></div> -->
     <div id="sec2" class="container">
       <a name="kss"><h3 style="color:black; font-weight: bold;"><br>2. Latent Representation of Each Scale of HiMuV-TTS Model</br></h3></a>
+      In the HiMuV-TTS-G model, the global-scale prosody embedding is sampled but the local-scale prosody embedding is fixed. Meanwhile, in the HiMuV-TTS-L model, the global-scale prosody embedding is fixed but the local-scale prosody embedding is sampled.
       <table style = "table-layout: auto; width: 100%; table-layout: fixed;" >
         <colgroup>
         <col width="50%" />
@@ -266,6 +268,7 @@ $("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런�
     <!-- <div id="index"></div> -->
     <div id="sec3" class="container">
       <a name="kss"><h3 style="color:black; font-weight: bold;"><br>3. Additional Examples on Sampling</br></h3></a>
+      In here, several speech samples with diverse speaking styles generated with the proposed HiMuV-TTS model via sampling is showed.
       <table>
         <tr>
           <td colspan="8"><b>Text:</b> They entered a stone cold room and were presently joined by the prisoner.</td>
