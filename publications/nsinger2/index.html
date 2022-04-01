@@ -1,0 +1,71 @@
+<html>
+<meta charset="utf-8">
+
+<!-- Background theme -->
+<div id="background">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <img src="img/logo.svg" alt="ci_logo"><img>
+    <div class="bg3"></div>
+    <div class="bg4"></div>
+</div>
+
+<br>
+
+<div id="gvc_header" class="container">
+    <div>
+    <h4> N-Singer2: Improving the naturalness of synthesized singing voice  </h4>
+    <h4>            in the Korean pop ballad genre</h4>
+    <br>
+    <h3 style="display:inline"> Gyeong-Hoon Lee, Tae-Woo Kim, Minsu Kang</h3>
+    <h3 style="font-size:1rem;">{ghlee3401, ktw0114, mskang}@ncsoft.com</h3></div>
+    <br>
+    <div>
+    <h6><h5>Abstract</h5> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;We propose N-Singer, a fast and robust non-autoregressive Korean singing<br>
+        voice synthesis system that can synthesize high-quality and articulate pronounced <br>
+        Korean singing in parallel. N-Singer consists of a transformer-based mel-generator,<br>
+        a convolutional network-based postnet, and voicing-aware discriminators: 1) For <br>
+        accurate pronunciation, N-Singer separately models linguistic and pitch information<br>
+        without other acoustic features, e.g. mel-spectrogram. 2) To achieve improved mel- <br>
+        spectrograms, N-Singer uses a combination of transformer-based modules and con-<br>
+        volutional network-based modules. 3) In the adversarial training, we use  voicing-<br>
+        aware conditional discriminators to capture harmonic features of voiced segments <br>
+        and noise components of unvoiced segments respectively. The experimental results <br>
+        prove that N-Singer can synthesize a natural singing voice in parallel with more <br>
+        accurate pronunciation than the baseline.</h6></div>
+
+    <br>
+    <div id="toc_container" >
+    <h5>Contents</h5>
+    <ol type="A">
+        <li><a href="#kor">Audio Samples (Korean)</a></li>
+
+            
+    </ol>
+    </div>
+</div>
+
+
+<head>
+  <title> Demo page of N-Singer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="../../images/nc.png">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">   
+$(document).ready( function() {
+
+$("#index").load("index.html"); 
+
+});
+</script>
+
+</html>
