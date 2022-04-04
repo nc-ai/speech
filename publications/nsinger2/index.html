@@ -22,7 +22,7 @@
     <br>
     <div>
     <h6><h5>Abstract</h5> <br>
-        &nbsp;&nbsp;&nbsp;&nbsp;We propose N-Singer, a fast and robust non-autoregressive Korean singing<br>
+        <!-- &nbsp;&nbsp;&nbsp;&nbsp;We propose N-Singer, a fast and robust non-autoregressive Korean singing<br>
         voice synthesis system that can synthesize high-quality and articulate pronounced <br>
         Korean singing in parallel. N-Singer consists of a transformer-based mel-generator,<br>
         a convolutional network-based postnet, and voicing-aware discriminators: 1) For <br>
@@ -33,7 +33,28 @@
         aware conditional discriminators to capture harmonic features of voiced segments <br>
         and noise components of unvoiced segments respectively. The experimental results <br>
         prove that N-Singer can synthesize a natural singing voice in parallel with more <br>
-        accurate pronunciation than the baseline.</h6></div>
+        accurate pronunciation than the baseline.</h6></div> -->
+        &nbsp;Singing voices in the pop ballad genre especially tend to<br>
+        have more dynamic and complicated components related to vo-<br>
+        cal techniques of a singer, such as vibrato, breathy sound, and<br>
+        fundamental frequency (F0) fluctuations, than the voices suited<br>
+        to the children’s song genre. It is important to understand the<br>
+        characteristics of a singer to generate a natural singing voice.<br>
+        However, it is difficult to model a singing voice for pop ballads<br>
+        because both linguistic content and singer identity are entangled<br>
+        with prosody information. In this paper, we propose model-<br>
+        ing natural singing voices by disentangling singer-independent<br>
+        and singer-dependent features using a multi-singer system. In<br>
+        the variation predictor of our system, for each input note pitch,<br>
+        we use a difference-based F0 to model the vibrato and F0 fluc-<br>
+        tuations only related to the characteristics of the singer. Our<br>
+        system also predict the voiced range of a singing voice to pre-<br>
+        vent predicting pitch in the unvoiced range arising from the<br>
+        wrong duration of musical notes. In addition, we apply a data-<br>
+        augmentation method to the training dataset for generating a<br>
+        singing voice with a more stable prosody. Experimental results<br>
+        show that our system can generate a more natural singing voice
+        than the conventional system.</h6></div>
 
     <br>
     <div id="toc_container" >
