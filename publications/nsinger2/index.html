@@ -48,22 +48,26 @@
         Experimental results show that our system can generate a more natural singing voice than the conventional system.</h6></div>
 
     <br>
-    <div id="toc_container" >
-    <h5>Contents</h5>
-    <img align="left" src="img/structure.png";
-      style="display: block;
+    <div id="toc_container">
+    <h5>Structure</h5>
+    <img align="center" src="img/structure.png";
+      style="display: left;
         margin-left: auto;
         margin-right: auto;
-        width: 30%;" />
+        width: 40%;" />
     </div>
+    <hr color="gray" size="1px"></hr> 
+    <div id="toc_container2">
+    <br>
+      <h5>Contents</h5>
+      <ol type="A">
+        <li><a href="#kor1">Audio Samples (Korean ballad song genre)</a></li>
+        <li><a href="#kor2">Audio Samples (Korean children’s song genre)</a></li>
+      </ol>
+    </div>
+
 </div>
 
-<div>
-<ol type="A">
-  <li><a href="#kor1">Audio Samples (Korean)</a></li>
-  <li><a href="#kor2">Audio Samples (Korean)</a></li>
-</ol>
-</div>
 
 <head>
   <title> Demo page of N-Singer2</title>
@@ -94,8 +98,8 @@ $("#index").load("index.html");
       <hr color="gray" size="1px"></hr> 
       <table>
         <tr>
-          <td colspan="3">Sentence: 잘 지내는 척 해도 <span class="red_highlight">돌아서면</span> 혼자 <br>
-          <span class="en_pronun">(Pronunciation): jal jinaeneun cheog haedo <span class="red_highlight">'dol-aseomyeon'</span> honja </span>
+          <td colspan="3">Sentence: 우우우우후 나에게 <br>
+          <span class="en_pronun">(Pronunciation): woo woo woo woo hoo na ege </span>
           </td>
         </tr>
         <tr>
@@ -104,9 +108,9 @@ $("#index").load("index.html");
             <td style="text-align: center;">Ground Truth</td>
         </tr>
         <tr>
-            <td style="text-align: center;"><audio controls><source src="samples/ATK_46_thirty_007.wav"></audio></td>
-            <td style="text-align: center;"><audio controls><source src="samples/nsingerA_46_thirty_007.wav"></audio></td>
-            <td style="text-align: center;"><audio controls><source src="samples/GT_46_thirty_007.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/nsinger/05_balladw01_atTheEnd_018.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/nsinger2/05_balladw01_atTheEnd_018.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/gt/05_balladw01_atTheEnd_018.wav"></audio></td>
         </tr>
       </table>
     </div>
