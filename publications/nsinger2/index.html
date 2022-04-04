@@ -62,7 +62,7 @@
   style="display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;" />
+  width: 30%;" />
 
 <head>
   <title> Demo page of N-Singer2</title>
@@ -89,7 +89,7 @@ $("#index").load("index.html");
 <body class="text-center">
 
     <div id="kor" class="container">
-      <a name="kss"><h3 style="color:black;" font-weight="bold"><br>1. Audio Samples (Korean)</br></h3></a>
+      <a name="kss"><h3 style="color:black;" font-weight="bold"><br>1. Audio Samples in the ballad genre (Korean)</br></h3></a>
       <hr color="gray" size="1px"></hr> 
       <table>
         <tr>
@@ -98,9 +98,31 @@ $("#index").load("index.html");
           </td>
         </tr>
         <tr>
-            <td style="text-align: center;">ATK (Baseline)<br> <span class="red_highlight">Incorrect pronunciation</span>  </td>
-            <td style="text-align: center;">N-Singer (Ours)</td>
-            <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+            <td style="text-align: center;">N-Singer (Baseline)</td>
+            <td style="text-align: center;">N-Singer2 (Ours)</td>
+            <td style="text-align: center;">Ground Truth</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/ATK_46_thirty_007.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/nsingerA_46_thirty_007.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/GT_46_thirty_007.wav"></audio></td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="kor" class="container">
+      <a name="kss"><h3 style="color:black;" font-weight="bold"><br>2. Audio Samples in the children’s song genre (Korean)</br></h3></a>
+      <hr color="gray" size="1px"></hr> 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 잘 지내는 척 해도 <span class="red_highlight">돌아서면</span> 혼자 <br>
+          <span class="en_pronun">(Pronunciation): jal jinaeneun cheog haedo <span class="red_highlight">'dol-aseomyeon'</span> honja </span>
+          </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">N-Singer (Baseline)</td>
+            <td style="text-align: center;">N-Singer2 (Ours)</td>
+            <td style="text-align: center;">Ground Truth</td>
         </tr>
         <tr>
             <td style="text-align: center;"><audio controls><source src="samples/ATK_46_thirty_007.wav"></audio></td>
