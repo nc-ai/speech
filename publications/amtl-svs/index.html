@@ -1,0 +1,286 @@
+<html>
+<meta charset="utf-8">
+
+<!-- Background theme -->
+<div id="background">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <img src="img/logo.svg" alt="ci_logo"><img>
+    <div class="bg3"></div>
+    <div class="bg4"></div>
+</div>
+
+<br>
+
+<div id="gvc_header" class="container">
+    <div>
+    <h4> Adversarial Multi-Task Learning for Disentangling Timbre and Pitch </h4>
+    <h4> in Singing Voice Synthesis </h4>
+    <br>
+    <h3 style="display:inline"> Tae-Woo Kim, Min-Su Kang, Gyeong-Hoon Lee</h3>
+    <h3 style="font-size:1rem;">{ktw0114, mskang, ghlee3401}@ncsoft.com</h3></div>
+    <br>
+    <div>
+    <h6><h5>Abstract</h5> <br>
+      <!-- <br> -->
+      <textarea style="width:55%;min-height:440px;max-height:550px;font-size:17px;color:#000000;resize:none;line-height: 1.45;border:none" readonly>
+        Recently, deep-learning based generative models have been introduced to generate singing voices. One approach is to predict the parametric vocoder features consisting of explicit speech parameters. This approach has the advantage that the meaning of each feature is clearly distinguished. Another approach is to predict mel-spectrograms for a neural vocoder. However, parametric vocoders have limitations of voice quality and the melspectrogram features are difficult to model because the timbre and pitch information are entangled. In this study, we propose a singing voice synthesis model with multi-task learning to use both approaches – the acoustic features for a parametric vocoder as well as the mel-spectrograms for a neural vocoder. By using the parametric vocoder features as auxiliary features, the proposed model can efficiently disentangle and control the timbre and pitch components of the mel-spectrogram. Moreover, a generative adversarial network framework is applied to improve the quality of singing voices in a multi-singer model. Experimental results demonstrate that our proposed model can generate more natural singing voices than the single-task models, while performing better than the conventional parametric vocoder-based model.
+      </textarea>
+        <!-- <br> -->
+    <div id="toc_container" >
+    <h5>Contents</h5>
+    <ol type="1">
+        <li><a href="#pwg">Audio Samples using Parallel WaveGAN (48k)</a></li>
+        <li><a href="#world">Audio Samples using WORLD vocoder (48k)</a></li>
+        <!-- <li><a href="#single">Single-Singer Samples</a></li>
+        <li><a href="#cross">Cross-Singer Style Transfer Samples</a></li> -->
+    </ol>
+    </div>
+</div>
+
+
+<head>
+  <title> Demo for Adversarial-Multi-Task Learning-SVS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="../../images/nc.png">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+</head>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">   
+$(document).ready( function() {
+
+$("#index").load("index.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+});
+</script>
+
+<br>
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    <div id="pwg" class="container">
+      <a><h3 style="color:black;" font-weight="bold"><br>1. Audio Samples using Parallel WaveGAN (48k)</br></h3></a>
+      <hr color="gray" size="1px"></hr> 
+      <table>
+        <tr>
+          <td colspan="3">Sentence: 사라져가는 저 별빛 사이로 감출 순 없나요 커져버린 마음 <br>
+          <span class="en_pronun">(Pronunciation): salajyeoganeun jeo byeolbich sailo gamchul sun eobsnayo keojyeobeolin ma-eum </span>
+          </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">N-Singer </td>
+            <td style="text-align: center;">Single-Task</td>
+            <td style="text-align: center;"><b>Multi-Task (Proposed)</b></td>
+            <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/NSinger_05_balladw01_atTheEnd_003.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/Baseline_05_balladw01_atTheEnd_003.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/Proposed_05_balladw01_atTheEnd_003.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/GT_05_balladw01_atTheEnd_003.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+    <table>
+      <tr>
+        <td colspan="3">Sentence: 남들 눈엔 힘 빠지는 한숨으로 보일지 몰라도 나는 알고 있죠 <br>
+        <span class="en_pronun">(Pronunciation): namdeul nun-en him ppajineun hansum-eulo boilji mollado naneun algo issjyo </span>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">N-Singer </td>
+        <td style="text-align: center;">Single-Task</td>
+        <td style="text-align: center;"><b>Multi-Task (Proposed)</b></td>
+        <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/NSinger_20_balladw01_sigh_019.wav"></audio></td>
+        <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/Baseline_20_balladw01_sigh_019.wav"></audio></td>
+        <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/Proposed_20_balladw01_sigh_019.wav"></audio></td>
+        <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/GT_20_balladw01_sigh_019.wav"></audio></td>
+      </tr>
+    </table>
+  &nbsp; 
+  <table>
+    <tr>
+      <td colspan="3">Sentence: 사라져가는 저 별빛 사이로 감출 순 없나요 커져버린 마음 <br>
+      <span class="en_pronun">(Pronunciation): salajyeoganeun jeo byeolbich sailo gamchul sun eobsnayo keojyeobeolin ma-eum </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">N-Singer </td>
+      <td style="text-align: center;">Single-Task</td>
+      <td style="text-align: center;"><b>Multi-Task (Proposed)</b></td>
+      <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/NSinger_05_balladw05_atTheEnd_003.wav"></audio></td>
+      <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/Baseline_05_balladw05_atTheEnd_003.wav"></audio></td>
+      <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/Proposed_05_balladw05_atTheEnd_003.wav"></audio></td>
+      <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/GT_05_balladw05_atTheEnd_003.wav"></audio></td>
+    </tr>
+  </table>
+&nbsp; 
+<table>
+  <tr>
+    <td colspan="3">Sentence: 이제 다른 생각은 마요 깊이 숨을 쉬어봐요 그대로 내뱉어요 <br>
+    <span class="en_pronun">(Pronunciation): ije daleun saeng-gag-eun mayo gip-i sum-eul swieobwayo geudaelo naebaet-eoyo </span>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">N-Singer </td>
+    <td style="text-align: center;">Single-Task</td>
+    <td style="text-align: center;"><b>Multi-Task (Proposed)</b></td>
+    <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/NSinger_20_balladw05_sigh_021.wav"></audio></td>
+    <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/Baseline_20_balladw05_sigh_021.wav"></audio></td>
+    <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/Proposed_20_balladw05_sigh_021.wav"></audio></td>
+    <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/GT_20_balladw05_sigh_021.wav"></audio></td>
+  </tr>
+</table>
+&nbsp; 
+<table>
+  <tr>
+    <td colspan="3">Sentence: 내가 안아줄게요 정말 수고했어요 <br>
+    <span class="en_pronun">(Pronunciation): naega an-ajulgeyo jeongmal sugohaess-eoyo </span>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">N-Singer </td>
+    <td style="text-align: center;">Single-Task</td>
+    <td style="text-align: center;"><b>Multi-Task (Proposed)</b></td>
+    <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/NSinger_20_balladw05_sigh_025.wav"></audio></td>
+    <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/Baseline_20_balladw05_sigh_025.wav"></audio></td>
+    <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/Proposed_20_balladw05_sigh_025.wav"></audio></td>
+    <td style="text-align: center;"><audio controls><source src="samples/Mel/Ballad/GT_20_balladw05_sigh_025.wav"></audio></td>
+  </tr>
+</table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+<br><br><br>
+
+<br>
+<body class="text-center">
+    <!-- <div id="index"></div> -->
+    <div id="world" class="container">
+      <a><h3 style="color:black;" font-weight="bold"><br>2. Audio Samples using WORLD vocoder</br></h3></a>
+      <hr color="gray" size="1px"></hr> 
+      &nbsp;
+<!-- 
+      <h3 style="width:100%;font-size:16px;margin-left:20px">
+        (1) All samples were generated by <b>proposed model</b>.<br>
+        (2) <b>AA</b> means the combination of <b>A</b>'s timbre and <b>A</b>'s pitch style. <br>
+        (3) <b>AB</b> means the combination of <b>A</b>'s timbre and <b>B</b>'s pitch style.
+      </h3>
+      <br> -->
+
+      <table>
+        <tr>
+          <td style="width:90%" colspan="3">Sentence: 사라져가는 저 별빛 사이로 감출 순 없나요 커져버린 마음 <br>
+          <span class="en_pronun">(Pronunciation): salajyeoganeun jeo byeolbich sailo gamchul sun eobsnayo keojyeobeolin ma-eum </span>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">XiaoiceSing</td>
+          <td style="text-align: center;"><b>Multi-Task (Proposed)</b></td>
+          <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/XiaoiceSing_05_balladw01_atTheEnd_003.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/Proposed_05_balladw01_atTheEnd_003.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/GT_05_balladw01_atTheEnd_003.wav"></audio></td>
+        </tr>
+      </table>
+    &nbsp; 
+    <table>
+      <tr>
+        <td colspan="3">Sentence: 남들 눈엔 힘 빠지는 한숨으로 보일지 몰라도 나는 알고 있죠 <br>
+        <span class="en_pronun">(Pronunciation): namdeul nun-en him ppajineun hansum-eulo boilji mollado naneun algo issjyo </span>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">XiaoiceSing</td>
+        <td style="text-align: center;"><b>Multi-Task (Proposed)</b></td>
+        <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/XiaoiceSing_20_balladw01_sigh_019.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/Proposed_20_balladw01_sigh_019.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/GT_20_balladw01_sigh_019.wav"></audio></td>
+      </tr>
+    </table>
+  &nbsp; 
+  <table>
+    <tr>
+      <td colspan="3">Sentence: 사라져가는 저 별빛 사이로 감출 순 없나요 커져버린 마음 <br>
+        <span class="en_pronun">(Pronunciation): salajyeoganeun jeo byeolbich sailo gamchul sun eobsnayo keojyeobeolin ma-eum </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">XiaoiceSing</td>
+      <td style="text-align: center;"><b>Multi-Task (Proposed)</b></td>
+      <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/XiaoiceSing_05_balladw05_atTheEnd_003.wav"></audio></td>
+        <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/Proposed_05_balladw05_atTheEnd_003.wav"></audio></td>
+        <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/GT_05_balladw05_atTheEnd_003.wav"></audio></td>
+    </tr>
+  </table>
+&nbsp; 
+<table>
+  <tr>
+    <td colspan="3">Sentence: 이제 다른 생각은 마요 깊이 숨을 쉬어봐요 그대로 내뱉어요 <br>
+      <span class="en_pronun">(Pronunciation): ije daleun saeng-gag-eun mayo gip-i sum-eul swieobwayo geudaelo naebaet-eoyo </span>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">XiaoiceSing</td>
+    <td style="text-align: center;"><b>Multi-Task (Proposed)</b></td>
+    <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+  </tr>
+  <tr>
+      <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/XiaoiceSing_20_balladw05_sigh_021.wav"></audio></td>
+      <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/Proposed_20_balladw05_sigh_021.wav"></audio></td>
+      <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/GT_20_balladw05_sigh_021.wav"></audio></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td colspan="3">Sentence: 내가 안아줄게요 정말 수고했어요 <br>
+      <span class="en_pronun">(Pronunciation): naega an-ajulgeyo jeongmal sugohaess-eoyo </span>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">XiaoiceSing</td>
+    <td style="text-align: center;"><b>Multi-Task (Proposed)</b></td>
+    <td style="text-align: center;">Copy-Synthesis (Ground Truth)</td>
+  </tr>
+  <tr>
+      <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/XiaoiceSing_20_balladw05_sigh_025.wav"></audio></td>
+      <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/Proposed_20_balladw05_sigh_025.wav"></audio></td>
+      <td style="text-align: center;"><audio controls><source src="samples/WORLD/Ballad/GT_20_balladw05_sigh_025.wav"></audio></td>
+  </tr>
+</table>
+&nbsp; 
+
+</body>
+
+
+</html>
