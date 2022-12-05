@@ -20,16 +20,13 @@
     <h6><h5>Abstract</h5> <br>
       <div style="width: 1000">
         Neural vocoders based on the generative adversarial neural network (GAN) have been widely used due to their fast inference speed and lightweight networks while generating high-quality speech waveforms.
-        Since the perceptually important speech components are primarily concentrated in the low-frequency band,
-        most of the GAN-based neural vocoders perform multi-scale analysis that evaluates downsampled speech waveforms.
-        This multi-scale analysis helps the generator improve speech intelligibility.
-        However, in preliminary experiments, we observed that the multi-scale analysis which focuses on the low-frequency band causes unintended artifacts,
-        e.g., aliasing and imaging artifacts, and these artifacts degrade the synthesized speech waveform quality.
-        Therefore, in this paper, we investigate the relationship between these artifacts and GAN-based neural vocoders and propose a GAN-based neural vocoder, called Avocodo,
-        that allows the synthesis of high-fidelity speech with reduced artifacts. We introduce two kinds of discriminators to evaluate waveforms in various perspectives:
-        a collaborative multi-band discriminator and a sub-band discriminator. We also utilize a pseudo quadrature mirror filter bank to obtain downsampled multi-band waveforms while avoiding aliasing.
-        The experimental results show that Avocodo outperforms conventional GAN-based neural vocoders in both speech and singing voice synthesis tasks and can synthesize artifact-free speech.
-        Especially, Avocodo is even capable to reproduce high-quality waveforms of unseen speakers.
+        Since the perceptually important speech components are primarily concentrated in the low-frequency bands, most GAN-based vocoders perform multi-scale analysis that evaluates downsampled speech waveforms.
+        This multi-scale analysis helps the generator improve speech intelligibility. However, in preliminary experiments,
+        we discovered that the multi-scale analysis which focuses on the low-frequency bands causes unintended artifacts, e.g., aliasing and imaging artifacts, which degrade the synthesized speech waveform quality.
+        Therefore, in this paper, we investigate the relationship between these artifacts and GAN-based vocoders and propose a GAN-based vocoder, called Avocodo, that allows the synthesis of high-fidelity speech with reduced artifacts.
+        We introduce two kinds of discriminators to evaluate speech waveforms in various perspectives: a collaborative multi-band discriminator and a sub-band discriminator.
+        We also utilize a pseudo quadrature mirror filter bank to obtain downsampled multi-band speech waveforms while avoiding aliasing.
+        According to experimental resutls, Avocodo outperforms baseline GAN-based vocoders, both objectviely and subjectively, while reproducing speech with fewer artifacts.
       </div>
     <br>
     <div id="toc_container">
@@ -45,15 +42,14 @@
     <div id="toc_container2">
     <br>
       <h5>Contents</h5>
-      <ol type="A">
+      <ol type="1">
         <li><a href="#single">Single speaker synthesis</a></li>
-        <li><a href="#singing">Singing speaker synthesis</a></li>
         <li><a href="#unseen">Unseen speaker synthesis</a></li>
         <li><a href="#ablation">Discriminator-wise Comparison </a></li>
-        <li><a href="#ablation2">Downsampling Methods and Discriminator Structures Comparison</a></li>
+        <li><a href="#singing">Analyze on artifacts - aliasing: Singing voice synthesis</a></li>
+        <li><a href="#expressive">Analyze on artifacts - upsampling artifacts: Expressive speech synthesis</a></li>
       </ol>
     </div>
-
 </div>
 
 
@@ -88,140 +84,148 @@ $("#index").load("index.html");
         <tr>
           <td style="text-align: center;">Ground Truth</td>
           <td style="text-align: center;">HiFi-GAN V1</td>
-          <td style="text-align: center;">HiFi-GAN V2</td>
           <td style="text-align: center;">VocGAN</td>
+          <td style="text-align: center;">StyleMelGAN</td>
           <td style="text-align: center;">Avocodo V1</td>
-          <td style="text-align: center;">Avocodo V2</td>
         </tr>
         <tr style="height:4px; padding:0; border:0">
-          <td colspan="6" style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
             <h7>and see for himself <span style="color:red">how a revolutionary</span> society operates, a Marxist <span style="color:red">society.</span></h7>
           </td>
         </tr>
         <tr>
           <td style="text-align: center;"><audio controls><source src="samples/single/ground_truth/LJ042-0017.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/single/hifigan_v1/LJ042-0017.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/single/hifigan_v2/LJ042-0017.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/single/vocgan/LJ042-0017.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/single/stylemelgan/LJ042-0017.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/single/avocodo_v1/LJ042-0017.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/single/avocodo_v2/LJ042-0017.wav"></audio></td>
         </tr>
         <tr style="height:4px; padding:0; border:0">
-          <td colspan="6" style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
             <h7>Solomons was <span style="color:red">now</span> also admitted as a witness, and his evidence, with that of Moss, secured the transportation of the principal actors in the theft.</h7>
           </td>
         </tr>
         <tr>
           <td style="text-align: center;"><audio controls><source src="samples/single/ground_truth/LJ012-0145.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/single/hifigan_v1/LJ012-0145.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/single/hifigan_v2/LJ012-0145.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/single/vocgan/LJ012-0145.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/single/stylemelgan/LJ012-0145.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/single/avocodo_v1/LJ012-0145.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/single/avocodo_v2/LJ012-0145.wav"></audio></td>
         </tr>
         <tr style="height:4px; padding:0; border:0">
-          <td colspan="6" style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
             <h7>The demands on the President in the execution of His responsibilities in today's world are <span style="color:blue">so varied</span> and complex.</h7>
           </td>
         </tr>
         <tr>
           <td style="text-align: center;"><audio controls><source src="samples/single/ground_truth/LJ050-0271.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/single/hifigan_v1/LJ050-0271.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/single/hifigan_v2/LJ050-0271.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/single/vocgan/LJ050-0271.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/single/stylemelgan/LJ050-0271.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/single/avocodo_v1/LJ050-0271.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/single/avocodo_v2/LJ050-0271.wav"></audio></td>
         </tr>
         <tr style="height:4px; padding:0; border:0">
-          <td colspan="6" style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
             <h7>When before have you found them really at your <span style="color:blue">side</span> in your fights for progress?</h7>
           </td>
         </tr>
         <tr>
           <td style="text-align: center;"><audio controls><source src="samples/single/ground_truth/LJ024-0119.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/single/hifigan_v1/LJ024-0119.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/single/hifigan_v2/LJ024-0119.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/single/vocgan/LJ024-0119.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/single/stylemelgan/LJ024-0119.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/single/avocodo_v1/LJ024-0119.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/single/avocodo_v2/LJ024-0119.wav"></audio></td>
         </tr>
       </table>
     </div>
 
-    <div id="singing" class="container">
-      <h3 style="color:black;" font-weight="bold">2. Singing Speaker Synthesis (Internal Korean Dataset)</h3>
-      <h6><span style="color:red">RED</span>: Artifacts due to inaccurate harmonic components</h6>
-      <h6><span style="color:blue">BLUE</span>: Artifacts at high frequency due to imaging artifacts</h6>
-      <hr color="gray" size="1px" style="margin-bottom: 0; margin-top: 10"></hr>
-      <table>
-        <tr>
-          <td style="text-align: center;">Ground Truth</td>
-          <td style="text-align: center;">HiFi-GAN V1</td>
-          <td style="text-align: center;">Avocodo V1</td>
-        </tr>
-        <tr style="height:4px; padding:0; border:0">
-          <td colspan="3" style="height:4px; padding:0; border:0">
-            <h7>1. Vocal Scale</h7>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><audio controls><source src="samples/singing/ground_truth/1.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/singing/hifigan_v1/1.wav"></audio></td>
-            <td style="text-align: center;"><audio controls><source src="samples/singing/avocodo_v1/1.wav"></audio></td>
-        </tr>
-        <tr style="height:4px; padding:0; border:0">
-          <td colspan="3" style="height:4px; padding:0; border:0">
-            <h7>2. 변하지 않는 사랑으로.</h7><br>
-            <h7> => <span style="color:red">byeonhaji</span> anhneun sarangeuro .</h7>
-          </td>
-        </tr>
-        <tr>
-            <td style="text-align: center;"><audio controls><source src="samples/singing/ground_truth/2.wav"></audio></td>
-            <td style="text-align: center;"><audio controls><source src="samples/singing/hifigan_v1/2.wav"></audio></td>
-            <td style="text-align: center;"><audio controls><source src="samples/singing/avocodo_v1/2.wav"></audio></td>
-        </tr>
-        <tr style="height:4px; padding:0; border:0">
-          <td colspan="3" style="height:4px; padding:0; border:0">
-            <h7>3. 슬퍼마요 그대 나를 봐요 웃어봐요.</h7><br>
-            <h7> => <span style="color:blue">seul</span>peo<span style="color:red">ma</span>yo geudae nareul bwayo <span style="color:blue">useo</span>bwayo.</h7>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><audio controls><source src="samples/singing/ground_truth/3.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/singing/hifigan_v1/3.wav"></audio></td>
-            <td style="text-align: center;"><audio controls><source src="samples/singing/avocodo_v1/3.wav"></audio></td>
-        </tr>
-        <tr style="height:4px; padding:0; border:0">
-          <td colspan="3" style="height:4px; padding:0; border:0">
-            <h7>4. 맑고 흰 눈이 새봄빛 속에 사라지기 전에</h7><br>
-            <h7> => malkgo huin <span style="color:red">nuni</span> saebombit <span style="color:blue">so</span>ge sarajigi <span style="color:red">jeone</span></h7>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align: center;"><audio controls><source src="samples/singing/ground_truth/4.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/singing/hifigan_v1/4.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/singing/avocodo_v1/4.wav"></audio></td>
-        </tr>
-      </table>
-
-    </div>
     </div>
 
     <div id="unseen" class="container">
-      <h3 style="color:black;" font-weight="bold">3. Unseen Speaker Synthesis (Internal Korean Dataset)</h3>
+      <h3 style="color:black;" font-weight="bold">2. Unseen Speaker Synthesis</h3>
+      <br>
+      <h5 style="color:black;" font-weight="bold">VCTK datasets </h5>
+
       <hr color="gray" size="1px" style="margin-bottom: 0; margin-top: 10"></hr>
       <table>
         <tr>
           <td style="text-align: center;">Ground Truth</td>
           <td style="text-align: center;">HiFi-GAN V1</td>
-          <td style="text-align: center;">HiFi-GAN V2</td>
           <td style="text-align: center;">VocGAN</td>
+          <td style="text-align: center;">StyleMelGAN V1</td>
           <td style="text-align: center;">Avocodo V1</td>
-          <td style="text-align: center;">Avocodo V2</td>
         </tr>
 
         <tr style="height:4px; padding:0; border:0">
-          <td colspan="6" style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p254_gt.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p254_hifi.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p254_vocgan.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p254_style.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p254_avocodo.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p334_gt.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p334_hifi.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p334_vocgan.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p334_style.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p334_avocodo.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p314_gt.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p314_hifi.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p314_vocgan.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p314_style.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p314_avocodo.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p317_gt.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p317_hifi.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p317_vocgan.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p317_style.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p317_avocodo.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p283_gt.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p283_hifi.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p283_vocgan.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p283_style.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/vctk/p283_avocodo.wav"></audio></td>
+        </tr>
+      </table>
+      <br>
+      <h5 style="color:black;" font-weight="bold">Internal Korean Datasets</h5>
+      <hr color="gray" size="1px" style="margin-bottom: 0; margin-top: 10"></hr>
+      <table>
+        <tr>
+          <td style="text-align: center;">Ground Truth</td>
+          <td style="text-align: center;">HiFi-GAN V1</td>
+          <td style="text-align: center;">VocGAN</td>
+          <td style="text-align: center;">StyleMelGAN</td>
+          <td style="text-align: center;">Avocodo V1</td>
+        </tr>
+
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
             <h7>1. 러시아의 옛 수도원과 사원에서는 러시아 최초의 연대기들이 발견되는데.</h7><br>
             <h7> => reosiaui yet sudowongwa sawoneseoneun reosia choechoui yeondaegideuri balgyeondoeneunde.</h7>
           </td>
@@ -229,13 +233,12 @@ $("#index").load("index.html");
         <tr>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/ground_truth/m3.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/hifigan_v1/m3.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/unseen/hifigan_v2/m3.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/vocgan/m3.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/unseen/stylemelgan/m3.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/avocodo_v1/m3.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/unseen/avocodo_v2/m3.wav"></audio></td>
         </tr>
         <tr style="height:4px; padding:0; border:0">
-          <td colspan="6" style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
             <h7>2. 시몬 경을 어서 안전한 곳으로 옮겨야겠다. 상황이 일단락 되면 연락할테니 기다리도록 해.</h7><br>
             <h7> => simon gyeongeul eoseo anjeonhan goseuro olmgyeoyagessda. sanghwangi ildanrak doemyeon yeonrakhalteni gidaridorok hae.</h7>
           </td>
@@ -243,13 +246,12 @@ $("#index").load("index.html");
         <tr>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/ground_truth/m2.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/hifigan_v1/m2.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/unseen/hifigan_v2/m2.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/vocgan/m2.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/unseen/stylemelgan/m2.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/avocodo_v1/m2.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/unseen/avocodo_v2/m2.wav"></audio></td>
         </tr>
         <tr style="height:4px; padding:0; border:0">
-          <td colspan="6" style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
             <h7>3. 신애가 앞으로 의사가 될지 교수님이 될지, 화가가 될지 아직은 아무도 모르지.</h7><br>
             <h7> => sinaega apeuro uisaga doelji gyosunimi doelji, hwagaga doelji ajigeun amudo moreuji.</h7>
           </td>
@@ -257,13 +259,12 @@ $("#index").load("index.html");
         <tr>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/ground_truth/w1.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/hifigan_v1/w1.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/unseen/hifigan_v2/w1.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/vocgan/w1.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/unseen/stylemelgan/w1.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/avocodo_v1/w1.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/unseen/avocodo_v2/w1.wav"></audio></td>
         </tr>
         <tr style="height:4px; padding:0; border:0">
-          <td colspan="6" style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
             <h7>4. 낯선 환경이 얼마나 로맨틱한 감정을 불러일으키는지 확인해보자구요.</h7><br>
             <h7> => naccseon hwangyeongi eolmana romaentikhan gamjeongeul bulleoireukineunji hwaginhaebojaguyo.</h7>
           </td>
@@ -271,10 +272,9 @@ $("#index").load("index.html");
         <tr>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/ground_truth/w2.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/hifigan_v1/w2.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/unseen/hifigan_v2/w2.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/vocgan/w2.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/unseen/stylemelgan/w2.wav"></audio></td>
           <td style="text-align: center;"><audio controls><source src="samples/unseen/avocodo_v1/w2.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/unseen/avocodo_v2/w2.wav"></audio></td>
         </tr>
       </table>
 
@@ -282,7 +282,7 @@ $("#index").load("index.html");
     </div>
 
     <div id="ablation" class="container">
-      <h3 style="color:black;" font-weight="bold">4. Discriminator-wise Comparison (LJ Speech dataset)</h3>
+      <h3 style="color:black;" font-weight="bold">3. Discriminator-wise Comparison (LJ Speech dataset)</h3>
       <hr color="gray" size="1px" style="margin-bottom: 0; margin-top: 10"></hr>
       <table>
         <tr>
@@ -326,44 +326,98 @@ $("#index").load("index.html");
     </div>
     </div>
 
-    <div id="ablation2" class="container">
-      <h3 style="color:black;" font-weight="bold">5. Downsampling Methods and Discriminator Structures Comparison (LJ Speech dataset)</h3>
-      <h6>Downsampling methods : Average Pooling (AP), PQMF</h6>
-      <h6>Discriminator Structures : Multi-scale structure (MS), Hierarchical Structure (HS)</h6>
+    <div id="singing" class="container">
+      <h3 style="color:black;" font-weight="bold">4. Analyze on artifacts - aliasing: Singing voice synthesis (Internal Korean Dataset)</h3>
+      <img src="img/singing_spec.png" height="250" width="800">
       <hr color="gray" size="1px" style="margin-bottom: 0; margin-top: 10"></hr>
       <table>
         <tr>
           <td style="text-align: center;">Ground Truth</td>
-          <td style="text-align: center;">AP + MS</td>
-          <td style="text-align: center;">AP + HS</td>
-          <td style="text-align: center;">PQMF + MS</td>
-          <td style="text-align: center;">PQMF + HS</td>
-          <!-- <td style="text-align: center;">tSBD + fSBD</td> -->
+          <td style="text-align: center;">HiFi-GAN V1</td>
+          <td style="text-align: center;">Avocodo V1</td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="3" style="height:4px; padding:0; border:0">
+            <h7>Vocal Scale</h7>
+          </td>
         </tr>
         <tr>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/ground_truth/LJ021-0049.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/ap_ms/LJ021-0049.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/ap_hs/LJ021-0049.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/pqmf_ms/LJ021-0049.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/pqmf_hs/LJ021-0049.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/singing/ground_truth/1.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/singing/hifigan_v1/1.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/singing/avocodo_v1/1.wav"></audio></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Samples from baseline degraded by high frequency artifacts. -->
+    <div id="expressive" class="container">
+      <h3 style="color:black;" font-weight="bold">5. Analyze on artifacts - upsampling artifacts: Expressive speech synthesis (Internal Korean Dataset)</h3>
+          <h7>We trained each vocoders with expressive speech datasets (800k iterations). Below samples were excluded from training.</h7><br>
+          <h7>In expressive speech, the perceptual quality degradation, especailly high-frequency noise, by upsampling artifact is noticeble.</h7><br>
+      <hr color="gray" size="1px" style="margin-bottom: 0; margin-top: 10"></hr>
+      <table>
+        <tr>
+          <td style="text-align: center;">Ground Truth</td>
+          <td style="text-align: center;">HiFi-GAN V1</td>
+          <td style="text-align: center;">Avocodo V1</td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="3" style="height:4px; padding:0; border:0">
+            <h7>1. 내게 <span style="color:blue">아무런 의미가 없어</span>.</h7><br>
+            <h7> => naege <span style="color:blue">amureon uimiga eopseo.</span></h7>
+          </td>
         </tr>
         <tr>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/ground_truth/LJ039-0149.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/ap_ms/LJ039-0149.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/ap_hs/LJ039-0149.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/pqmf_ms/LJ039-0149.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/pqmf_hs/LJ039-0149.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/expressive/01_gt1.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/expressive/01_hifigan1.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/expressive/01_avocodo1.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="3" style="height:4px; padding:0; border:0">
+            <h7>2. 흥! <span style="color:blue">늦었어.</span> 이젠 날 막을 순 <span style="color:blue">없어</span>!</h7><br>
+            <h7> => heung! <span style="color:blue">neujeosseo.</span> ijen nal mageul sun <span style="color:blue">eopseoe</span>!</h7>
+          </td>
         </tr>
         <tr>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/ground_truth/LJ049-0174.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/ap_ms/LJ049-0174.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/ap_hs/LJ049-0174.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/pqmf_ms/LJ049-0174.wav"></audio></td>
-          <td style="text-align: center;"><audio controls><source src="samples/composition/pqmf_hs/LJ049-0174.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/expressive/02_gt1.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/expressive/02_hifigan1.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/expressive/02_avocodo1.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="3" style="height:4px; padding:0; border:0">
+            <h7>3. 후... 엉망<span style="color:blue">진창이로군</span>!</h7><br>
+            <h7> => hu... eongmang<span style="color:blue">jinchangirogun!</span></h7>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><audio controls><source src="samples/expressive/03_gt1.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/expressive/03_hifigan1.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/expressive/03_avocodo1.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="3" style="height:4px; padding:0; border:0">
+            <h7>4. 절대 <span style="color:blue">기대하지 말라</span>고. 그런 건 아주 오래전에 <span style="color:blue">사라졌으니.</span></h7><br>
+            <h7> => jeoldae <span style="color:blue">gidaehaji malla</span>go. geureon geon aju oraejeone <span style="color:blue">sarajyeosseuni.</span></h7>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><audio controls><source src="samples/expressive/04_gt1.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/expressive/04_hifigan1.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/expressive/04_avocodo1.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="3" style="height:4px; padding:0; border:0">
+            <h7>5. <span style="color:blue">천명</span>에만 달린 것이 <span style="color:blue">아닌 것을.</span></h7><br>
+            <h7> => <span style="color:blue">cheonmyeong</span>eman dallin geosi <span style="color:blue">anin geoseul.</span></h7>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><audio controls><source src="samples/expressive/05_gt1.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/expressive/05_hifigan1.wav"></audio></td>
+            <td style="text-align: center;"><audio controls><source src="samples/expressive/05_avocodo1.wav"></audio></td>
         </tr>
       </table>
 
-    </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
