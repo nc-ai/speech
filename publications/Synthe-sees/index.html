@@ -1,0 +1,687 @@
+<html>
+<meta charset="utf-8">
+
+<!-- Background theme -->
+<div id="background">
+    <div class="bg1"></div>
+    <div class="bg2"></div>
+    <img src="img/logo.svg" alt="ci_logo"><img>
+    <div class="bg3"></div>
+    <div class="bg4"></div>
+</div>
+
+<br>
+
+<div id="gvc_header" class="container">
+    <div>
+    <h4> SYNTHE-SEES: Face Based Text-to-speech For Virtual Speaker </h4>
+    <h3 style="display:inline">Jae Hyun Park, Joon-Gyu Maeng, Taejun Bak, Young-Sun Joo</h3>
+    <br>
+    <br>
+    <h5>Paper</h5><br>
+    <div>
+    <a href="">	arXiv</a>
+    , accepted to <b>ICASSP 2024</b></div><br>
+    <h6><h5>Abstract</h5> <br>
+      <div style="width: 1000">
+        Recent virtual voice generation researches have limitations in that they results in low-quality voice and generate inconsistent voice from the same speaker's different facial images. 
+        To handle this, we propose a facial encoder module for the pre-trained multi-speaker TTS system called SYNTHE-SEES, which utilizes face embeddings as speaker embeddings by sharing the embedding space of the pre-trained speech embeddings using cross-modal contrastive learning.
+        We trained the facial encoder in two ways: 1) for consistent embeddings, we use the dataset supervision to capture discriminative speaker attributes;  2) we leverage internal structure of the speech embedding to generate diverse and high-quality voices.
+        Experimental results demonstrate that our method generates more distinct, consistent, and high-quality speaker embeddings than other state-of-the-art methods in both quantitative and qualitative evaluations.
+        Especially, the result of cluster-level evaluation verifies that our method shows the highest distinction performance of diverse speaker embedding.
+      </div>
+    <br>
+    <div id="toc_container">
+      <br>
+    <h5>Structure</h5>
+    <img align="center" src="img/synthe_sees_system.png";
+      style="display: left;
+        margin-left: auto;
+        margin-right: auto;
+        width: 600;" />
+    </div>
+    <hr color="gray" size="1px"></hr>
+    <div id="toc_container2">
+    <br>
+      <h5>Contents</h5>
+      <ol type="1">
+        <li><a href="#unseen">Results from unseen faces</a></li>
+        <li><a href="#identical">Faces from identical speaker</a></li>
+        <li><a href="#cited"> Acknowledgements </a></li>
+      </ol>
+    </div>
+</div>
+
+
+<head>
+  <title> Demo page of Synthe-Sees</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="../../images/nc.png">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700,900&display=swap&subset=korean"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready( function() {
+
+$("#index").load("index.html");
+
+});
+</script>
+
+<br>
+<body class="text-center">
+    <div id="unseen" class="container">
+      <h3 style="color:black;" font-weight="bold">1. Results from unseen faces</h3>
+
+      <h6>Celebrity (Real human)</h6>
+      Various results including real, virtual, and not human character from proposed method. We sample transcriptions from CNN, LJSpeech.
+      <hr color="gray" size="1px" style="margin-bottom: 0; margin-top: 10"></hr>
+      <p style="text-align: center;">
+        <img src="./img/unseen_faces/0.jpeg" alt="0" width="300"><br>
+      </p>
+      <p style="text-align: center;">
+        <b>Text</b>: At the same time, extreme weather has had a deadly impact in other parts of the region.
+      </p>
+      <p style="text-align: center;">  
+        <audio controls><source src="./samples/unseen_faces/0.wav" type="audio/wav"></audio>
+      </p>
+      <br>
+      <p style="text-align: center;">
+        <img src="./img/unseen_faces/1.jpeg" alt="1" width="300">
+      </p>
+      <p style="text-align: center;">
+        <b>Text</b>: The event was supposed to feature outdoor activities, cultural performances, sustainability workshops and other offerings for the participants, mostly middle and high schoolers.
+      </p>
+      <p style="text-align: center;">
+        <audio controls><source src="./samples/unseen_faces/1.wav" type="audio/wav"></audio>
+      </p>
+      <br>
+      <p style="text-align: center;">
+        <img src="./img/unseen_faces/2.jpeg" alt="2" width="300">
+      </p>
+      <p style="text-align: center;">
+        <b>Text</b>: These people had many characteristics in common and were all called Indians.
+      </p>
+      <p style="text-align: center;">
+        <audio controls><source src="./samples/unseen_faces/2.wav" type="audio/wav"></audio>
+      </p><br>
+
+      <h6>Animated (Virtual)</h6>
+      <p style="text-align: center; color:gray;">
+        <img src="./img/unseen_faces/3.jpeg" alt="3" width="300"><br>
+        (Image is generated by Stable Diffusion)
+      </p>
+      <p style="text-align: center;">
+        <b>Text</b>: It ended just where it had started, on a dead twig of a tree in a shady, rather lonely part of the Green Forest.
+      </p>
+      <p style="text-align: center;">
+        <audio controls><source src="./samples/unseen_faces/3.wav" type="audio/wav"></audio>
+      </p>
+      <br>
+      <p style="text-align: center; color:gray;">
+        <img src="./img/unseen_faces/4.jpeg" alt="4" width="300"><br>
+        (The character of TJ Kim who is the head of NCSOFT, <a href="https://www.youtube.com/watch?v=aMYvommxKiw">	Project M</a>)
+      </p>
+      <p style="text-align: center;">  
+        <b>Text</b>: You are so accustomed to light, I fear you will stumble when I try to guide you through the land of darkness and silence.
+      </p>
+      <p style="text-align: center;">
+        <audio controls><source src="./samples/unseen_faces/4.wav" type="audio/wav"></audio>
+      </p>
+      <br>
+      <p style="text-align: center; color:gray;">
+        <img src="./img/unseen_faces/5.jpeg" alt="5" width="300"><br>
+        (The main character in <a href="https://www.youtube.com/watch?v=aMYvommxKiw">	Project M</a>)
+      </p>
+      <p style="text-align: center;">
+        <b>Text</b>: A preliminary investigation report is expected to be released about 15 days after the team completes their work.
+      </p>
+      <p style="text-align: center;">
+        <audio controls><source src="./samples/unseen_faces/5.wav" type="audio/wav"></audio>
+      </p>
+      <br>
+      <p style="text-align: center; color:gray;">
+        <img src="./img/unseen_faces/6.jpeg" alt="6" width="300"><br>
+        (The cute character of NCSOFT, name is "DOGURI" <a href="https://www.instagram.com/doguri_official/"><img src="./img/instagram.jpeg" width="15"></a>)
+      </p>
+      <p style="text-align: center;">
+        <b>Text</b>: His cunning began here; he smiled habitually, by way of precaution, and was almost polite to everybody, even to the beggar to whom he refused half a farthing.
+      </p>
+      <p style="text-align: center;">
+        <audio controls><source src="./samples/unseen_faces/6.wav" type="audio/wav"></audio>
+      </p>
+      
+    </div>
+
+    </div>
+
+    <div id="identical" class="container">
+      <h3 style="color:black;" font-weight="bold">2. Faces from identical speaker (also unseen)</h3>
+      Given 3 samples of identical speaker, we show the results compared other face-to-voice approaches. In many of cases, we find out that other methods generate 
+      different voices from same speaker while our method generate consistent voices. Note that we generate voices from same text in same speaker since it is easy
+      to find voice difference. It is recommended to listen to the samples one row at a time.
+      <br>
+      <br>
+      <!-- 8nt3ed -->
+      <table>
+        <tr>
+          <td></td>
+          <td style="text-align: center;"><img src="./img/8nt3ed/Untitled.png" width="200"></td>
+          <td style="text-align: center;"><img src="./img/8nt3ed/Untitled_1.png" width="200"></td>
+          <td style="text-align: center;"><img src="./img/8nt3ed/Untitled_2.png" width="200"></td>
+        </tr>
+
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Ground Truth</td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/GT/00003.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/GT/00003.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/GT/00003.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Face2Speech</td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/face2speech/00003_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/face2speech/00004_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/face2speech/00005_4_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Imaginary Voice</td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/Imaginary Voice/8nt3edWLgIg-00003_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/Imaginary Voice/8nt3edWLgIg-00004_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/Imaginary Voice/8nt3edWLgIg-00005_4_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Trained-L2</td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/Trained-L2/00003_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/Trained-L2/00004_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/Trained-L2/00005_4_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">X-vector</td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/x-vector/00003_1_xvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/x-vector/00004_1_xvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/x-vector/00005_4_xvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">SYNTHE-SEES</td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/proposed/00003_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/proposed/00004_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/8nt3ed/proposed/00005_4_fvec.wav"></audio></td>
+        </tr>
+      </table>
+      <br>
+      <!-- 95ovIJ -->
+      <br>
+      <table>
+        <tr>
+          <td></td>
+          <td style="text-align: center;"><img src="./img/95ovIJ/Untitled.png" width="200"></td>
+          <td style="text-align: center;"><img src="./img/95ovIJ/Untitled_1.png" width="200"></td>
+          <td style="text-align: center;"><img src="./img/95ovIJ/Untitled_2.png" width="200"></td>
+        </tr>
+
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Ground Truth</td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/GT/00003.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/GT/00003.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/GT/00003.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Face2Speech</td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/Face2speech/00002_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/Face2speech/00009_3_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/Face2speech/00009_4_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Imaginary Voice</td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/Imaginary Voice/95ovIJ3dsNk-00002_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/Imaginary Voice/95ovIJ3dsNk-00009_3_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/Imaginary Voice/95ovIJ3dsNk-00009_4_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Trained-L2</td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/Trained-L2/00002_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/Trained-L2/00009_3_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/Trained-L2/00009_4_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">X-vector</td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/x-vector/00002_2_xvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/x-vector/00006_2_xvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/x-vector/00009_3_xvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">SYNTHE-SEES</td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/Proposed/00002_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/Proposed/00009_3_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/95ovIJ/Proposed/00009_4_fvec.wav"></audio></td>
+        </tr>
+      </table>
+      <br>
+      <!-- fllCVe -->
+      <br>
+      <table>
+        <tr>
+          <td></td>
+          <td style="text-align: center;"><img src="./img/fllCVe/Untitled.png" width="200"></td>
+          <td style="text-align: center;"><img src="./img/fllCVe/Untitled_1.png" width="200"></td>
+          <td style="text-align: center;"><img src="./img/fllCVe/Untitled_2.png" width="200"></td>
+        </tr>
+
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Ground Truth</td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/GT/00003.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/GT/00003.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/GT/00003.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Face2Speech</td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/Face2speech/00001_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/Face2speech/00004_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/Face2speech/00003_1_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Imaginary Voice</td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/Imaginary Voice/fIICVeGW4RY-00001_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/Imaginary Voice/fIICVeGW4RY-00003_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/Imaginary Voice/fIICVeGW4RY-00004_2_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Trained-L2</td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/Trained-L2/00001_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/Trained-L2/00004_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/Trained-L2/00003_1_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">X-vector</td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/x-vector/00001_2_xvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/x-vector/00003_1_xvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/x-vector/00003_2_xvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">SYNTHE-SEES</td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/Proposed/00001_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/Proposed/00003_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/fllCVe/Proposed/00004_2_fvec.wav"></audio></td>
+        </tr>
+      </table>
+      <br>
+      <!-- stngBN -->
+      <br>
+      <table>
+        <tr>
+          <td></td>
+          <td style="text-align: center;"><img src="./img/stngBN/Untitled.png" width="200"></td>
+          <td style="text-align: center;"><img src="./img/stngBN/Untitled_1.png" width="200"></td>
+          <td style="text-align: center;"><img src="./img/stngBN/Untitled_2.png" width="200"></td>
+        </tr>
+
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Ground Truth</td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/GT/00003.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/GT/00003.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/GT/00003.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Face2Speech</td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/Face2Speech/00001_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/Face2Speech/00001_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/Face2Speech/00001_6_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Imaginary Voice</td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/Imaginary Voice/stngBN4hp14-00001_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/Imaginary Voice/stngBN4hp14-00001_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/Imaginary Voice/stngBN4hp14-00001_6_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Trained-L2</td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/Trained-L2/00001_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/Trained-L2/00001_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/Trained-L2/00001_6_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">X-vector</td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/x-vector/00001_1_xvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/x-vector/00001_2_xvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/x-vector/00001_3_xvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">SYNTHE-SEES</td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/Proposed/00001_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/Proposed/00001_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/stngBN/Proposed/00001_6_fvec.wav"></audio></td>
+        </tr>
+      </table>
+      <br>
+      <!-- UMhLB -->
+      <br>
+      <table>
+        <tr>
+          <td></td>
+          <td style="text-align: center;"><img src="./img/UMhLB/Untitled.png" width="200"></td>
+          <td style="text-align: center;"><img src="./img/UMhLB/Untitled_1.png" width="200"></td>
+          <td style="text-align: center;"><img src="./img/UMhLB/Untitled_2.png" width="200"></td>
+        </tr>
+
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Ground Truth</td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/GT/00005.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/GT/00005.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/GT/00005.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Face2Speech</td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/Face2speech/00002_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/Face2speech/00004_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/Face2speech/00005_2_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Imaginary Voice</td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/Imaginary Voice/UMhLBPPtlrY-00002_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/Imaginary Voice/UMhLBPPtlrY-00004_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/Imaginary Voice/UMhLBPPtlrY-00005_2_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Trained-L2</td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/Trained-L2/00002_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/Trained-L2/00004_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/Trained-L2/00005_2_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">X-vector</td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/x-vector/00002_1_xvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/x-vector/00004_2_xvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/x-vector/00005_1_xvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">SYNTHE-SEES</td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/Proposed/00002_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/Proposed/00004_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/UMhLB/Proposed/00005_2_fvec.wav"></audio></td>
+        </tr>
+      </table>
+      <br>
+      <!-- LEx6K4 -->
+      <br>
+      <table>
+        <tr>
+          <td></td>
+          <td style="text-align: center;"><img src="./img/LEx6K4/Untitled.png" width="200"></td>
+          <td style="text-align: center;"><img src="./img/LEx6K4/Untitled_1.png" width="200"></td>
+          <td style="text-align: center;"><img src="./img/LEx6K4/Untitled_2.png" width="200"></td>
+        </tr>
+
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Ground Truth</td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/GT/00004.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/GT/00004.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/GT/00004.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Face2Speech</td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/Face2speech/00001_4_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/Face2speech/00004_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/Face2speech/00005_1_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Imaginary Voice</td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/Imaginary voice/LEx6K4P4GJc-00001_4_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/Imaginary voice/LEx6K4P4GJc-00004_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/Imaginary voice/LEx6K4P4GJc-00005_1_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Trained-L2</td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/Trained-L2/00001_4_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/Trained-L2/00004_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/Trained-L2/00005_1_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">X-vector</td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/x-vector/00001_4_xvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/x-vector/00003_2_xvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/x-vector/00004_2_xvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr> 
+        <tr>
+          <td style="font-weight:bold; text-align: center;">SYNTHE-SEES</td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/Proposed/00001_4_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/Proposed/00003_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/LEx6K4/Proposed/00004_2_fvec.wav"></audio></td>
+        </tr>
+      </table>
+      <br>
+      <!-- 2UStOg -->
+      <br>
+      <table>
+        <tr>
+          <td></td>
+          <td style="text-align: center;"><img src="./img/2UStOg/Untitled.png" width="200"></td>
+          <td style="text-align: center;"><img src="./img/2UStOg/Untitled_1.png" width="200"></td>
+          <td style="text-align: center;"><img src="./img/2UStOg/Untitled_2.png" width="200"></td>
+        </tr>
+
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Ground Truth</td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/GT/00003.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/GT/00003.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/GT/00003.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Face2Speech</td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/Face2speech/00001_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/Face2speech/00002_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/Face2speech/00005_1_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Imaginary Voice</td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/Imaginary Voice/2UStOghblfE-00001_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/Imaginary Voice/2UStOghblfE-00002_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/Imaginary Voice/2UStOghblfE-00005_1_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">Trained-L2</td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/Trained-L2/00001_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/Trained-L2/00002_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/Trained-L2/00005_1_fvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr>
+        <tr>
+          <td style="font-weight:bold; text-align: center;">X-vector</td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/x-vector/00001_2_xvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/x-vector/00002_1_xvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/x-vector/00005_1_xvec.wav"></audio></td>
+        </tr>
+        <tr style="height:4px; padding:0; border:0">
+          <td colspan="5" style="height:4px; padding:0; border:0">
+          </td>
+        </tr> 
+        <tr>
+          <td style="font-weight:bold; text-align: center;">SYNTHE-SEES</td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/Proposed/00001_2_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/Proposed/00002_1_fvec.wav"></audio></td>
+          <td style="text-align: center;"><audio controls><source src="samples/2UStOg/Proposed/00005_1_fvec.wav"></audio></td>
+        </tr>
+      </table>
+      <br>
+
+    </div>
+    <div id="cited" class="container">
+      <h3 style="color:black;" font-weight="bold">3. Acknowledgements</h3>
+      TODO
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
