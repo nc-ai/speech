@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toggle Multiple Contents with Dynamic Images</title>
+<style>
+   .hidden-content {
+     display: none;
+   }
+   /* Style for the image button */
+   .image-button {
+     background: none;
+     border: none;
+     cursor: pointer;
+   }
+</style>
+</head>
+<body>
+<div>
+<h2>섹션 1</h2>
+<button class="image-button" onclick="toggleContent('section1')">
+<img id="image1" src="static/images/button_off.png" alt="Toggle Button 1">
+</button>
+<div id="section1" class="hidden-content">
+<p>섹션 1의 내용이 여기에 들어갑니다.</p>
+</div>
+</div>
+<div>
+<h2>섹션 2</h2>
+<button class="image-button" onclick="toggleContent('section2')">
+<img id="image2" src="static/images/button_off.png" alt="Toggle Button 2">
+</button>
+<div id="section2" class="hidden-content">
+<p>섹션 2의 내용이 여기에 들어갑니다.</p>
+</div>
+</div>
+<script>
+ function toggleContent(sectionId) {
+   var contentDiv = document.getElementById(sectionId);
+   var imageElement = document.getElementById('image' + sectionId.charAt(sectionId.length - 1));
+   if (contentDiv.style.display === "none" || contentDiv.style.display === "") {
+     contentDiv.style.display = "block";
+     imageElement.src = "static/images/button_on.png";
+   } else {
+     contentDiv.style.display = "none";
+     imageElement.src = "static/images/button_off.png";
+   }
+ }
+</script>
+</body>
+</html>
