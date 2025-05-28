@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H2NH Voice Conversion Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hidden { display: none; }
+        @media (max-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center p-6">
+    <h1 class="text-3xl font-bold text-center max-w-3xl mx-auto leading-tight mb-2">
+	When Humans Growl and Birds Speak:<br>
+        High-Fidelity Voice Conversion from Human to Animal and Designed Sounds
+    </h1>
+
+    <p class="text-gray-300 mb-4">Anonymous submissions to Interspeech 2005</p>
+    &nbsp;
+    <div class="max-w-3xl text-gray-300 text-base leading-relaxed text-center mx-auto mb-6">
+        Human-to-non-human voice conversion (H2NH-VC) transforms human speech into animal or designed vocalizations.
+        Unlike prior studies focused on dog-sounds and 16 or 22.05kHz audio transformation, this work addresses a broader
+        range of non-speech sounds, including natural sounds (lion-roars, birdsongs) and designed voice (synthetic growls).
+        To accommodate generation of diverse non-speech sounds and 44.1kHz high-quality audio transformation, we introduce
+        a preprocessing pipeline and an improved CVAE-based H2NH-VC model, both optimized for human and nonhuman voices.
+        Experimental results showed that the proposed method outperformed baselines in quality, naturalness, and similarity MOS,
+        achieving effective voice conversion across diverse nonhuman timbres.
+    </div>
+
+
+    &nbsp;
+
+
+    &nbsp;
+
+    <!-- Comparison of Baseline Models Page -->
+    <div id="comparison-page" class="w-full max-w-5xl">
+        <h2 class="text-2xl font-semibold mb-4">Comparison of Baseline Models</h2>
+        <!-- 기존 경쟁 모델 비교 페이지 -->
+        
+        <p class="mb-4 text-gray-300">This section presents a comparison between our proposed model and baseline models.</p>
+
+        <div class="bg-gray-800 p-4 rounded-lg shadow-lg mb-6">
+            <h3 class="text-lg font-semibold mb-2">Baseline Models:</h3>
+            <ul class="list-disc pl-6 text-gray-300">
+                <li><b>Proposed</b>- Proposed</b> - Our proposed H2NH-VC model, designed for high-fidelity nonhuman voice conversion using a CVAE-based architecture with specialized preprocessing pipeline</li></li>
+                <li><b>w/o pp</b>- The proposed model without our specialized preprocessing pipeline, instead using a conventional speech-focused preprocessing approach.</li>
+                <li><b>DDDM-VC [Choi 23] </b>- A VC model integrating a source-filter–based diffusion acoustic model with a separate HiFiGAN vocoder [Kong 21], designed to enhance the disentanglement of prosodic elements in human speech.</li>
+                <li><b>Diff-HierVC [Choi 23] </b>- A diffusion-based model employing a hierarchical structure to more accurately capture the source-filter properties of human speech over time and frequency. A separate HiFiGAN vocoder [Kong 21] was used for waveform reconstruction.</li>
+                <li><b>Free-VC [Li 22] </b>- A CVAE-VC model implementing text-free VC, focusing on detailed linguistic representation extraction.</li>
+            </ul>
+        </div>
+
+        <p class="mb-4 text-black font-bold text-lg bg-yellow-500 px-4 py-2 rounded-lg text-center">
+            (Source) Human Speech + (Reference) Non-human Timbre
+        </p>
+        
+        <div class="grid grid-cols-7 gap-4 p-4 bg-gray-800 rounded-lg shadow-lg mb-6">
+            <div class="text-center"><p class="text-sm font-bold">Source</p><audio controls class="w-full"><source src="samples/source_04.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Reference</p><audio controls class="w-full"><source src="samples/reference_04.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Proposed (ours)</p><audio controls class="w-full"><source src="samples/proposed_04.wav" type="audio/wav"></audio></div>
+            <div class="text-center whitespace-nowrap"><p class="text-sm font-bold">w/o pp (ours)</p><audio controls class="w-full"><source src="samples/proposed_wo_pp_04.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">DDDM-VC</p><audio controls class="w-full"><source src="samples/dddm_04.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Diff-HierVC</p><audio controls class="w-full"><source src="samples/diff_hier_04.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Free-VC</p><audio controls class="w-full"><source src="samples/freevc_04.wav" type="audio/wav"></audio></div>
+        </div>
+
+        <div class="grid grid-cols-7 gap-4 p-4 bg-gray-800 rounded-lg shadow-lg mb-6">
+            <div class="text-center"><p class="text-sm font-bold">Source</p><audio controls class="w-full"><source src="samples/source_03.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Reference</p><audio controls class="w-full"><source src="samples/reference_03.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Proposed (ours)</p><audio controls class="w-full"><source src="samples/proposed_03.wav" type="audio/wav"></audio></div>
+            <div class="text-center whitespace-nowrap"><p class="text-sm font-bold">w/o pp (ours)</p><audio controls class="w-full"><source src="samples/proposed_wo_pp_03.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">DDDM-VC</p><audio controls class="w-full"><source src="samples/dddm_03.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Diff-HierVC</p><audio controls class="w-full"><source src="samples/diff_hier_03.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Free-VC</p><audio controls class="w-full"><source src="samples/freevc_03.wav" type="audio/wav"></audio></div>
+        </div>
+        
+        <div class="grid grid-cols-7 gap-4 p-4 bg-gray-800 rounded-lg shadow-lg mb-6">
+            <div class="text-center"><p class="text-sm font-bold">Source</p><audio controls class="w-full"><source src="samples/source_02.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Reference</p><audio controls class="w-full"><source src="samples/reference_02.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Proposed (ours)</p><audio controls class="w-full"><source src="samples/proposed_02.wav" type="audio/wav"></audio></div>
+            <div class="text-center whitespace-nowrap"><p class="text-sm font-bold">w/o pp (ours)</p><audio controls class="w-full"><source src="samples/proposed_wo_pp_02.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">DDDM-VC</p><audio controls class="w-full"><source src="samples/dddm_02.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Diff-HierVC</p><audio controls class="w-full"><source src="samples/diff_hier_02.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Free-VC</p><audio controls class="w-full"><source src="samples/freevc_02.wav" type="audio/wav"></audio></div>
+        </div>
+        
+
+        <div class="grid grid-cols-7 gap-4 p-4 bg-gray-800 rounded-lg shadow-lg mb-6">
+            <div class="text-center"><p class="text-sm font-bold">Source</p><audio controls class="w-full"><source src="samples/source_01.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Reference</p><audio controls class="w-full"><source src="samples/reference_01.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Proposed (ours)</p><audio controls class="w-full"><source src="samples/proposed_01.wav" type="audio/wav"></audio></div>
+            <div class="text-center whitespace-nowrap"><p class="text-sm font-bold">w/o pp (ours)</p><audio controls class="w-full"><source src="samples/proposed_wo_pp_01.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">DDDM-VC</p><audio controls class="w-full"><source src="samples/dddm_01.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Diff-HierVC</p><audio controls class="w-full"><source src="samples/diff_hier_01.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Free-VC</p><audio controls class="w-full"><source src="samples/freevc_01.wav" type="audio/wav"></audio></div>
+        </div>
+
+        
+        <p class="mb-4 text-black font-bold text-lg bg-yellow-500 px-4 py-2 rounded-lg text-center">
+            (Source) Human Non-verbal Vocalizations + (Reference) Non-human Timbre
+        </p>        
+
+        <div class="grid grid-cols-7 gap-4 p-4 bg-gray-800 rounded-lg shadow-lg mb-6">
+            <div class="text-center"><p class="text-sm font-bold">Source</p><audio controls class="w-full"><source src="samples/source_05.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Reference</p><audio controls class="w-full"><source src="samples/reference_05.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Proposed (ours)</p><audio controls class="w-full"><source src="samples/proposed_05.wav" type="audio/wav"></audio></div>
+            <div class="text-center whitespace-nowrap"><p class="text-sm font-bold">w/o pp (ours)</p><audio controls class="w-full"><source src="samples/proposed_wo_pp_05.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">DDDM-VC</p><audio controls class="w-full"><source src="samples/dddm_05.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Diff-HierVC</p><audio controls class="w-full"><source src="samples/diff_hier_05.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Free-VC</p><audio controls class="w-full"><source src="samples/freevc_05.wav" type="audio/wav"></audio></div>
+        </div>
+
+        <div class="grid grid-cols-7 gap-4 p-4 bg-gray-800 rounded-lg shadow-lg mb-6">
+            <div class="text-center"><p class="text-sm font-bold">Source</p><audio controls class="w-full"><source src="samples/source_07.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Reference</p><audio controls class="w-full"><source src="samples/reference_07.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Proposed (ours)</p><audio controls class="w-full"><source src="samples/proposed_07.wav" type="audio/wav"></audio></div>
+            <div class="text-center whitespace-nowrap"><p class="text-sm font-bold">w/o pp (ours)</p><audio controls class="w-full"><source src="samples/proposed_wo_pp_07.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">DDDM-VC</p><audio controls class="w-full"><source src="samples/dddm_07.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Diff-HierVC</p><audio controls class="w-full"><source src="samples/diff_hier_07.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Free-VC</p><audio controls class="w-full"><source src="samples/freevc_07.wav" type="audio/wav"></audio></div>
+        </div>
+
+        <div class="grid grid-cols-7 gap-4 p-4 bg-gray-800 rounded-lg shadow-lg mb-6">
+            <div class="text-center"><p class="text-sm font-bold">Source</p><audio controls class="w-full"><source src="samples/source_08.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Reference</p><audio controls class="w-full"><source src="samples/reference_08.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Proposed (ours)</p><audio controls class="w-full"><source src="samples/proposed_08.wav" type="audio/wav"></audio></div>
+            <div class="text-center whitespace-nowrap"><p class="text-sm font-bold">w/o pp (ours)</p><audio controls class="w-full"><source src="samples/proposed_wo_pp_08.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">DDDM-VC</p><audio controls class="w-full"><source src="samples/dddm_08.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Diff-HierVC</p><audio controls class="w-full"><source src="samples/diff_hier_08.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Free-VC</p><audio controls class="w-full"><source src="samples/freevc_08.wav" type="audio/wav"></audio></div>
+        </div>
+
+        <div class="grid grid-cols-7 gap-4 p-4 bg-gray-800 rounded-lg shadow-lg mb-6">
+            <div class="text-center"><p class="text-sm font-bold">Source</p><audio controls class="w-full"><source src="samples/source_06.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Reference</p><audio controls class="w-full"><source src="samples/reference_06.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Proposed (ours)</p><audio controls class="w-full"><source src="samples/proposed_06.wav" type="audio/wav"></audio></div>
+            <div class="text-center whitespace-nowrap"><p class="text-sm font-bold">w/o pp (ours)</p><audio controls class="w-full"><source src="samples/proposed_wo_pp_06.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">DDDM-VC</p><audio controls class="w-full"><source src="samples/dddm_06.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Diff-HierVC</p><audio controls class="w-full"><source src="samples/diff_hier_06.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Free-VC</p><audio controls class="w-full"><source src="samples/freevc_06.wav" type="audio/wav"></audio></div>
+        </div>
+
+
+
+                
+        <p class="mb-4 text-black font-bold text-lg bg-yellow-500 px-4 py-2 rounded-lg text-center">
+            (Source) Non-human Non-verbal Vocalizations + (Reference) Nonhuman Timbre
+        </p>        
+
+        <div class="grid grid-cols-7 gap-4 p-4 bg-gray-800 rounded-lg shadow-lg mb-6">
+            <div class="text-center"><p class="text-sm font-bold">Source</p><audio controls class="w-full"><source src="samples/source_09.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Reference</p><audio controls class="w-full"><source src="samples/reference_09.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Proposed (ours)</p><audio controls class="w-full"><source src="samples/proposed_09.wav" type="audio/wav"></audio></div>
+            <div class="text-center whitespace-nowrap"><p class="text-sm font-bold">w/o pp (ours)</p><audio controls class="w-full"><source src="samples/proposed_wo_pp_09.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">DDDM-VC</p><audio controls class="w-full"><source src="samples/dddm_09.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Diff-HierVC</p><audio controls class="w-full"><source src="samples/diff_hier_09.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Free-VC</p><audio controls class="w-full"><source src="samples/freevc_09.wav" type="audio/wav"></audio></div>
+        </div>
+
+        <div class="grid grid-cols-7 gap-4 p-4 bg-gray-800 rounded-lg shadow-lg mb-6">
+            <div class="text-center"><p class="text-sm font-bold">Source</p><audio controls class="w-full"><source src="samples/source_10.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Reference</p><audio controls class="w-full"><source src="samples/reference_10.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Proposed (ours)</p><audio controls class="w-full"><source src="samples/proposed_10.wav" type="audio/wav"></audio></div>
+            <div class="text-center whitespace-nowrap"><p class="text-sm font-bold">w/o pp (ours)</p><audio controls class="w-full"><source src="samples/proposed_wo_pp_10.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">DDDM-VC</p><audio controls class="w-full"><source src="samples/dddm_10.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Diff-HierVC</p><audio controls class="w-full"><source src="samples/diff_hier_10.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Free-VC</p><audio controls class="w-full"><source src="samples/freevc_10.wav" type="audio/wav"></audio></div>
+        </div>
+
+        <div class="grid grid-cols-7 gap-4 p-4 bg-gray-800 rounded-lg shadow-lg mb-6">
+            <div class="text-center"><p class="text-sm font-bold">Source</p><audio controls class="w-full"><source src="samples/source_11.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Reference</p><audio controls class="w-full"><source src="samples/reference_11.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Proposed (ours)</p><audio controls class="w-full"><source src="samples/proposed_11.wav" type="audio/wav"></audio></div>
+            <div class="text-center whitespace-nowrap"><p class="text-sm font-bold">w/o pp (ours)</p><audio controls class="w-full"><source src="samples/proposed_wo_pp_11.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">DDDM-VC</p><audio controls class="w-full"><source src="samples/dddm_11.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Diff-HierVC</p><audio controls class="w-full"><source src="samples/diff_hier_11.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Free-VC</p><audio controls class="w-full"><source src="samples/freevc_11.wav" type="audio/wav"></audio></div>
+        </div>
+
+        <div class="grid grid-cols-7 gap-4 p-4 bg-gray-800 rounded-lg shadow-lg mb-6">
+            <div class="text-center"><p class="text-sm font-bold">Source</p><audio controls class="w-full"><source src="samples/source_12.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Reference</p><audio controls class="w-full"><source src="samples/reference_12.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Proposed (ours)</p><audio controls class="w-full"><source src="samples/proposed_12.wav" type="audio/wav"></audio></div>
+            <div class="text-center whitespace-nowrap"><p class="text-sm font-bold">w/o pp (ours)</p><audio controls class="w-full"><source src="samples/proposed_wo_pp_12.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">DDDM-VC</p><audio controls class="w-full"><source src="samples/dddm_12.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Diff-HierVC</p><audio controls class="w-full"><source src="samples/diff_hier_12.wav" type="audio/wav"></audio></div>
+            <div class="text-center"><p class="text-sm font-bold">Free-VC</p><audio controls class="w-full"><source src="samples/freevc_12.wav" type="audio/wav"></audio></div>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
