@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULF-TTS: An Uncluttered Hybrid TTS System using Language and Flow Matching Models</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .title {
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .links {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .links a {
+            margin: 0 10px;
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .authors {
+            text-align: center;
+            font-style: italic;
+            margin: 20px 0;
+        }
+        
+        .affiliation {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .abstract {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .demo-section {
+            margin: 40px 0;
+        }
+        
+        .audio-sample {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .model-figure {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .model-figure img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .features {
+            text-align: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .demo-category {
+            background-color: #f8f9fa;
+            text-align: left;
+            margin: 40px 0;
+            padding: 0 20px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .sample-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-bottom: 1px solid #ddd;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            /* border: 1px solid #ddd; */
+            border-bottom: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+        }
+        
+        .demo-table {
+            width: calc(100% - 40px);
+            margin: 20px auto;
+            margin-bottom: 40px auto;
+            border-collapse: collapse;
+            background-color: white;
+            min-width: 1000px;
+            /* table-layout: fixed; */
+        }
+        
+        .demo-table th, .demo-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            vertical-align: top;
+            background-color: white;
+        }
+        
+        .demo-table th {
+            font-weight: bold;
+            text-align: left;
+            border-bottom: 2px solid #333;
+            margin-bottom: 20px;
+        }
+        
+        .demo-table tr:last-child td {
+            padding-bottom: 45px;
+        }
+        
+        .audio-cell {
+            min-width: 200px;
+        }
+        
+        .demo-table th:nth-child(1),
+        .demo-table td:nth-child(1) {
+            width: 20%;
+        }
+        
+        .demo-table th:nth-child(2),
+        .demo-table td:nth-child(2) {
+            width: 250px;
+        }
+        
+        .demo-table th:nth-child(n+3),
+        .demo-table td:nth-child(n+3) {
+            width: 20%;
+        }
+        
+        .text-content {
+            margin-bottom: 10px;
+            min-width: 200px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">ULF-TTS: An Uncluttered Hybrid TTS System using Language and Flow Matching Models</h1>
+    
+    <div class="links">
+        [<a href="#" target="_blank">Paper</a>]
+        [<a href="#" target="_blank">Code</a>]
+        [<a href="#" target="_blank">Gradio</a>]
+    </div>
+    
+    <div class="authors">
+        Jae Hyun Park, Seung Jae Choi, Young Sik Eom, Allison Shindell, Min-Gwan Seo and Gyeong-hoon Lee
+    </div>
+    
+    <!-- <div class="affiliation">
+        SpeechLab@Tongyi, Alibaba Group
+    </div> -->
+    
+    <div class="abstract">
+        <h2>Abstract:</h2>
+        <p>Hybrid text-to-speech (TTS) systems that integrate a language model with flow matching decoders have been proposed to generate speech in voice-related applications such as dubbing.
+            However, these systems suffer from latency and computational overhead caused by next-token prediction and denoising steps.
+            Therefore, we propose an uncluttered hybrid TTS system that integrates a lightweight flow matching decoder and supports variable token prediction time.
+            In addition, we leverage a training strategy from a diffusion-based approach into the language model to enhance its generative performance.
+            The results of objective and subjective evaluations demonstrate that our proposed method is significantly more efficient than existing hybrid systems while maintaining competitive speech quality.</p>
+    </div>
+
+    <div class="model-figure">
+        <img src="overview_v4.png" alt="Model Architecture">
+    </div>
+
+    <div class="features">
+        <div class="feature-card">
+            <h3>Lightweight Flow-Matching Decoder</h3>
+            <p>A Multi-modal block module in the flow matching decoder, composed exclusively of multi-layer perceptrons (MLPs)</p>
+        </div>
+        <div class="feature-card">
+            <h3>Variable Token sequence Prediction</h3>
+            <p>A token prediction approach for controlling the length of the token sequence predicted by the language model.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Natural and Expressive Speech</h3>
+            <p>A training methodology leveraging a diffusion training strategy for the language model training to enhance generation.</p>
+        </div>
+    </div>
+
+    <div class="abstract">
+        <h3>Contents</h3>
+        &nbsp;&nbsp; - <a href="#intra-lingual">Intra-Lingual Generation</a><br>
+        &nbsp;&nbsp; - <a href="#cross-lingual">Cross-Lingual Generation</a><br>
+        &nbsp;&nbsp; - <a href="#multi-lingual">Multi-Lingual Generation</a><br>
+        &nbsp;&nbsp; - <a href="#ablation-studies">Impact on Multi-token prediction and Decoder types</a><br>
+    </div>
+
+    <div class="demo-section">
+        <h1>Demo Samples</h1>
+        <h2>Zero-shot Scenario</h2>
+        <div class="demo-category">
+            <h3 id="intra-lingual">Intra-Lingual Generation</h3>
+            <table class="demo-table">
+                <tr>
+                    <th>Prompt</th>
+                    <th>Text</th>
+                    <th>Ground Truth</th>
+                    <th>CosyVoice</th>
+                    <th>FireRedTTS</th>
+                    <th>ULF-TTS</th>
+                </tr>
+                <tr>
+                    <td class="audio-cell">
+                        <div class="text-content">Text: When a private in the eighth Cavalry, he had been on the point of quitting the army at twenty eight years of age, but unexpectedly he had been appointed orderly to Captain Servadac.</div>
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/5105_prompt.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td>
+                        <div class="text-content">Hector Servadac was thirty years of age, an orphan without lineage and almost without means.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/5105_gt.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/5105_cosyvoice.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/5105_firered.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/5105_proposed.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="audio-cell">
+                        <div class="text-content">Text: When the alternating current was introduced for practical purposes it was not needed for arc lighting, the circuit for which, from a single dynamo, would often be twenty or thirty miles in length, its current having a pressure of not less than five or six thousand volts.</div>
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/2300_prompt.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td>
+                        <div class="text-content">It consisted of one small dynamo of a capacity of two hundred and eighty lights of ten c.p. each, and was housed in an unpretentious wooden shed.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/2300_gt.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/2300_cosyvoice.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/2300_firered.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/2300_proposed.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="audio-cell">
+                        <div class="text-content">Text: Now let us to business.</div>
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/1320_prompt.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td>
+                        <div class="text-content">The little knot of Indians drew back in a body, and suffered, as they thought, the conjurer and his inspired assistant to proceed.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/1320_gt.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/1320_cosyvoice.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/1320_firered.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/1320_proposed.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="audio-cell">
+                        <div class="text-content">Text: A young lady quietly joined the party at the supper table.</div>
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/5142_prompt.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td>
+                        <div class="text-content">But this subject will be more properly discussed when we treat of the different races of mankind.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/5142_gt.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/5142_cosyvoice.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/5142_firered.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/intra-lingual/5142_proposed.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="demo-category">
+            <h3 id="cross-lingual">Cross-Lingual Generation</h3>
+            <table class="demo-table">
+                <tr>
+                    <th>Prompt</th>
+                    <th>Text</th>
+                    <th>CosyVoice</th>
+                    <th>FireRedTTS</th>
+                    <th>ULF-TTS</th>
+                </tr>
+                <tr>
+                    <td class="audio-cell">
+                        <div class="text-content">Text: [KO]총자산이 십 퍼센트 상승하였습니다.</div>
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/0049_G1A2E7_JHJ_000030_prompt.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td>
+                        <div class="text-content">Also, a draft on futurity, sometimes honored, but generally extended.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/0049_G1A2E7_JHJ_000030_cosyvoice.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/0049_G1A2E7_JHJ_000030_firered.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/0049_G1A2E7_JHJ_000030_proposed.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="audio-cell">
+                        <div class="text-content">Text: [ZH]城门顶端有桃色的陶瓦、屋顶以龙凤等瑞兽装饰。.</div>
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/F000120_prompt.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td>
+                        <div class="text-content">I could write to my man and enclose the key; he could send down the packet as he finds it. It was to me in particular that he appeared to propound this appeared almost to appeal for aid not to hesitate.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/F000120_cosyvoice.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/F000120_firered.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/F000120_proposed.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="audio-cell">
+                        <div class="text-content">Text: [KR]우리 엄만 미워요 미경인 보고싶지도 않은가봐요</div>
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/M2005_000008_prompt.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td>
+                        <div class="text-content">They would think that they might do so too, and that would make you a great deal of trouble.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/M2005_000008_cosyvoice.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/M2005_000008_firered.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/M2005_000008_proposed.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="audio-cell">
+                        <div class="text-content">Text: [KR]언제 한 번 마주치나 했더니 여기서 보게 되는구나!</div>
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/F2001_000014_prompt.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td>
+                        <div class="text-content">Whatever she thought, she was not idly musing, as one might see by the expression of her face.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/F2001_000014_cosyvoice.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/F2001_000014_firered.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/cross-lingual/F2001_000014_proposed.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <h2 id="multi-lingual">Multi-Lingual Scenario</h2>
+        <div class="demo-category">
+            <h3>Natural and Expressive Voice Generation</h3>
+            <table class="demo-table">
+                <tr>
+                    <th>Language</th>
+                    <th>Text</th>
+                    <th>Ground Truth</th>
+                    <th>Generated</th>
+                </tr>
+                <tr>
+                    <td rowspan="4">
+                        <div class="text-content">EN</div>
+                    </td>
+                    <td>
+                        <div class="text-content">Everything is shimmering and glowing brilliantly, catching everyone's attention.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/eng_0_MacRile.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/eng_0_MacRile.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">The last photo I have before leaving for the airport that year, ten years ago, is of me draped over my sister's chest, kneeling on the grass, eyes red with tears.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/eng_1_NcMichael.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/eng_1_NcMichael.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">Oh! You noticed! We've learned that your kind's life force does wonders for our golems' power levels!</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/eng_2_FeyWow001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/eng_2_FeyWow001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">What type of international assistance is needed for this type of situation?</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/eng_3_NcBarri.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/eng_3_NcBarri.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="4">
+                        <div class="text-content">KO</div>
+                    </td>
+                    <td>
+                        <div class="text-content">소문에 의하면 당신이 영혼을 심판한다던데. 하아, 날 좀 봐주시오.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/kor_0_MayYfmickey.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/kor_0_MayYfmickey.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">어휴, 무턱대고 야생 류크를 습격했다간 아무것도 남지 않을 것 같아.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/kor_1_MaoGrandfhaka.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/kor_1_MaoGrandfhaka.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">어머! 아, 탓하는 것처럼 들렸나요? 당신 때문은 아니니 미안해 마세요.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/kor_2_FecHao.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/kor_2_FecHao.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">자, 자! 집중하자. 이제 조금만 더 가면 사막의 모닥불 지역이다!</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/kor_3_FeoOld001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/kor_3_FeoOld001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="4">
+                        <div class="text-content">TW</div>
+                    </td>
+                    <td>
+                        <div class="text-content">活动间隙,谢海英拿出手机,收到一条暖心的短信.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/twi_0_NctMale001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/twi_0_NctMale001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">其家属反映,近期刘小华身体状态不好,精神较差.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/twi_1_NctMale002.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/twi_1_NctMale002.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">其昨天打电话说好的两三天就回来</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/twi_2_NctFemale001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/twi_2_NctFemale001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">他问你开车走没有,我说没有走呢.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/twi_3_NctFemale002.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/twi_3_NctFemale002.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="4">
+                        <div class="text-content">JA</div>
+                    </td>
+                    <td>
+                        <div class="text-content">おこまりですか. ごらんのひよーでおなやみごとおかいけついたします.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/jpn_0_NcjMale002.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/jpn_0_NcjMale002.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">でも, そんなこといみがあるんでしょーか?</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/jpn_1_NcjFemale001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/jpn_1_NcjFemale001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">とまってください.それいじょーちかずかないでください</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/jpn_2_FeyAoi.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/jpn_2_FeyAoi.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">なにもききたくありません. よんじゅーねんもなにもいわずにいたくせに, いまさらきけって?</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/GT/jpn_3_FeyTakahashi.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/multi-lingual/syn/jpn_3_FeyTakahashi.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <h2 id="ablation-studies">Impact on Multi-token prediction and Decoder types</h2>
+        <div class="demo-category">
+            <h3>Multi Token Prediction & Decoder Types</h3>
+            <table class="demo-table">
+                <tr>
+                    <th>Text</th>
+                    <th>Ground Truth</th>
+                    <th>m=1, Tokenizer Decoder</th>
+                    <th>m=1, Flow-Matching Decoder</th>
+                    <th>m=2, Flow-Matching Decoder</th>
+                    <th>m=4, Flow-Matching Decoder</th>
+                    <th>m=6, Flow-Matching Decoder</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">the application of reenforced suggestion or even of hypnotism in the doctor's office is even for him no possible source of danger.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/GT/1355_39947_000001_000008.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/tokenizer/1355_39947_000001_000008.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/1step/1355_39947_000001_000008.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/2step/1355_39947_000001_000008.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/4step/1355_39947_000001_000008.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/6step/1355_39947_000001_000008.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">there was thus no great sign of depression to be noticed when we came back into the tent after finishing our work, and had to while away the time.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/GT/2843_152918_000000_000005.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/tokenizer/2843_152918_000000_000005.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/1step/2843_152918_000000_000005.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/2step/2843_152918_000000_000005.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/4step/2843_152918_000000_000005.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/6step/2843_152918_000000_000005.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">there are two main classes of simple measures, two beat measure, and three beat measure.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/GT/3235_11599_000012_000003.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/tokenizer/3235_11599_000012_000003.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/1step/3235_11599_000012_000003.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/2step/3235_11599_000012_000003.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/4step/3235_11599_000012_000003.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/6step/3235_11599_000012_000003.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="text-content">the first rains had fallen on the lowlands, and the first snows on the mountains, and everything was fresh and bracing, while an abundance of balmy sunshine filled all the noonday hours.</div>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/GT/4362_15663_000002_000001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/tokenizer/4362_15663_000002_000001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/1step/4362_15663_000002_000001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/2step/4362_15663_000002_000001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/4step/4362_15663_000002_000001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                    <td class="audio-cell">
+                        <audio controls>
+                            <source src="demo_samples/ablation/6step/4362_15663_000002_000001.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 50px; padding: 20px; border-top: 1px solid #ddd;">
+        <!-- <p>© 2024 SpeechLab@Tongyi, Alibaba Group. All rights reserved.</p> -->
+        <p>The content provided above is for academic purposes only.</p>
+    </footer>
+</body>
+</html>
